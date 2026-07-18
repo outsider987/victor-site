@@ -251,6 +251,11 @@ export default function TradingConsolePage() {
               maker-checker approval queue.
             </figcaption>
           </figure>
+          <p className="mt-4 font-mono text-xs">
+            <Link href="/demos/live-desk" className="text-red-ink hover:underline">
+              → see the render-isolation technique running live: the trading desk demo
+            </Link>
+          </p>
         </section>
 
         <section>

@@ -13,6 +13,7 @@ const caseStudies = [
     meta: "2026 —\ntrading",
     title: "Live trading console for a sports wagering exchange",
     href: "/work/trading-console",
+    demo: "/demos/live-desk" as string | undefined,
     role: "Full-stack engineer · #1 contributor to the trader console (400+ PRs)",
     stack: "React 18 · TypeScript · Go · NATS · gRPC · WebSocket · Redis · GKE",
     points: [
@@ -25,6 +26,7 @@ const caseStudies = [
     meta: "2022 – 2026\ninsurtech",
     title: "Claims platform used daily by 150+ clinics across Hong Kong",
     href: "/work/claims-platform",
+    demo: undefined as string | undefined,
     role: "Senior full-stack engineer · technical lead across HK / Taiwan / Vietnam",
     stack: "TypeScript · React · NestJS · PostgreSQL · Redis · AWS",
     points: [
@@ -37,6 +39,7 @@ const caseStudies = [
     meta: "2021 —\nweb3",
     title: "Crypto product work, employment and freelance",
     href: undefined as string | undefined,
+    demo: undefined as string | undefined,
     role: "Frontend / full-stack",
     stack: "Vue · Nuxt · TypeScript · TON",
     points: [
@@ -108,10 +111,15 @@ export default function WorkPage() {
                   </ul>
                   <p className="tnum mt-3 font-mono text-xs text-ink-3">{cs.stack}</p>
                   {cs.href && (
-                    <p className="mt-3 font-mono text-xs">
+                    <p className="mt-3 flex flex-wrap gap-x-5 gap-y-1 font-mono text-xs">
                       <Link href={cs.href} className="text-red-ink hover:underline">
                         → read the case study: architecture &amp; decisions
                       </Link>
+                      {cs.demo && (
+                        <Link href={cs.demo} className="text-red-ink hover:underline">
+                          → try the live demo
+                        </Link>
+                      )}
                     </p>
                   )}
                 </div>
@@ -119,8 +127,8 @@ export default function WorkPage() {
             ))}
           </div>
           <p className="mt-4 font-mono text-xs leading-relaxed text-ink-3">
-            Full write-ups with architecture diagrams are in progress;
-            de-identified live demos will be linked here.
+            Real product UIs stay behind NDAs — the demos here are
+            de-identified rebuilds of the same techniques, running live.
           </p>
         </section>
 

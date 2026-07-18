@@ -10,6 +10,7 @@
   --ink-2: #575653;
   --ink-3: #878580;
   --red-ink: #af3029;
+  --up: #66800b;
 }
 
 @theme inline {
@@ -21,6 +22,7 @@
   --color-ink-2: var(--ink-2);
   --color-ink-3: var(--ink-3);
   --color-red-ink: var(--red-ink);
+  --color-up: var(--up);
   --font-serif: var(--font-newsreader);
   --font-mono: var(--font-plex-mono);
 }
@@ -46,4 +48,18 @@ body {
 /* numbers behave like a ledger */
 .tnum {
   font-variant-numeric: tabular-nums;
+}
+
+/* live-desk demo: brief wash on updated cells */
+.desk-flash {
+  display: inline-block;
+  animation: desk-flash 0.5s ease-out;
+}
+@keyframes desk-flash {
+  from {
+    background: rgba(175, 48, 41, 0.16);
+  }
+  to {
+    background: transparent;
+  }
 }
