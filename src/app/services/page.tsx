@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Nav, Footer, Row, SectionTitle, EMAIL } from "@/components/site";
+import { Nav, Footer, Row, SectionTitle, Card, EMAIL } from "@/components/site";
 
 export const metadata: Metadata = {
   title: "Services — Victor Chang",
@@ -30,37 +30,40 @@ export default function ServicesPage() {
 
         <section>
           <SectionTitle>What I take on</SectionTitle>
-          <div className="border-b border-rule">
-            <Row meta="platforms">
-              <p className="font-serif text-lg font-medium leading-snug">
+          <div className="mt-4 grid gap-5 lg:grid-cols-3">
+            <Card>
+              <p className="font-mono text-xs text-ink-3">platforms</p>
+              <p className="mt-2 font-serif text-lg font-medium leading-snug">
                 Full-stack product delivery
               </p>
-              <p className="mt-1.5 text-[15.5px] leading-relaxed text-ink-2">
+              <p className="mt-2 text-[15px] leading-relaxed text-ink-2">
                 A feature, a module, or a whole platform — React/Next.js
                 front, Node or Go behind, deployed and documented. For teams
                 that need senior hands without a hiring cycle.
               </p>
-            </Row>
-            <Row meta="real-time">
-              <p className="font-serif text-lg font-medium leading-snug">
+            </Card>
+            <Card>
+              <p className="font-mono text-xs text-ink-3">real-time</p>
+              <p className="mt-2 font-serif text-lg font-medium leading-snug">
                 Real-time systems &amp; dashboards
               </p>
-              <p className="mt-1.5 text-[15.5px] leading-relaxed text-ink-2">
+              <p className="mt-2 text-[15px] leading-relaxed text-ink-2">
                 WebSocket feeds, live consoles, event-driven backends —
                 built to stay smooth under thousands of updates a minute.
                 Trading, gaming, logistics, monitoring.
               </p>
-            </Row>
-            <Row meta="velocity">
-              <p className="font-serif text-lg font-medium leading-snug">
+            </Card>
+            <Card>
+              <p className="font-mono text-xs text-ink-3">velocity</p>
+              <p className="mt-2 font-serif text-lg font-medium leading-snug">
                 AI-accelerated delivery
               </p>
-              <p className="mt-1.5 text-[15.5px] leading-relaxed text-ink-2">
+              <p className="mt-2 text-[15px] leading-relaxed text-ink-2">
                 I run a production-grade agentic workflow (Claude Code). You
                 get senior-quality output at a pace one engineer is not
                 supposed to have. Best for MVPs and deadline-bound builds.
               </p>
-            </Row>
+            </Card>
           </div>
         </section>
 

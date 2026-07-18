@@ -100,3 +100,27 @@ export function SectionTitle({ children }: { children: React.ReactNode }) {
     <h2 className="mt-14 mb-2 font-mono text-[13px] text-ink-2">{children}</h2>
   );
 }
+
+/** Index-card: square corners, ink hairline, hard offset shadow — a physical card, not a UI card. */
+export function Card({
+  children,
+  href,
+  className = "",
+}: {
+  children: React.ReactNode;
+  href?: string;
+  className?: string;
+}) {
+  const base = `block border border-ink bg-paper p-6 shadow-[4px_4px_0_0_#100f0f] ${className}`;
+  if (href) {
+    return (
+      <Link
+        href={href}
+        className={`${base} transition-[transform,box-shadow] duration-150 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_#100f0f]`}
+      >
+        {children}
+      </Link>
+    );
+  }
+  return <div className={base}>{children}</div>;
+}

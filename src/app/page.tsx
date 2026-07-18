@@ -1,4 +1,4 @@
-import { Nav, Footer, Row, SectionTitle, EMAIL } from "@/components/site";
+import { Nav, Footer, Row, SectionTitle, Card, EMAIL } from "@/components/site";
 
 const ledger = [
   {
@@ -62,35 +62,31 @@ export default function Home() {
 
         <section>
           <SectionTitle>Start here</SectionTitle>
-          <div className="border-b border-rule">
-            <Row meta="hiring?" href="/work">
-              <p className="leading-snug">
+          <div className="mt-4 grid gap-5 sm:grid-cols-2">
+            <Card href="/work">
+              <p className="font-mono text-xs text-ink-3">hiring?</p>
+              <p className="mt-2 font-serif text-xl font-medium leading-snug">
                 Case studies &amp; how I work with distributed teams
-                <span className="ml-2 font-mono text-xs text-red-ink">
-                  → work
-                </span>
               </p>
-            </Row>
-            <Row meta="building?" href="/services">
-              <p className="leading-snug">
+              <p className="mt-3 font-mono text-xs text-red-ink">→ work</p>
+            </Card>
+            <Card href="/services">
+              <p className="font-mono text-xs text-ink-3">building?</p>
+              <p className="mt-2 font-serif text-xl font-medium leading-snug">
                 Scoped freelance delivery, English or 中文
-                <span className="ml-2 font-mono text-xs text-red-ink">
-                  → services
-                </span>
               </p>
-            </Row>
-            <Row meta="neither?" href={undefined}>
-              <p className="leading-snug">
-                Say hello anyway —{" "}
-                <a
-                  className="underline decoration-rule-mid underline-offset-4 hover:decoration-red-ink hover:text-red-ink"
-                  href={`mailto:${EMAIL}`}
-                >
-                  {EMAIL}
-                </a>
-              </p>
-            </Row>
+              <p className="mt-3 font-mono text-xs text-red-ink">→ services</p>
+            </Card>
           </div>
+          <p className="mt-6 text-[15.5px] text-ink-2">
+            Neither? Say hello anyway —{" "}
+            <a
+              className="underline decoration-rule-mid underline-offset-4 hover:decoration-red-ink hover:text-red-ink"
+              href={`mailto:${EMAIL}`}
+            >
+              {EMAIL}
+            </a>
+          </p>
         </section>
       </main>
 

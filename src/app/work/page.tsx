@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Nav, Footer, Row, SectionTitle, EMAIL, GITHUB, LINKEDIN } from "@/components/site";
+import { Nav, Footer, Row, SectionTitle, Card, EMAIL, GITHUB, LINKEDIN } from "@/components/site";
 
 export const metadata: Metadata = {
   title: "Work — Victor Chang",
@@ -81,16 +81,13 @@ export default function WorkPage() {
 
         <section>
           <SectionTitle>Case studies</SectionTitle>
-          <div className="border-b border-rule">
+          <div className="mt-4 space-y-6">
             {caseStudies.map((cs) => (
-              <div
-                key={cs.title}
-                className="grid gap-2 border-t border-rule py-6 sm:grid-cols-[9.5rem_1fr] sm:gap-6"
-              >
-                <div className="tnum whitespace-pre-line font-mono text-xs leading-5 text-ink-3">
-                  {cs.meta}
+              <Card key={cs.title}>
+                <div className="tnum font-mono text-xs leading-5 text-ink-3">
+                  {cs.meta.split("\n").reverse().join(" · ")}
                 </div>
-                <div>
+                <div className="mt-2">
                   <h3 className="font-serif text-[1.35rem] font-medium leading-snug">
                     {cs.href ? (
                       <Link href={cs.href} className="hover:text-red-ink">
@@ -118,7 +115,7 @@ export default function WorkPage() {
                     </p>
                   )}
                 </div>
-              </div>
+              </Card>
             ))}
           </div>
           <p className="mt-4 font-mono text-xs leading-relaxed text-ink-3">
