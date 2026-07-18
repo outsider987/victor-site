@@ -3,7 +3,7 @@ import { Nav, Footer, Row, SectionTitle, EMAIL } from "@/components/site";
 const ledger = [
   {
     meta: "2026 —",
-    what: "Live trading console & Go real-time services, sports wagering exchange (HK)",
+    what: "Live trading console & Go real-time services for a sports wagering exchange",
     figure: "650 PRs / 20 wks",
   },
   {

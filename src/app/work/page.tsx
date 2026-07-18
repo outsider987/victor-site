@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Nav, Footer, Row, SectionTitle, EMAIL, GITHUB, LINKEDIN } from "@/components/site";
 
 export const metadata: Metadata = {
@@ -11,6 +12,7 @@ const caseStudies = [
   {
     meta: "2026 —\ntrading",
     title: "Live trading console for a sports wagering exchange",
+    href: "/work/trading-console",
     role: "Full-stack engineer · #1 contributor to the trader console (400+ PRs)",
     stack: "React 18 · TypeScript · Go · NATS · gRPC · WebSocket · Redis · GKE",
     points: [
@@ -22,6 +24,7 @@ const caseStudies = [
   {
     meta: "2022 – 2026\ninsurtech",
     title: "Claims platform used daily by clinics across Hong Kong",
+    href: "/work/claims-platform",
     role: "Senior full-stack engineer · technical lead across HK / Taiwan / Vietnam",
     stack: "TypeScript · React · NestJS · PostgreSQL · Redis · AWS",
     points: [
@@ -33,6 +36,7 @@ const caseStudies = [
   {
     meta: "2021 —\nweb3",
     title: "Crypto product work, employment and freelance",
+    href: undefined as string | undefined,
     role: "Frontend / full-stack",
     stack: "Vue · Nuxt · TypeScript · TON",
     points: [
@@ -55,8 +59,8 @@ export default function WorkPage() {
           </h1>
           <p className="mt-5 max-w-xl leading-relaxed text-ink-2">
             Currently a full-stack engineer on a real-time sports wagering
-            exchange in Hong Kong. Before that, four years on a
-            health-insurance claims platform. Open to senior remote roles —
+            exchange. Before that, four years on a health-insurance claims
+            platform used across Hong Kong. Open to senior remote roles —
             APAC timezone or global async.
           </p>
           <p className="tnum mt-5 font-mono text-[13px] leading-6 text-ink-3">
@@ -88,7 +92,13 @@ export default function WorkPage() {
                 </div>
                 <div>
                   <h3 className="font-serif text-[1.35rem] font-medium leading-snug">
-                    {cs.title}
+                    {cs.href ? (
+                      <Link href={cs.href} className="hover:text-red-ink">
+                        {cs.title}
+                      </Link>
+                    ) : (
+                      cs.title
+                    )}
                   </h3>
                   <p className="mt-1 text-[15px] italic text-ink-2">{cs.role}</p>
                   <ul className="mt-3 space-y-2 text-[15.5px] leading-relaxed">
@@ -100,6 +110,13 @@ export default function WorkPage() {
                     ))}
                   </ul>
                   <p className="tnum mt-3 font-mono text-xs text-ink-3">{cs.stack}</p>
+                  {cs.href && (
+                    <p className="mt-3 font-mono text-xs">
+                      <Link href={cs.href} className="text-red-ink hover:underline">
+                        → read the case study: architecture &amp; decisions
+                      </Link>
+                    </p>
+                  )}
                 </div>
               </div>
             ))}
