@@ -1,29 +1,28 @@
 @import "tailwindcss";
 
+/* Flexoki-derived ink-on-paper palette (stephango.com/flexoki, MIT) */
 :root {
-  --background: #0b0e14;
-  --panel: #10151f;
-  --panel-2: #131a26;
-  --border: #1e2735;
-  --foreground: #e6edf3;
-  --muted: #8b98a9;
-  --accent: #4ade80;
-  --accent-dim: #22c55e;
-  --down: #f87171;
+  --paper: #fffcf0;
+  --wash: #f2f0e5;
+  --rule: #dad8ce;
+  --rule-mid: #b7b5ac;
+  --ink: #100f0f;
+  --ink-2: #575653;
+  --ink-3: #878580;
+  --red-ink: #af3029;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-panel: var(--panel);
-  --color-panel-2: var(--panel-2);
-  --color-line: var(--border);
-  --color-foreground: var(--foreground);
-  --color-muted: var(--muted);
-  --color-accent: var(--accent);
-  --color-accent-dim: var(--accent-dim);
-  --color-down: var(--down);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-paper: var(--paper);
+  --color-wash: var(--wash);
+  --color-rule: var(--rule);
+  --color-rule-mid: var(--rule-mid);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-red-ink: var(--red-ink);
+  --font-serif: var(--font-newsreader);
+  --font-mono: var(--font-plex-mono);
 }
 
 html {
@@ -31,12 +30,20 @@ html {
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans), system-ui, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-newsreader), Georgia, serif;
+  font-size: 17px;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 ::selection {
-  background: rgba(74, 222, 128, 0.25);
+  background: rgba(175, 48, 41, 0.14);
+}
+
+/* numbers behave like a ledger */
+.tnum {
+  font-variant-numeric: tabular-nums;
 }

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Nav, Footer, Eyebrow, Chip, EMAIL } from "@/components/site";
+import { Nav, Footer, Row, SectionTitle, EMAIL } from "@/components/site";
 
 export const metadata: Metadata = {
   title: "Services — Victor Chang",
@@ -7,129 +7,119 @@ export const metadata: Metadata = {
     "Freelance full-stack delivery: real-time dashboards, product platforms, and AI-accelerated development. English / 中文.",
 };
 
-const offers = [
-  {
-    h: "Full-stack product delivery",
-    p: "A feature, a module, or a whole platform — React/Next.js frontend to Node/Go backend, deployed and documented.",
-    fit: "Best for: teams that need senior hands without a hiring cycle.",
-  },
-  {
-    h: "Real-time systems & dashboards",
-    p: "WebSocket data feeds, live-updating consoles, event-driven backends — built to stay smooth under thousands of updates per minute.",
-    fit: "Best for: trading, gaming, logistics, monitoring products.",
-  },
-  {
-    h: "AI-accelerated delivery",
-    p: "I run a production-grade agentic workflow (Claude Code). You get senior-quality output at a pace one engineer isn't supposed to have.",
-    fit: "Best for: MVPs and deadline-bound builds.",
-  },
-];
-
-const steps = [
-  ["01", "Scope call", "30–60 min, free. We define what done looks like. (EN / 中文)"],
-  ["02", "Fixed-scope proposal", "Deliverables, timeline, price — in writing."],
-  ["03", "Weekly demo cadence", "Working software every week, async updates in between."],
-  ["04", "Handover", "Docs, tests, deploy pipeline — your team can run it without me."],
-];
-
 export default function ServicesPage() {
   return (
     <div className="flex min-h-screen flex-col">
       <Nav />
 
-      <main className="flex-1">
-        <section className="mx-auto w-full max-w-5xl px-5 pb-4 pt-16">
-          <Eyebrow>For clients · 接案</Eyebrow>
-          <h1 className="mt-4 max-w-3xl text-3xl font-semibold tracking-tight sm:text-5xl">
-            Systems that touch money,{" "}
-            <span className="text-accent">built to be trusted</span>.
+      <main className="mx-auto w-full max-w-3xl flex-1 px-5 pb-20">
+        <section className="pt-16">
+          <p className="font-mono text-[13px] text-ink-3">For clients · 接案</p>
+          <h1 className="mt-3 max-w-2xl font-serif text-3xl font-medium leading-[1.15] tracking-tight sm:text-[2.6rem]">
+            Systems that touch money, built to be trusted.
           </h1>
-          <p className="mt-5 max-w-2xl leading-relaxed text-muted">
-            I&apos;ve spent seven years on insurance claims, live wagering
-            markets, and crypto products — the kind of software where bugs cost
-            real money. That&apos;s the standard your project gets.
+          <p className="mt-5 max-w-xl leading-relaxed text-ink-2">
+            Seven years on insurance claims, live wagering markets, and
+            crypto products — software where bugs cost real money. That is
+            the standard your project gets, whatever its size.
           </p>
-          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted">
+          <p className="mt-3 max-w-xl text-[15.5px] leading-relaxed text-ink-2">
             中文合作無障礙——需求訪談、報價、交付文件皆可全中文進行。
           </p>
         </section>
 
-        {/* Offers */}
-        <section className="mx-auto w-full max-w-5xl px-5 py-12">
-          <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-muted">
-            What I take on
-          </h2>
-          <div className="mt-5 grid gap-4 sm:grid-cols-3">
-            {offers.map((o) => (
-              <div key={o.h} className="rounded-xl border border-line bg-panel p-6">
-                <h3 className="text-lg font-semibold">{o.h}</h3>
-                <p className="mt-2.5 text-sm leading-relaxed text-muted">{o.p}</p>
-                <p className="mt-4 font-mono text-xs leading-relaxed text-accent">
-                  {o.fit}
-                </p>
-              </div>
-            ))}
+        <section>
+          <SectionTitle>What I take on</SectionTitle>
+          <div className="border-b border-rule">
+            <Row meta="platforms">
+              <p className="font-serif text-lg font-medium leading-snug">
+                Full-stack product delivery
+              </p>
+              <p className="mt-1.5 text-[15.5px] leading-relaxed text-ink-2">
+                A feature, a module, or a whole platform — React/Next.js
+                front, Node or Go behind, deployed and documented. For teams
+                that need senior hands without a hiring cycle.
+              </p>
+            </Row>
+            <Row meta="real-time">
+              <p className="font-serif text-lg font-medium leading-snug">
+                Real-time systems &amp; dashboards
+              </p>
+              <p className="mt-1.5 text-[15.5px] leading-relaxed text-ink-2">
+                WebSocket feeds, live consoles, event-driven backends —
+                built to stay smooth under thousands of updates a minute.
+                Trading, gaming, logistics, monitoring.
+              </p>
+            </Row>
+            <Row meta="velocity">
+              <p className="font-serif text-lg font-medium leading-snug">
+                AI-accelerated delivery
+              </p>
+              <p className="mt-1.5 text-[15.5px] leading-relaxed text-ink-2">
+                I run a production-grade agentic workflow (Claude Code). You
+                get senior-quality output at a pace one engineer is not
+                supposed to have. Best for MVPs and deadline-bound builds.
+              </p>
+            </Row>
           </div>
         </section>
 
-        {/* Track record */}
-        <section className="mx-auto w-full max-w-5xl px-5 py-12">
-          <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-muted">
-            Track record
-          </h2>
-          <div className="mt-5 rounded-xl border border-line bg-panel p-6 sm:p-7">
-            <ul className="space-y-2.5 text-[15px] leading-relaxed text-foreground/90">
-              {[
-                "Freelance delivery for a leading crypto gaming platform — frontend architecture and feature delivery.",
-                "4 years shipping a health-insurance claims platform used daily by clinics across Hong Kong.",
-                "Currently building a real-time sports wagering exchange: live odds consoles, event-driven Go services.",
-                "Custom CMS platforms enabling non-technical teams to run content independently.",
-              ].map((b) => (
-                <li key={b} className="flex gap-2.5">
-                  <span className="mt-[9px] h-1 w-1 shrink-0 rounded-full bg-accent" />
-                  <span>{b}</span>
-                </li>
-              ))}
-            </ul>
-            <div className="mt-5 flex flex-wrap gap-2">
-              {["React / Next.js", "Vue / Nuxt", "Node.js / NestJS", "Go", "PostgreSQL", "AWS / GCP", "Docker"].map(
-                (s) => (
-                  <Chip key={s}>{s}</Chip>
-                ),
-              )}
-            </div>
+        <section>
+          <SectionTitle>Track record</SectionTitle>
+          <div className="border-b border-rule">
+            <Row meta="2026 —">
+              <p className="text-[15.5px] leading-relaxed">
+                Real-time sports wagering exchange: live odds consoles,
+                event-driven Go services.
+              </p>
+            </Row>
+            <Row meta="freelance">
+              <p className="text-[15.5px] leading-relaxed">
+                Delivery for a leading crypto gaming platform — frontend
+                architecture and features.
+              </p>
+            </Row>
+            <Row meta="2022 – 26">
+              <p className="text-[15.5px] leading-relaxed">
+                Health-insurance claims platform used daily by clinics
+                across Hong Kong.
+              </p>
+            </Row>
+            <Row meta="earlier">
+              <p className="text-[15.5px] leading-relaxed">
+                Custom CMS platforms that let non-technical teams run
+                content independently.
+              </p>
+            </Row>
           </div>
         </section>
 
-        {/* Process */}
-        <section className="mx-auto w-full max-w-5xl px-5 py-12">
-          <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-muted">
-            How it works
-          </h2>
-          <div className="mt-5 grid gap-4 sm:grid-cols-4">
-            {steps.map(([n, h, p]) => (
-              <div key={n} className="rounded-xl border border-line bg-panel p-5">
-                <p className="font-mono text-xs text-accent">{n}</p>
-                <h3 className="mt-2 font-semibold">{h}</h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-muted">{p}</p>
-              </div>
-            ))}
+        <section>
+          <SectionTitle>How it works</SectionTitle>
+          <div className="max-w-xl space-y-3 text-[15.5px] leading-relaxed text-ink-2">
+            <p>
+              We start with a free 30–60 minute scope call, in English or
+              中文, and define what done looks like. You get a fixed-scope
+              proposal in writing — deliverables, timeline, price.
+            </p>
+            <p>
+              Then a weekly demo cadence: working software every week, async
+              written updates in between. At the end, handover — docs,
+              tests, deploy pipeline — so your team can run it without me.
+            </p>
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="mx-auto w-full max-w-5xl px-5 py-16 text-center">
-          <p className="text-lg text-muted">
-            Have a project in mind? Tell me what you&apos;re building.
-          </p>
-          <a
-            className="mt-4 inline-block rounded-md border border-accent-dim bg-panel px-6 py-3 font-mono text-accent transition-colors hover:bg-panel-2"
-            href={`mailto:${EMAIL}?subject=Project inquiry`}
-          >
-            {EMAIL}
-          </a>
-          <p className="mt-3 font-mono text-xs text-muted">
-            EN / 中文 · Replies within 24h · UTC+8
+        <section className="mt-14">
+          <p className="leading-relaxed text-ink-2">
+            Have a project in mind? Tell me what you&apos;re building —{" "}
+            <a
+              className="underline decoration-rule-mid underline-offset-4 hover:text-red-ink hover:decoration-red-ink"
+              href={`mailto:${EMAIL}?subject=Project inquiry`}
+            >
+              {EMAIL}
+            </a>
+            <span className="tnum font-mono text-xs text-ink-3"> — EN / 中文, replies within 24h.</span>
           </p>
         </section>
       </main>

@@ -4,27 +4,28 @@ export const EMAIL = "t790219520@gmail.com";
 export const GITHUB = "https://github.com/outsider987";
 export const LINKEDIN = "https://linkedin.com/in/yao-hsien-chang";
 
+const BUILD_DATE = new Date().toLocaleDateString("en-GB", {
+  day: "2-digit",
+  month: "short",
+  year: "numeric",
+});
+
 export function Nav() {
   return (
-    <header className="sticky top-0 z-20 border-b border-line bg-background/80 backdrop-blur">
-      <nav className="mx-auto flex max-w-5xl items-center justify-between px-5 py-3.5">
-        <Link href="/" className="font-mono text-sm tracking-widest text-foreground">
-          <span className="text-accent">▲</span> VICTOR CHANG
+    <header className="border-b border-rule">
+      <nav className="mx-auto flex max-w-3xl items-baseline justify-between px-5 py-4 font-mono text-[13px] text-ink-2">
+        <Link href="/" className="text-ink hover:text-red-ink">
+          victor chang
         </Link>
-        <div className="flex items-center gap-5 text-sm text-muted">
-          <Link href="/work" className="transition-colors hover:text-foreground">
-            Work
+        <div className="flex gap-5">
+          <Link href="/work" className="hover:text-red-ink">
+            work
           </Link>
-          <Link href="/services" className="transition-colors hover:text-foreground">
-            Services
+          <Link href="/services" className="hover:text-red-ink">
+            services
           </Link>
-          <a
-            href={GITHUB}
-            target="_blank"
-            rel="noreferrer"
-            className="transition-colors hover:text-foreground"
-          >
-            GitHub
+          <a href={GITHUB} target="_blank" rel="noreferrer" className="hover:text-red-ink">
+            github
           </a>
         </div>
       </nav>
@@ -34,37 +35,68 @@ export function Nav() {
 
 export function Footer() {
   return (
-    <footer className="border-t border-line">
-      <div className="mx-auto flex max-w-5xl flex-col gap-2 px-5 py-8 text-sm text-muted sm:flex-row sm:items-center sm:justify-between">
-        <p className="font-mono text-xs tracking-wide">
-          TAIWAN · UTC+8 · REMOTE-READY
+    <footer className="border-t border-rule">
+      <div className="mx-auto max-w-3xl space-y-1.5 px-5 py-8 font-mono text-xs leading-relaxed text-ink-3">
+        <p>
+          Taipei, Taiwan · UTC+8 ·{" "}
+          <a className="hover:text-red-ink" href={`mailto:${EMAIL}`}>
+            {EMAIL}
+          </a>{" "}
+          ·{" "}
+          <a className="hover:text-red-ink" href={GITHUB} target="_blank" rel="noreferrer">
+            github
+          </a>{" "}
+          ·{" "}
+          <a className="hover:text-red-ink" href={LINKEDIN} target="_blank" rel="noreferrer">
+            linkedin
+          </a>
         </p>
-        <p className="flex gap-4">
-          <a className="hover:text-foreground" href={`mailto:${EMAIL}`}>
-            Email
+        <p>
+          Set in Newsreader &amp; IBM Plex Mono on Flexoki paper. Built with
+          Next.js — deployed {BUILD_DATE}.{" "}
+          <a
+            className="hover:text-red-ink"
+            href={`${GITHUB}/victor-site`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Source
           </a>
-          <a className="hover:text-foreground" href={GITHUB} target="_blank" rel="noreferrer">
-            GitHub
-          </a>
-          <a className="hover:text-foreground" href={LINKEDIN} target="_blank" rel="noreferrer">
-            LinkedIn
-          </a>
+          .
         </p>
       </div>
     </footer>
   );
 }
 
-export function Chip({ children }: { children: React.ReactNode }) {
-  return (
-    <span className="rounded-full border border-line bg-panel-2 px-2.5 py-0.5 font-mono text-[11px] text-muted">
-      {children}
-    </span>
+/** A ledger row: hairline top rule, mono meta column, content column. */
+export function Row({
+  meta,
+  children,
+  href,
+}: {
+  meta: string;
+  children: React.ReactNode;
+  href?: string;
+}) {
+  const inner = (
+    <div className="grid gap-1 border-t border-rule py-4 sm:grid-cols-[9.5rem_1fr] sm:gap-6">
+      <div className="tnum font-mono text-xs leading-6 text-ink-3">{meta}</div>
+      <div>{children}</div>
+    </div>
   );
+  if (href) {
+    return (
+      <Link href={href} className="group block hover:bg-wash">
+        {inner}
+      </Link>
+    );
+  }
+  return inner;
 }
 
-export function Eyebrow({ children }: { children: React.ReactNode }) {
+export function SectionTitle({ children }: { children: React.ReactNode }) {
   return (
-    <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent">{children}</p>
+    <h2 className="mt-14 mb-2 font-mono text-[13px] text-ink-2">{children}</h2>
   );
 }

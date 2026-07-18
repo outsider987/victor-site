@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Nav, Footer, Eyebrow, Chip, EMAIL, GITHUB, LINKEDIN } from "@/components/site";
+import { Nav, Footer, Row, SectionTitle, EMAIL, GITHUB, LINKEDIN } from "@/components/site";
 
 export const metadata: Metadata = {
   title: "Work — Victor Chang",
@@ -9,38 +9,35 @@ export const metadata: Metadata = {
 
 const caseStudies = [
   {
-    tag: "REAL-TIME TRADING",
-    period: "2026 — present",
+    meta: "2026 —\ntrading",
     title: "Live trading console for a sports wagering exchange",
-    role: "Full-Stack Engineer — #1 contributor to the trader console (400+ PRs)",
-    stack: ["React 18", "TypeScript", "Go", "NATS", "gRPC", "WebSocket", "Redis", "GKE"],
-    bullets: [
-      "Live odds grids over WebSocket with row-level re-render isolation, throttled frame invalidation, and graceful WS-to-poll degradation.",
-      "Go BFF real-time infrastructure: cross-pod WebSocket fan-out on Kubernetes with sequence-guarded event consistency.",
-      "Maker-checker approval workflow with an idempotent command gate and field-level before/after audit diffs for high-risk operations.",
+    role: "Full-stack engineer · #1 contributor to the trader console (400+ PRs)",
+    stack: "React 18 · TypeScript · Go · NATS · gRPC · WebSocket · Redis · GKE",
+    points: [
+      "Live odds grids over WebSocket: row-level re-render isolation, throttled frame invalidation, graceful WS-to-poll degradation.",
+      "Go BFF real-time infrastructure — cross-pod WebSocket fan-out on Kubernetes with sequence-guarded event consistency.",
+      "Maker-checker approval workflow: idempotent command gate, field-level before/after audit diffs for high-risk operations.",
     ],
   },
   {
-    tag: "INSURTECH",
-    period: "2022 — 2026",
-    title: "Health-insurance claims platform used daily by clinics across Hong Kong",
-    role: "Senior Full-Stack Engineer — technical lead across HK / Taiwan / Vietnam teams",
-    stack: ["TypeScript", "React", "NestJS", "PostgreSQL", "Redis", "AWS"],
-    bullets: [
+    meta: "2022 – 2026\ninsurtech",
+    title: "Claims platform used daily by clinics across Hong Kong",
+    role: "Senior full-stack engineer · technical lead across HK / Taiwan / Vietnam",
+    stack: "TypeScript · React · NestJS · PostgreSQL · Redis · AWS",
+    points: [
       "Led claim-processing platforms and NestJS microservices: eligibility verification, copayment calculation, OCR orchestration, insurer integrations.",
-      "Improved system performance by 150% via query optimization, caching, and rendering work; automated OCR pipeline cut operational delays by 40%.",
-      "Served as the cross-country bridge for a distributed engineering org — standards, review practices, reliable delivery.",
+      "System performance improved 150% through query optimization, caching, and rendering work.",
+      "End-to-end automated OCR pipeline cut manual workload and operational delays by 40%.",
     ],
   },
   {
-    tag: "WEB3 / CRYPTO",
-    period: "2021 — present",
-    title: "Crypto product work — from government-grade systems to gaming platforms",
-    role: "Frontend / Full-Stack — employment & freelance",
-    stack: ["Vue", "Nuxt", "TypeScript", "Solidity (basics)", "TON"],
-    bullets: [
+    meta: "2021 —\nweb3",
+    title: "Crypto product work, employment and freelance",
+    role: "Frontend / full-stack",
+    stack: "Vue · Nuxt · TypeScript · TON",
+    points: [
       "Frontend lead for government-grade crypto management systems and enterprise platforms.",
-      "Freelance delivery for a crypto gaming platform; personal experiments with TON Connect, wallet flows, and on-chain tracking (see GitHub).",
+      "Freelance delivery for a crypto gaming platform; ongoing experiments with TON Connect, wallet flows, and on-chain tracking.",
     ],
   },
 ];
@@ -50,128 +47,104 @@ export default function WorkPage() {
     <div className="flex min-h-screen flex-col">
       <Nav />
 
-      <main className="flex-1">
-        <section className="mx-auto w-full max-w-5xl px-5 pb-4 pt-16">
-          <Eyebrow>For hiring teams</Eyebrow>
-          <h1 className="mt-4 text-3xl font-semibold tracking-tight sm:text-5xl">
-            Seven years of systems where{" "}
-            <span className="text-accent">correctness costs money</span>.
+      <main className="mx-auto w-full max-w-3xl flex-1 px-5 pb-20">
+        <section className="pt-16">
+          <p className="font-mono text-[13px] text-ink-3">For hiring teams</p>
+          <h1 className="mt-3 max-w-2xl font-serif text-3xl font-medium leading-[1.15] tracking-tight sm:text-[2.6rem]">
+            Seven years of systems where correctness costs money.
           </h1>
-          <p className="mt-5 max-w-2xl leading-relaxed text-muted">
-            Insurance claims, live wagering markets, crypto products. Currently a
-            full-stack engineer on a real-time sports wagering exchange (HK) —
-            open to senior remote roles, APAC timezone or global async.
+          <p className="mt-5 max-w-xl leading-relaxed text-ink-2">
+            Currently a full-stack engineer on a real-time sports wagering
+            exchange in Hong Kong. Before that, four years on a
+            health-insurance claims platform. Open to senior remote roles —
+            APAC timezone or global async.
           </p>
-          <div className="mt-6 flex flex-wrap gap-3 font-mono text-sm">
-            <a
-              className="rounded-md border border-accent-dim bg-panel px-4 py-2 text-accent transition-colors hover:bg-panel-2"
-              href={`mailto:${EMAIL}`}
-            >
-              Get in touch
-            </a>
-            <a
-              className="rounded-md border border-line bg-panel px-4 py-2 text-muted transition-colors hover:text-foreground"
-              href={GITHUB}
-              target="_blank"
-              rel="noreferrer"
-            >
-              GitHub
-            </a>
-            <a
-              className="rounded-md border border-line bg-panel px-4 py-2 text-muted transition-colors hover:text-foreground"
-              href={LINKEDIN}
-              target="_blank"
-              rel="noreferrer"
-            >
-              LinkedIn
-            </a>
-          </div>
+          <p className="tnum mt-5 font-mono text-[13px] leading-6 text-ink-3">
+            <a className="text-red-ink hover:underline" href={`mailto:${EMAIL}`}>
+              email
+            </a>{" "}
+            ·{" "}
+            <a className="hover:text-red-ink" href={GITHUB} target="_blank" rel="noreferrer">
+              github
+            </a>{" "}
+            ·{" "}
+            <a className="hover:text-red-ink" href={LINKEDIN} target="_blank" rel="noreferrer">
+              linkedin
+            </a>{" "}
+            · resume on request
+          </p>
         </section>
 
-        {/* Case studies */}
-        <section className="mx-auto w-full max-w-5xl px-5 py-12">
-          <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-muted">
-            Case studies
-          </h2>
-          <div className="mt-5 space-y-5">
+        <section>
+          <SectionTitle>Case studies</SectionTitle>
+          <div className="border-b border-rule">
             {caseStudies.map((cs) => (
-              <article
+              <div
                 key={cs.title}
-                className="rounded-xl border border-line bg-panel p-6 sm:p-7"
+                className="grid gap-2 border-t border-rule py-6 sm:grid-cols-[9.5rem_1fr] sm:gap-6"
               >
-                <div className="flex flex-wrap items-baseline justify-between gap-2">
-                  <p className="font-mono text-xs tracking-[0.18em] text-accent">
-                    {cs.tag}
-                  </p>
-                  <p className="font-mono text-xs text-muted">{cs.period}</p>
+                <div className="tnum whitespace-pre-line font-mono text-xs leading-5 text-ink-3">
+                  {cs.meta}
                 </div>
-                <h3 className="mt-3 text-xl font-semibold sm:text-2xl">
-                  {cs.title}
-                </h3>
-                <p className="mt-1.5 text-sm italic text-muted">{cs.role}</p>
-                <ul className="mt-4 space-y-2 text-[15px] leading-relaxed text-foreground/90">
-                  {cs.bullets.map((b) => (
-                    <li key={b} className="flex gap-2.5">
-                      <span className="mt-[9px] h-1 w-1 shrink-0 rounded-full bg-accent" />
-                      <span>{b}</span>
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {cs.stack.map((s) => (
-                    <Chip key={s}>{s}</Chip>
-                  ))}
+                <div>
+                  <h3 className="font-serif text-[1.35rem] font-medium leading-snug">
+                    {cs.title}
+                  </h3>
+                  <p className="mt-1 text-[15px] italic text-ink-2">{cs.role}</p>
+                  <ul className="mt-3 space-y-2 text-[15.5px] leading-relaxed">
+                    {cs.points.map((p) => (
+                      <li key={p} className="flex gap-2.5">
+                        <span className="select-none text-ink-3">—</span>
+                        <span>{p}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="tnum mt-3 font-mono text-xs text-ink-3">{cs.stack}</p>
                 </div>
-              </article>
-            ))}
-          </div>
-          <p className="mt-6 font-mono text-xs text-muted">
-            Full write-ups with architecture diagrams — in progress. Live,
-            de-identified demos landing here soon.
-          </p>
-        </section>
-
-        {/* How I work */}
-        <section className="mx-auto w-full max-w-5xl px-5 py-12">
-          <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-muted">
-            How I work remotely
-          </h2>
-          <div className="mt-5 grid gap-4 sm:grid-cols-3">
-            {[
-              {
-                h: "Async-first",
-                p: "Written specs, decision logs, and PRs that explain themselves. 4 years bridging HK / Taiwan / Vietnam teams.",
-              },
-              {
-                h: "AI-augmented",
-                p: "Daily agentic workflow (Claude Code): ~650 PRs shipped in 20 weeks on a production trading platform.",
-              },
-              {
-                h: "Overlap-friendly",
-                p: "Based in Taiwan (UTC+8). Comfortable overlapping APAC business hours and EU mornings / US evenings.",
-              },
-            ].map((x) => (
-              <div key={x.h} className="rounded-xl border border-line bg-panel p-6">
-                <h3 className="font-semibold">{x.h}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">{x.p}</p>
               </div>
             ))}
           </div>
+          <p className="mt-4 font-mono text-xs leading-relaxed text-ink-3">
+            Full write-ups with architecture diagrams are in progress;
+            de-identified live demos will be linked here.
+          </p>
         </section>
 
-        {/* CTA */}
-        <section className="mx-auto w-full max-w-5xl px-5 py-16 text-center">
-          <p className="text-lg text-muted">
-            Want the resume, references, or a conversation?
-          </p>
-          <a
-            className="mt-4 inline-block rounded-md border border-accent-dim bg-panel px-6 py-3 font-mono text-accent transition-colors hover:bg-panel-2"
-            href={`mailto:${EMAIL}`}
-          >
-            {EMAIL}
-          </a>
-          <p className="mt-3 font-mono text-xs text-muted">
-            Replies within 24h · UTC+8
+        <section>
+          <SectionTitle>How I work remotely</SectionTitle>
+          <div className="border-b border-rule">
+            <Row meta="async-first">
+              <p className="text-[15.5px] leading-relaxed">
+                Written specs, decision logs, PRs that explain themselves.
+                Four years bridging Hong Kong, Taiwan, and Vietnam teams.
+              </p>
+            </Row>
+            <Row meta="ai-augmented">
+              <p className="text-[15.5px] leading-relaxed">
+                Daily agentic workflow with Claude Code — 650 PRs shipped in
+                20 weeks on a production trading platform, with the test
+                coverage to survive it.
+              </p>
+            </Row>
+            <Row meta="overlap">
+              <p className="text-[15.5px] leading-relaxed">
+                Taipei (UTC+8). Comfortable overlapping APAC business hours
+                and EU mornings / US evenings.
+              </p>
+            </Row>
+          </div>
+        </section>
+
+        <section className="mt-14">
+          <p className="leading-relaxed text-ink-2">
+            Want the resume, references, or a conversation? Write to{" "}
+            <a
+              className="underline decoration-rule-mid underline-offset-4 hover:text-red-ink hover:decoration-red-ink"
+              href={`mailto:${EMAIL}`}
+            >
+              {EMAIL}
+            </a>
+            <span className="tnum font-mono text-xs text-ink-3"> — replies within 24h, UTC+8.</span>
           </p>
         </section>
       </main>
