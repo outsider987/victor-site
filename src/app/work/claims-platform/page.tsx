@@ -173,9 +173,16 @@ export default function ClaimsPlatformPage() {
             When a patient walks out of a clinic, someone has to verify their
             policy, calculate the copayment, file the claim, and get the
             insurer to pay — for years, largely by hand. This platform put
-            that flow into software used daily by clinics and insurers across
-            Hong Kong. I spent four years on it as senior engineer and
-            technical lead, bridging teams in Hong Kong, Taiwan, and Vietnam.
+            that flow into software used daily by <strong>150+ clinics</strong>,
+            integrated with <strong>13 insurer systems</strong> across Hong
+            Kong. I spent four years on it as senior engineer and technical
+            lead, bridging teams in Hong Kong, Taiwan, and Vietnam.
+          </p>
+          <p className="text-ink-2">
+            The first generation was a PHP-era codebase with frontend and
+            backend tangled together — every change rippled somewhere
+            unexpected. The v2 rewrite untangled it, and it&apos;s the part
+            of this work I&apos;m proudest of.
           </p>
         </section>
 
@@ -195,29 +202,41 @@ export default function ClaimsPlatformPage() {
         <section>
           <SectionTitle>The interesting problems</SectionTitle>
           <div className="border-b border-rule">
-            <Row meta="ocr pipeline">
+            <Row meta="the v2 rewrite">
               <p className="text-[15.5px] leading-relaxed">
-                Claims arrive as paper — scanned forms, receipts, referral
-                letters. I built the end-to-end OCR orchestration: extraction,
-                classification, validation, and confidence-based routing, so
-                only genuinely ambiguous fields reach a human. Manual workload
-                and operational delays dropped by 40%.
+                I led the complete frontend rebuild in React: SWR-style
+                caching with request deduplication, and one canonical
+                API-access layer so every endpoint had a single owner and a
+                single shape — replacing a coupled PHP frontend where any
+                change could ripple anywhere. Overall system performance
+                improved 150% on the flows clinics actually wait on.
               </p>
             </Row>
-            <Row meta="performance">
+            <Row meta="ci/cd">
               <p className="text-[15.5px] leading-relaxed">
-                The platform grew faster than its queries. Query optimization,
-                a Redis caching layer, and frontend rendering work improved
-                overall system performance by 150% — measured on the flows
-                clinics actually wait on.
+                I introduced the team&apos;s CI/CD pipeline — from manual,
+                nervous deploys to build-test-deploy on merge. Releases
+                stopped being events; the v2 rewrite would not have shipped
+                at its pace without it.
+              </p>
+            </Row>
+            <Row meta="ocr pipeline">
+              <p className="text-[15.5px] leading-relaxed">
+                Claims arrive as paper — receipts, forms, referral letters —
+                and I had never built AI document recognition before this
+                project. I built the end-to-end orchestration anyway:
+                extraction, classification, validation, confidence-based
+                routing, with spreadsheet-ready structured rows coming out
+                the other side. Manual workload and operational delays
+                dropped by 40%.
               </p>
             </Row>
             <Row meta="integrations">
               <p className="text-[15.5px] leading-relaxed">
-                Every insurer speaks a different dialect. The adapter services
-                normalized eligibility checks and claim submission across
-                insurer APIs, so a new integration was a bounded project, not
-                a re-architecture.
+                Thirteen insurer systems, each speaking a different dialect.
+                The adapter services normalized eligibility checks and claim
+                submission across all of them, so a new integration was a
+                bounded project, not a re-architecture.
               </p>
             </Row>
             <Row meta="distributed team">
@@ -247,10 +266,16 @@ export default function ClaimsPlatformPage() {
         <section>
           <SectionTitle>In numbers</SectionTitle>
           <div className="border-b border-rule">
-            <Row meta="daily use">
+            <Row meta="150+ clinics">
               <p className="text-[15.5px] leading-relaxed">
-                by clinics and insurers across Hong Kong — the operational
-                system of record for claim processing.
+                using the platform daily as their operational system of
+                record for claim processing.
+              </p>
+            </Row>
+            <Row meta="13 insurers">
+              <p className="text-[15.5px] leading-relaxed">
+                integrated through normalized adapter services — eligibility,
+                submission, settlement.
               </p>
             </Row>
             <Row meta="+150% / −40%">
@@ -267,8 +292,7 @@ export default function ClaimsPlatformPage() {
             </Row>
           </div>
           <p className="mt-4 font-mono text-xs leading-relaxed text-ink-3">
-            A deeper write-up of the v2 clinic platform is in progress.
-            Questions welcome —{" "}
+            Company details and real documents withheld. Questions welcome —{" "}
             <a className="text-red-ink hover:underline" href={`mailto:${EMAIL}`}>
               {EMAIL}
             </a>

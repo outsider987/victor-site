@@ -8,7 +8,7 @@ const ledger = [
   },
   {
     meta: "2022 – 2026",
-    what: "Health-insurance claims platform used daily by clinics across Hong Kong",
+    what: "Health-insurance claims platform — 150+ clinics, 13 insurers, Hong Kong",
     figure: "+150% perf · −40% ops delay",
   },
   {

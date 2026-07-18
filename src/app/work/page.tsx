@@ -23,14 +23,14 @@ const caseStudies = [
   },
   {
     meta: "2022 – 2026\ninsurtech",
-    title: "Claims platform used daily by clinics across Hong Kong",
+    title: "Claims platform used daily by 150+ clinics across Hong Kong",
     href: "/work/claims-platform",
     role: "Senior full-stack engineer · technical lead across HK / Taiwan / Vietnam",
     stack: "TypeScript · React · NestJS · PostgreSQL · Redis · AWS",
     points: [
-      "Led claim-processing platforms and NestJS microservices: eligibility verification, copayment calculation, OCR orchestration, insurer integrations.",
-      "System performance improved 150% through query optimization, caching, and rendering work.",
-      "End-to-end automated OCR pipeline cut manual workload and operational delays by 40%.",
+      "Led the v1→v2 rewrite out of a coupled PHP codebase: React rebuild with SWR-style caching and one canonical API layer; introduced the team's CI/CD.",
+      "NestJS microservices for eligibility, copayment, OCR orchestration, and 13 insurer-system integrations.",
+      "System performance +150%; automated OCR pipeline cut manual workload and delays by 40%.",
     ],
   },
   {
