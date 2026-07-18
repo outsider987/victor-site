@@ -1,65 +1,94 @@
-import Image from "next/image";
+import Link from "next/link";
+import { Nav, Footer, Eyebrow, Chip, EMAIL } from "@/components/site";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <div className="flex min-h-screen flex-col">
+      <Nav />
+
+      <main className="flex-1">
+        {/* Hero */}
+        <section className="mx-auto w-full max-w-5xl px-5 pb-16 pt-20 sm:pt-28">
+          <Eyebrow>Taiwan · UTC+8 · Remote</Eyebrow>
+          <h1 className="mt-4 max-w-3xl text-4xl font-semibold leading-tight tracking-tight sm:text-6xl">
+            I build real-time,{" "}
+            <span className="text-accent">real-money</span> systems.
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
+            Senior full-stack engineer — 7+ years shipping insurance claims
+            platforms, live trading consoles, and crypto products with
+            distributed teams across APAC.
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+          <div className="mt-8 flex flex-wrap gap-2">
+            {["React", "TypeScript", "Node.js", "Go", "NATS", "PostgreSQL", "AWS / GCP"].map(
+              (t) => (
+                <Chip key={t}>{t}</Chip>
+              ),
+            )}
+          </div>
+        </section>
+
+        {/* Fork */}
+        <section className="mx-auto w-full max-w-5xl px-5 pb-24">
+          <div className="grid gap-4 sm:grid-cols-2">
+            <Link
+              href="/work"
+              className="group rounded-xl border border-line bg-panel p-7 transition-colors hover:border-accent-dim"
+            >
+              <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted">
+                For hiring teams
+              </p>
+              <h2 className="mt-3 text-2xl font-semibold">
+                Hiring for your team?
+              </h2>
+              <p className="mt-3 leading-relaxed text-muted">
+                Case studies from InsurTech, a live wagering exchange, and Web3 —
+                plus how I work with distributed, async-first teams.
+              </p>
+              <p className="mt-5 font-mono text-sm text-accent">
+                View work{" "}
+                <span className="inline-block transition-transform group-hover:translate-x-1">
+                  →
+                </span>
+              </p>
+            </Link>
+
+            <Link
+              href="/services"
+              className="group rounded-xl border border-line bg-panel p-7 transition-colors hover:border-accent-dim"
+            >
+              <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted">
+                For clients
+              </p>
+              <h2 className="mt-3 text-2xl font-semibold">
+                Need something built?
+              </h2>
+              <p className="mt-3 leading-relaxed text-muted">
+                Freelance delivery for product teams — from real-time dashboards
+                to full platforms, shipped with an AI-accelerated workflow.
+              </p>
+              <p className="mt-5 font-mono text-sm text-accent">
+                View services{" "}
+                <span className="inline-block transition-transform group-hover:translate-x-1">
+                  →
+                </span>
+              </p>
+            </Link>
+          </div>
+
+          <p className="mt-10 text-center text-sm text-muted">
+            Or just say hi —{" "}
+            <a
+              className="text-foreground underline decoration-line underline-offset-4 hover:decoration-accent"
+              href={`mailto:${EMAIL}`}
+            >
+              {EMAIL}
+            </a>
+          </p>
+        </section>
       </main>
+
+      <Footer />
     </div>
   );
 }
