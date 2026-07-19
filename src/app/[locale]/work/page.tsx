@@ -108,8 +108,8 @@ const content: Record<
         text: "Written specs, decision logs, PRs that explain themselves. Four years bridging Hong Kong, Taiwan, and Vietnam teams.",
       },
       {
-        meta: "ai-augmented",
-        text: "Daily agentic workflow with Claude Code — 650 PRs shipped in 20 weeks on a production trading platform, with the test coverage to survive it.",
+        meta: "ai, engineered",
+        text: "I treat AI as a system to engineer, not a tool to prompt: agent harnesses that drive and verify live environments end-to-end, and reusable skill libraries that turn operating knowledge into repeatable automation. Claude Code is the daily workflow — the reliability around it is the actual work.",
       },
       {
         meta: "overlap",
@@ -173,8 +173,8 @@ const content: Record<
         text: "規格文件、決策紀錄、能自我說明的 PR。四年串接香港、台灣、越南三地團隊。",
       },
       {
-        meta: "AI 協作",
-        text: "以 Claude Code 為日常工作流——20 週在正式交易平台合併 650 個 PR。這個速度能成立，是因為規格先寫清楚、測試跟著每個 PR 走：快是紀律的結果，不是品質的代價。",
+        meta: "AI 工程化",
+        text: "我把 AI 當成要被工程化的系統，而不是等著被 prompt 的工具：打造能驅動、能驗證真實環境的 agent harness，並把操作知識沉澱成可重用的 skill 庫，讓自動化能被複製。Claude Code 是日常工作流——讓它可靠，才是真正的工程。",
       },
       {
         meta: "時區配合",

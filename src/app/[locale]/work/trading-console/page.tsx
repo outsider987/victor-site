@@ -88,8 +88,8 @@ export default async function TradingConsolePage({
           numbersTitle: "In numbers",
           numbers: [
             {
-              meta: "~650 PRs",
-              text: "merged in the first 20 weeks — frontend console, legacy Go BFF, and its greenfield successor — in a team that institutionalized AI-assisted development (Claude Code, agent-driven E2E).",
+              meta: "ai practice",
+              text: "Spec-first delivery with Claude Code as the daily driver, agent-run E2E harnesses exercising live environments before humans do, and reusable skills encoding how the platform is operated and tested.",
             },
             {
               meta: "3 services",
@@ -144,8 +144,8 @@ export default async function TradingConsolePage({
           numbersTitle: "數字",
           numbers: [
             {
-              meta: "~650 PRs",
-              text: "前 20 週合併——交易台前端、舊版 Go BFF 與新一代重寫——團隊已把 AI 輔助開發制度化（Claude Code、agent 驅動 E2E）。",
+              meta: "AI 實踐",
+              text: "規格先行、以 Claude Code 為日常開發；agent 驅動的 E2E harness 在人工介入前就先跑過真實環境；平台的操作與測試知識則寫成可重用的 skill。",
             },
             {
               meta: "3 個服務",

@@ -46,7 +46,7 @@ const content = {
       {
         tag: "velocity",
         h: "AI-accelerated delivery",
-        p: "I run a production-grade agentic workflow (Claude Code). You get senior-quality output at a pace one engineer is not supposed to have. Best for MVPs and deadline-bound builds.",
+        p: "I run a production-grade agentic workflow (Claude Code) — with the agent harnesses and reusable skills that make it reliable. Senior-quality output, fast, without the AI debt. Best for MVPs and deadline-bound builds.",
       },
     ],
     trackTitle: "Track record",
@@ -82,7 +82,7 @@ const content = {
       {
         tag: "交付速度",
         h: "AI 加速開發",
-        p: "我以生產等級的 agentic 工作流（Claude Code）開發。你會得到資深品質的產出，但速度是一個工程師「不該有」的。最適合 MVP 與趕檔期的案子。",
+        p: "我以生產等級的 agentic 工作流（Claude Code）開發，並自建 agent harness 與可重用 skill 讓它可靠——資深品質的產出、更快的速度，而不是 AI 技術債。最適合 MVP 與趕檔期的案子。",
       },
     ],
     trackTitle: "實績",

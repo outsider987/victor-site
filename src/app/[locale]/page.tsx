@@ -37,7 +37,7 @@ const content = {
       {
         meta: "2026 —",
         what: "Live trading console & Go real-time services for a sports wagering exchange",
-        figure: "650 PRs / 20 wks",
+        figure: "React · Go · NATS",
       },
       {
         meta: "2022 – 2026",
@@ -83,7 +83,7 @@ const content = {
       {
         meta: "2026 —",
         what: "運動博彩交易所的即時交易台與 Go 即時服務",
-        figure: "650 PRs / 20 週",
+        figure: "React · Go · NATS",
       },
       {
         meta: "2022 – 2026",
