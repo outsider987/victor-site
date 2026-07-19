@@ -109,7 +109,7 @@ const content: Record<
       },
       {
         meta: "ai, engineered",
-        text: "I treat AI as a system to engineer, not a tool to prompt. A harness, concretely, is three things: real tools and environments for the agent (driving a browser via Playwright against live test environments), verifiable goals with replayable inputs (synthetic traffic, event replay), and a human gate — agents draft, humans approve. Operating knowledge gets encoded as reusable skills. Claude Code is the daily workflow; making it reliable is the actual work.",
+        text: "Claude Code daily. The harness: agents drive real test environments through Playwright — replayable inputs (synthetic traffic, event replay), verifiable assertions, human-approved output. Operating knowledge is written down as reusable skills.",
       },
       {
         meta: "overlap",
@@ -174,7 +174,7 @@ const content: Record<
       },
       {
         meta: "AI 工程化",
-        text: "我把 AI 當成要被工程化的系統，而不是等著被 prompt 的工具。所謂 harness，具體是三件事：給 agent 真實的工具與環境（透過 Playwright 直接操作瀏覽器、打測試環境）、給它可驗證的目標與可重放的輸入（合成流量、事件重播）、加上人類閘門（agent 起草，人核准）。操作知識再沉澱成可重用的 skill 庫——Claude Code 是日常工作流，讓它可靠才是真正的工程。",
+        text: "Claude Code 日常開發。harness：agent 用 Playwright 打真實測試環境——輸入可重放（合成流量、事件重播）、結果可斷言、輸出人核准。操作知識寫成可重用的 skill。",
       },
       {
         meta: "時區配合",
