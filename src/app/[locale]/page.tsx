@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
+import fs from "node:fs";
+import path from "node:path";
 import { Nav, Footer, Row, SectionTitle, Card, EMAIL } from "@/components/site";
 import { altFor, isLocale, type Locale } from "@/i18n";
+
+// avatar is optional: drop public/avatar.png and rebuild
+const hasAvatar = fs.existsSync(path.join(process.cwd(), "public", "avatar.png"));
 
 export async function generateMetadata({
   params,
@@ -122,11 +127,25 @@ export default async function Home({
 
       <main className="mx-auto w-full max-w-3xl flex-1 px-5 pb-20">
         <section className="pt-16 sm:pt-24">
-          <h1 className="max-w-2xl font-serif text-4xl font-medium leading-[1.12] tracking-tight sm:text-[3.4rem]">
-            {t.h1}
-          </h1>
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-2">{t.lede}</p>
-          <p className="tnum mt-6 font-mono text-[13px] text-ink-3">{t.status}</p>
+          <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+              <h1 className="max-w-2xl font-serif text-4xl font-medium leading-[1.12] tracking-tight sm:text-[3.4rem]">
+                {t.h1}
+              </h1>
+              <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-2">{t.lede}</p>
+              <p className="tnum mt-6 font-mono text-[13px] text-ink-3">{t.status}</p>
+            </div>
+            {hasAvatar && (
+              /* eslint-disable-next-line @next/next/no-img-element */
+              <img
+                src="/avatar.png"
+                alt="Victor Chang — pixel portrait"
+                width={136}
+                height={136}
+                className="order-first shrink-0 border border-ink shadow-[4px_4px_0_0_#100f0f] [image-rendering:pixelated] sm:order-none sm:mt-2"
+              />
+            )}
+          </div>
         </section>
 
         <section>
