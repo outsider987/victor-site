@@ -41,6 +41,14 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+/* Traditional Chinese: extend the serif stack and open up CJK line rhythm */
+body[data-locale="zh"] {
+  font-family: var(--font-newsreader), var(--font-noto-serif-tc), "Songti TC",
+    "Noto Serif CJK TC", serif;
+  line-height: 1.8;
+  letter-spacing: 0.01em;
+}
+
 ::selection {
   background: rgba(175, 48, 41, 0.14);
 }

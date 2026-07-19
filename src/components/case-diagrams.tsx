@@ -1,12 +1,7 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import { Nav, Footer, Row, SectionTitle, EMAIL } from "@/components/site";
-
-export const metadata: Metadata = {
-  title: "Case study: live trading console — Victor Chang",
-  description:
-    "Architecture and engineering decisions behind a real-time trading console for a sports wagering exchange: WebSocket fan-out, render isolation, maker-checker controls.",
-};
+/**
+ * De-identified case-study diagrams. Labels stay in English in both
+ * locales — they are engineering artifacts, like code.
+ */
 
 const INK = "#100f0f";
 const INK2 = "#575653";
@@ -15,7 +10,7 @@ const WASH = "#f2f0e5";
 const RULE = "#dad8ce";
 const RED = "#af3029";
 
-function ArchDiagram() {
+export function TradingArchDiagram() {
   return (
     <svg
       viewBox="0 0 760 350"
@@ -86,7 +81,7 @@ function ArchDiagram() {
   );
 }
 
-function ConsoleSketch() {
+export function ConsoleSketch() {
   const gridRows = [104, 140, 176, 212, 248, 284];
   return (
     <svg
@@ -158,135 +153,134 @@ function ConsoleSketch() {
   );
 }
 
-export default function TradingConsolePage() {
+export function ClaimsArchDiagram() {
+  const services = [
+    { x: 20, label: "eligibility", sub: "verification" },
+    { x: 200, label: "copayment", sub: "calculation" },
+    { x: 380, label: "OCR", sub: "orchestration" },
+    { x: 560, label: "insurer", sub: "adapters" },
+  ];
   return (
-    <div className="flex min-h-screen flex-col">
-      <Nav />
+    <svg
+      viewBox="0 0 760 330"
+      role="img"
+      aria-label="Architecture: clinic portal calls a claims BFF, which orchestrates NestJS microservices for eligibility, copayment, OCR, and insurer integrations"
+      className="w-full"
+    >
+      <defs>
+        <marker id="ca" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 0 1 L 9 5 L 0 9" fill="none" stroke={INK2} strokeWidth="1.4" />
+        </marker>
+        <marker id="cr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 0 1 L 9 5 L 0 9" fill="none" stroke={RED} strokeWidth="1.4" />
+        </marker>
+      </defs>
 
-      <main className="mx-auto w-full max-w-3xl flex-1 px-5 pb-20">
-        <section className="pt-14">
-          <p className="font-mono text-[13px] text-ink-3">
-            <Link href="/work" className="hover:text-red-ink">work</Link> / case study
-          </p>
-          <h1 className="mt-3 max-w-2xl font-serif text-3xl font-medium leading-[1.15] tracking-tight sm:text-[2.4rem]">
-            A trading console that keeps up with the market.
-          </h1>
-          <p className="tnum mt-4 font-mono text-xs leading-6 text-ink-3">
-            2026 — present · sports wagering exchange · full-stack engineer
-            <br />
-            React 18 · TypeScript · Go · NATS · gRPC · WebSocket · Redis · PostgreSQL · GKE
-          </p>
-        </section>
+      {/* clinic portal */}
+      <rect x="20" y="26" width="150" height="50" fill="#fffcf0" stroke={INK} strokeWidth="1.4" />
+      <text x="95" y="47" textAnchor="middle" fontSize="11" fill={INK} className="font-mono">clinic portal</text>
+      <text x="95" y="62" textAnchor="middle" fontSize="10" fill={INK3} className="font-mono">React · used daily</text>
 
-        <section className="mt-10 max-w-xl space-y-4 leading-relaxed">
-          <p>
-            A wagering exchange runs on numbers that change by the second.
-            Traders watch a grid of live odds across hundreds of markets and
-            intervene — suspending a market, overriding a price — where every
-            action moves real money. I was the #1 contributor to this console
-            (400+ PRs) and a top contributor to the Go backend feeding it.
-          </p>
-          <p className="text-ink-2">
-            The problem in one line: <em>thousands of odds updates per minute,
-            one browser tab, and an operations team that must never see stale
-            data without knowing it&apos;s stale.</em>
-          </p>
-        </section>
+      {/* insurer systems */}
+      <rect x="590" y="26" width="150" height="50" fill="#fffcf0" stroke={INK} strokeDasharray="4 3" />
+      <text x="665" y="47" textAnchor="middle" fontSize="11" fill={INK2} className="font-mono">insurer systems</text>
+      <text x="665" y="62" textAnchor="middle" fontSize="10" fill={INK3} className="font-mono">external APIs</text>
 
-        <section>
-          <SectionTitle>Architecture</SectionTitle>
-          <figure className="border-y border-rule py-6">
-            <ArchDiagram />
-            <figcaption className="mt-3 font-mono text-xs leading-relaxed text-ink-3">
-              Data plane, de-identified. Vendor feeds are normalized into one
-              schema, published as sequence-stamped frames on NATS, fanned out
-              across BFF pods so every WebSocket client gets every event, and
-              rendered by the React console. Ops actions flow through a
-              maker-checker gate.
-            </figcaption>
-          </figure>
-        </section>
+      {/* BFF */}
+      <line x1="170" y1="51" x2="296" y2="51" stroke={INK2} strokeWidth="1.2" markerEnd="url(#ca)" />
+      <rect x="300" y="26" width="170" height="50" fill={WASH} stroke={INK} />
+      <text x="385" y="47" textAnchor="middle" fontSize="11" fill={INK} className="font-mono">claims BFF / API</text>
+      <text x="385" y="62" textAnchor="middle" fontSize="10" fill={INK3} className="font-mono">NestJS · REST</text>
 
-        <section>
-          <SectionTitle>The interesting problems</SectionTitle>
-          <div className="border-b border-rule">
-            <Row meta="render economics">
-              <p className="text-[15.5px] leading-relaxed">
-                A naive React grid re-renders everything on every frame. I
-                isolated re-renders to the single changed row: stable context
-                values, memoized leaf cells, and throttled frame invalidation.
-                The grid stays smooth while the market is moving — and there is
-                a render-count overlay in dev builds to prove it stays that way.
-              </p>
-            </Row>
-            <Row meta="consistency">
-              <p className="text-[15.5px] leading-relaxed">
-                Kubernetes runs several BFF pods; a client connects to one, but
-                events arrive on all of them. I built the cross-pod fan-out so
-                every pod delivers every relevant event, with engine sequence
-                numbers as high-water marks — an out-of-order frame can never
-                overwrite fresher state, and a 60-second poll can never regress
-                what the socket already knew.
-              </p>
-            </Row>
-            <Row meta="human-in-the-loop">
-              <p className="text-[15.5px] leading-relaxed">
-                High-risk operations (price overrides, market suspension) go
-                through a maker-checker workflow: one person proposes, another
-                approves, every write carries a reason and an idempotency key,
-                and the audit trail shows field-level before/after diffs.
-                Trust is a feature you build, not a policy you write.
-              </p>
-            </Row>
-          </div>
-        </section>
+      {/* fan to services */}
+      {services.map((s) => (
+        <g key={s.label}>
+          <line
+            x1="385"
+            y1="76"
+            x2={s.x + 90}
+            y2="136"
+            stroke={INK2}
+            strokeWidth="1.1"
+            markerEnd="url(#ca)"
+          />
+          <rect x={s.x} y="140" width="180" height="48" fill="#fffcf0" stroke={INK} />
+          <text x={s.x + 90} y="160" textAnchor="middle" fontSize="11" fill={INK} className="font-mono">{s.label}</text>
+          <text x={s.x + 90} y="175" textAnchor="middle" fontSize="10" fill={INK3} className="font-mono">{s.sub}</text>
+        </g>
+      ))}
+      <text x="20" y="122" fontSize="10" fill={INK3} className="font-mono">NestJS microservices</text>
 
-        <section>
-          <SectionTitle>The console, abstracted</SectionTitle>
-          <figure className="border-y border-rule py-6">
-            <ConsoleSketch />
-            <figcaption className="mt-3 font-mono text-xs leading-relaxed text-ink-3">
-              Stylized sketch — the real interface stays behind the NDA.
-              Market list, live odds grid with row-isolated updates, and the
-              maker-checker approval queue.
-            </figcaption>
-          </figure>
-          <p className="mt-4 font-mono text-xs">
-            <Link href="/demos/live-desk" className="text-red-ink hover:underline">
-              → see the render-isolation technique running live: the trading desk demo
-            </Link>
-          </p>
-        </section>
+      {/* docs into OCR */}
+      <rect x="330" y="242" width="120" height="56" fill="#fffcf0" stroke={INK} />
+      <line x1="342" y1="256" x2="426" y2="256" stroke={RULE} />
+      <line x1="342" y1="268" x2="426" y2="268" stroke={RULE} />
+      <line x1="342" y1="280" x2="406" y2="280" stroke={RULE} />
+      <text x="390" y="316" textAnchor="middle" fontSize="10" fill={INK3} className="font-mono">paper claim documents</text>
+      <line x1="435" y1="242" x2="462" y2="192" stroke={RED} strokeWidth="1.2" markerEnd="url(#cr)" />
+      <text x="510" y="228" fontSize="10" fill={RED} className="font-mono">automated pipeline:</text>
+      <text x="510" y="241" fontSize="10" fill={RED} className="font-mono">−40% manual workload</text>
 
-        <section>
-          <SectionTitle>In numbers</SectionTitle>
-          <div className="border-b border-rule">
-            <Row meta="~650 PRs">
-              <p className="text-[15.5px] leading-relaxed">
-                merged in the first 20 weeks — frontend console, legacy Go BFF,
-                and its greenfield successor — in a team that institutionalized
-                AI-assisted development (Claude Code, agent-driven E2E).
-              </p>
-            </Row>
-            <Row meta="3 services">
-              <p className="text-[15.5px] leading-relaxed">
-                touched daily: the React console, the legacy real-time BFF
-                (+57k lines of Go), and the v2 BFF with the batched
-                odds-override pipeline.
-              </p>
-            </Row>
-          </div>
-          <p className="mt-4 font-mono text-xs leading-relaxed text-ink-3">
-            Company name, partners, and internal identifiers withheld.
-            Happy to go deeper in a conversation —{" "}
-            <a className="text-red-ink hover:underline" href={`mailto:${EMAIL}`}>
-              {EMAIL}
-            </a>
-          </p>
-        </section>
-      </main>
+      {/* insurer adapters to external */}
+      <line x1="650" y1="140" x2="665" y2="80" stroke={INK2} strokeWidth="1.1" strokeDasharray="4 3" markerEnd="url(#ca)" />
 
-      <Footer />
-    </div>
+      {/* datastore */}
+      <rect x="20" y="242" width="240" height="26" fill={WASH} stroke={INK} />
+      <text x="140" y="259" textAnchor="middle" fontSize="10" fill={INK} className="font-mono">PostgreSQL · Redis cache</text>
+      <line x1="110" y1="188" x2="120" y2="238" stroke={INK3} strokeWidth="1" strokeDasharray="3 3" markerEnd="url(#ca)" />
+      <line x1="290" y1="188" x2="200" y2="238" stroke={INK3} strokeWidth="1" strokeDasharray="3 3" markerEnd="url(#ca)" />
+    </svg>
+  );
+}
+
+export function OcrSketch() {
+  return (
+    <svg
+      viewBox="0 0 760 300"
+      role="img"
+      aria-label="Stylized sketch: a scanned claim document passes through OCR and becomes structured, validated form fields, with low-confidence fields flagged for human review"
+      className="w-full"
+    >
+      <defs>
+        <marker id="oa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+          <path d="M 0 1 L 9 5 L 0 9" fill="none" stroke={INK2} strokeWidth="1.4" />
+        </marker>
+      </defs>
+
+      {/* document */}
+      <rect x="48" y="28" width="200" height="244" fill="#fffcf0" stroke={INK} strokeWidth="1.4" />
+      {[52, 70, 88, 106, 148, 166, 184, 222, 240].map((y, i) => (
+        <line key={y} x1="64" y1={y} x2={i % 3 === 2 ? 180 : 232} y2={y} stroke={RULE} strokeWidth="6" />
+      ))}
+      {/* scan band */}
+      <rect x="40" y="118" width="216" height="26" fill={RED} fillOpacity="0.08" stroke={RED} strokeDasharray="5 4" />
+      <text x="148" y="135" textAnchor="middle" fontSize="10" fill={RED} className="font-mono">OCR pass</text>
+
+      {/* arrow */}
+      <line x1="260" y1="150" x2="420" y2="150" stroke={INK2} strokeWidth="1.3" markerEnd="url(#oa)" />
+      <text x="340" y="130" textAnchor="middle" fontSize="10" fill={INK3} className="font-mono">extract · classify</text>
+      <text x="340" y="172" textAnchor="middle" fontSize="10" fill={INK3} className="font-mono">· validate</text>
+
+      {/* form */}
+      <rect x="428" y="28" width="284" height="244" fill="#fffcf0" stroke={INK} strokeWidth="1.4" />
+      {[
+        { y: 56, ok: true },
+        { y: 108, ok: true },
+        { y: 160, ok: true },
+        { y: 212, ok: false },
+      ].map((f) => (
+        <g key={f.y}>
+          <rect x="446" y={f.y - 14} width="90" height="8" fill={WASH} />
+          <rect x="446" y={f.y} width="200" height="24" fill="#fffcf0" stroke={f.ok ? RULE : RED} strokeWidth={f.ok ? 1 : 1.3} />
+          <rect x="454" y={f.y + 8} width="120" height="8" fill={WASH} />
+          {f.ok ? (
+            <path d={`M 656 ${f.y + 6} l 5 7 l 10 -13`} fill="none" stroke={INK2} strokeWidth="1.6" />
+          ) : (
+            <text x="656" y={f.y + 17} fontSize="10" fill={RED} className="font-mono">review</text>
+          )}
+        </g>
+      ))}
+      <text x="428" y="292" fontSize="9" fill={INK3} className="font-mono">low-confidence fields route to humans — the rest never wait</text>
+    </svg>
   );
 }

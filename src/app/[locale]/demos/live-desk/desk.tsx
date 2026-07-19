@@ -135,7 +135,7 @@ function useDeskStats(running: boolean) {
 
 /* ---------- the desk ---------- */
 
-export default function Desk() {
+export default function Desk({ explainer }: { explainer: string }) {
   const [mode, setMode] = useState<Mode>("isolated");
   const [tps, setTps] = useState(120);
   const [running, setRunning] = useState(true);
@@ -223,12 +223,7 @@ export default function Desk() {
         ))}
       </div>
 
-      <p className="mt-3 font-mono text-xs leading-relaxed text-ink-3">
-        watch <span className="text-ink">row renders/s</span>: in isolated mode
-        it tracks ticks/s (one render per update); in naive mode every update
-        re-renders all 30 rows — same feed, ~30× the render work. crank
-        updates/s and compare fps.
-      </p>
+      <p className="mt-3 font-mono text-xs leading-relaxed text-ink-3">{explainer}</p>
 
       {/* the grid */}
       <div className="mt-4 overflow-x-auto border border-ink bg-paper shadow-[4px_4px_0_0_#100f0f]">

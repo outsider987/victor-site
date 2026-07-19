@@ -1,4 +1,6 @@
 import Link from "next/link";
+import type { Locale } from "@/i18n";
+import { LangSwitch } from "./lang-switch";
 
 export const EMAIL = "t790219520@gmail.com";
 export const GITHUB = "https://github.com/outsider987";
@@ -10,35 +12,67 @@ const BUILD_DATE = new Date().toLocaleDateString("en-GB", {
   year: "numeric",
 });
 
-export function Nav() {
+const navLabels = {
+  en: { work: "work", services: "services" },
+  zh: { work: "作品", services: "服務" },
+} as const;
+
+/** `path` is the current path without the locale prefix, e.g. "/work" */
+export function Nav({ locale, path }: { locale: Locale; path: string }) {
+  const t = navLabels[locale];
   return (
     <header className="border-b border-rule">
       <nav className="mx-auto flex max-w-3xl items-baseline justify-between px-5 py-4 font-mono text-[13px] text-ink-2">
-        <Link href="/" className="text-ink hover:text-red-ink">
+        <Link href={`/${locale}`} className="text-ink hover:text-red-ink">
           victor chang
         </Link>
-        <div className="flex gap-5">
-          <Link href="/work" className="hover:text-red-ink">
-            work
+        <div className="flex items-baseline gap-5">
+          <Link href={`/${locale}/work`} className="hover:text-red-ink">
+            {t.work}
           </Link>
-          <Link href="/services" className="hover:text-red-ink">
-            services
+          <Link href={`/${locale}/services`} className="hover:text-red-ink">
+            {t.services}
           </Link>
           <a href={GITHUB} target="_blank" rel="noreferrer" className="hover:text-red-ink">
             github
           </a>
+          <LangSwitch locale={locale} path={path} />
         </div>
       </nav>
     </header>
   );
 }
 
-export function Footer() {
+const footerLabels = {
+  en: {
+    place: "Taipei, Taiwan · UTC+8",
+    colophon: (
+      <>
+        Set in Newsreader &amp; IBM Plex Mono on Flexoki paper. Built with
+        Next.js — deployed {BUILD_DATE}.
+      </>
+    ),
+    source: "Source",
+  },
+  zh: {
+    place: "台北 · UTC+8",
+    colophon: (
+      <>
+        字體 Newsreader、Noto Serif TC 與 IBM Plex Mono，Flexoki
+        紙墨色系。以 Next.js 構建——部署於 {BUILD_DATE}。
+      </>
+    ),
+    source: "原始碼",
+  },
+} as const;
+
+export function Footer({ locale }: { locale: Locale }) {
+  const t = footerLabels[locale];
   return (
     <footer className="border-t border-rule">
       <div className="mx-auto max-w-3xl space-y-1.5 px-5 py-8 font-mono text-xs leading-relaxed text-ink-3">
         <p>
-          Taipei, Taiwan · UTC+8 ·{" "}
+          {t.place} ·{" "}
           <a className="hover:text-red-ink" href={`mailto:${EMAIL}`}>
             {EMAIL}
           </a>{" "}
@@ -52,15 +86,14 @@ export function Footer() {
           </a>
         </p>
         <p>
-          Set in Newsreader &amp; IBM Plex Mono on Flexoki paper. Built with
-          Next.js — deployed {BUILD_DATE}.{" "}
+          {t.colophon}{" "}
           <a
             className="hover:text-red-ink"
             href={`${GITHUB}/victor-site`}
             target="_blank"
             rel="noreferrer"
           >
-            Source
+            {t.source}
           </a>
           .
         </p>
