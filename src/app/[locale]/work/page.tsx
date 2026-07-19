@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Nav, Footer, Row, SectionTitle, Card, EMAIL, GITHUB, LINKEDIN } from "@/components/site";
+import { HarnessDiagram } from "@/components/case-diagrams";
 import { altFor, isLocale, type Locale } from "@/i18n";
 
 const meta = {
@@ -52,6 +53,7 @@ const content: Record<
     how: { meta: string; text: string }[];
     ctaLead: string;
     ctaTail: string;
+    harnessCaption: string;
   }
 > = {
   en: {
@@ -109,7 +111,7 @@ const content: Record<
       },
       {
         meta: "ai, engineered",
-        text: "Claude Code daily. The harness: agents drive real test environments through Playwright — replayable inputs (synthetic traffic, event replay), verifiable assertions, human-approved output. Operating knowledge is written down as reusable skills.",
+        text: "Agents drive real test environments through Playwright — replayable inputs (synthetic traffic, event replay), verifiable assertions, human-approved output. Operating knowledge is written down as reusable skills.",
       },
       {
         meta: "overlap",
@@ -118,6 +120,8 @@ const content: Record<
     ],
     ctaLead: "Want the resume, references, or a conversation? Write to",
     ctaTail: " — replies within 24h, UTC+8.",
+    harnessCaption:
+      "The harness loop: skills load the agent · the agent drives a real test environment via Playwright · replayable inputs, verifiable assertions · agents draft, humans approve · verified knowledge written back as skills.",
   },
   zh: {
     eyebrow: "給正在找人的團隊",
@@ -174,7 +178,7 @@ const content: Record<
       },
       {
         meta: "AI 工程化",
-        text: "Claude Code 日常開發。harness：agent 用 Playwright 打真實測試環境——輸入可重放（合成流量、事件重播）、結果可斷言、輸出人核准。操作知識寫成可重用的 skill。",
+        text: "agent 用 Playwright 打真實測試環境——輸入可重放（合成流量、事件重播）、結果可斷言、輸出人核准。操作知識寫成可重用的 skill。",
       },
       {
         meta: "時區配合",
@@ -183,6 +187,8 @@ const content: Record<
     ],
     ctaLead: "想要履歷、推薦人，或直接聊聊？寫信到",
     ctaTail: "——24 小時內回覆（UTC+8）。",
+    harnessCaption:
+      "harness 迴路：skill 載入 agent · agent 經 Playwright 驅動真實測試環境 · 輸入可重放、斷言可驗 · agent 起草、人核准 · 驗證過的知識回寫成 skill。",
   },
 };
 
@@ -276,6 +282,12 @@ export default async function WorkPage({
               </Row>
             ))}
           </div>
+          <figure className="mt-6 border-y border-rule py-6">
+            <HarnessDiagram />
+            <figcaption className="mt-3 font-mono text-xs leading-relaxed text-ink-3">
+              {t.harnessCaption}
+            </figcaption>
+          </figure>
         </section>
 
         <section className="mt-14">

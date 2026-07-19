@@ -233,6 +233,79 @@ export function ClaimsArchDiagram() {
   );
 }
 
+export function HarnessDiagram() {
+  return (
+    <svg
+      viewBox="0 0 760 365"
+      role="img"
+      aria-label="The agent harness loop: skills load the agent, the agent drives a real test environment via Playwright with replayable inputs, results hit assertions, agents draft and humans approve, knowledge is written back as skills"
+      className="w-full"
+    >
+      <defs>
+        <marker id="ha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 0 1 L 9 5 L 0 9" fill="none" stroke={INK2} strokeWidth="1.4" />
+        </marker>
+        <marker id="hr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 0 1 L 9 5 L 0 9" fill="none" stroke={RED} strokeWidth="1.4" />
+        </marker>
+      </defs>
+
+      {/* skills library (stacked cards) */}
+      <rect x="28" y="38" width="140" height="50" fill={WASH} stroke={INK} />
+      <rect x="20" y="30" width="140" height="50" fill="#fffcf0" stroke={INK} />
+      <text x="90" y="51" textAnchor="middle" fontSize="11" fill={INK} className="font-mono">skills library</text>
+      <text x="90" y="66" textAnchor="middle" fontSize="10" fill={INK3} className="font-mono">operating knowledge</text>
+
+      {/* skills -> agent */}
+      <line x1="90" y1="88" x2="90" y2="146" stroke={INK2} strokeWidth="1.2" markerEnd="url(#ha)" />
+      <text x="100" y="122" fontSize="10" fill={INK3} className="font-mono">loads</text>
+
+      {/* agent */}
+      <rect x="20" y="150" width="140" height="56" fill="#fffcf0" stroke={INK} strokeWidth="1.4" />
+      <text x="90" y="173" textAnchor="middle" fontSize="11" fill={INK} className="font-mono">agent</text>
+      <text x="90" y="188" textAnchor="middle" fontSize="10" fill={INK3} className="font-mono">Claude Code</text>
+
+      {/* agent -> env via Playwright */}
+      <line x1="160" y1="178" x2="260" y2="178" stroke={RED} strokeWidth="1.3" markerEnd="url(#hr)" />
+      <text x="210" y="170" textAnchor="middle" fontSize="10" fill={RED} className="font-mono">Playwright</text>
+
+      {/* real test environment (mini browser) */}
+      <rect x="264" y="136" width="180" height="84" fill="#fffcf0" stroke={INK} strokeWidth="1.4" />
+      <line x1="264" y1="158" x2="444" y2="158" stroke={INK} />
+      <circle cx="278" cy="147" r="3.5" fill="none" stroke={INK2} />
+      <circle cx="290" cy="147" r="3.5" fill="none" stroke={INK2} />
+      <circle cx="302" cy="147" r="3.5" fill="none" stroke={INK2} />
+      <text x="354" y="182" textAnchor="middle" fontSize="11" fill={INK} className="font-mono">real test</text>
+      <text x="354" y="197" textAnchor="middle" fontSize="11" fill={INK} className="font-mono">environment</text>
+
+      {/* replayable inputs */}
+      <rect x="264" y="252" width="180" height="42" fill="#fffcf0" stroke={INK} strokeDasharray="4 3" />
+      <text x="354" y="269" textAnchor="middle" fontSize="10" fill={INK2} className="font-mono">synthetic traffic</text>
+      <text x="354" y="283" textAnchor="middle" fontSize="10" fill={INK2} className="font-mono">event replay</text>
+      <line x1="354" y1="252" x2="354" y2="224" stroke={INK2} strokeWidth="1.1" strokeDasharray="4 3" markerEnd="url(#ha)" />
+      <text x="362" y="242" fontSize="10" fill={INK3} className="font-mono">replayable inputs</text>
+
+      {/* env -> assertions */}
+      <line x1="444" y1="178" x2="504" y2="178" stroke={INK2} strokeWidth="1.2" markerEnd="url(#ha)" />
+      <rect x="508" y="150" width="100" height="56" fill="#fffcf0" stroke={INK} />
+      <text x="558" y="173" textAnchor="middle" fontSize="11" fill={INK} className="font-mono">assertions</text>
+      <text x="558" y="189" textAnchor="middle" fontSize="11" fill={INK2} className="font-mono">✓ / ✗</text>
+
+      {/* assertions -> human gate */}
+      <line x1="608" y1="178" x2="648" y2="178" stroke={INK2} strokeWidth="1.2" markerEnd="url(#ha)" />
+      <text x="628" y="168" textAnchor="middle" fontSize="9" fill={INK3} className="font-mono">drafts</text>
+      <rect x="652" y="146" width="88" height="64" fill={WASH} stroke={INK} strokeWidth="1.4" />
+      <text x="696" y="171" textAnchor="middle" fontSize="11" fill={INK} className="font-mono">human</text>
+      <text x="696" y="185" textAnchor="middle" fontSize="11" fill={INK} className="font-mono">gate</text>
+      <text x="696" y="200" textAnchor="middle" fontSize="9" fill={INK3} className="font-mono">approve·reject</text>
+
+      {/* feedback: knowledge written back as skills */}
+      <path d="M 696 210 V 350 H 10 V 55 H 14" fill="none" stroke={INK3} strokeWidth="1.1" strokeDasharray="4 4" markerEnd="url(#ha)" />
+      <text x="400" y="342" textAnchor="middle" fontSize="10" fill={INK3} className="font-mono">verified knowledge written back as skills</text>
+    </svg>
+  );
+}
+
 export function OcrSketch() {
   return (
     <svg
