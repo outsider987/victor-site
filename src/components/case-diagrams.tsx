@@ -233,6 +233,89 @@ export function ClaimsArchDiagram() {
   );
 }
 
+export function DeliveryPipelineDiagram() {
+  return (
+    <svg
+      viewBox="0 0 760 400"
+      role="img"
+      aria-label="Delivery pipeline: requirement to key-point analysis to grill-me design interrogation, then skill agents (frontend and backend) with a codebase sitemap take the work to a pull request, verified by an E2E harness and a human gate; recurring judgments accumulate as skills"
+      className="w-full"
+    >
+      <defs>
+        <marker id="pa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 0 1 L 9 5 L 0 9" fill="none" stroke={INK2} strokeWidth="1.4" />
+        </marker>
+      </defs>
+
+      {/* row 1: requirement -> analysis -> grill-me */}
+      <rect x="20" y="24" width="120" height="44" fill="#fffcf0" stroke={INK} />
+      <text x="80" y="50" textAnchor="middle" fontSize="11" fill={INK} className="font-mono">requirement</text>
+
+      <line x1="140" y1="46" x2="164" y2="46" stroke={INK2} strokeWidth="1.2" markerEnd="url(#pa)" />
+
+      <rect x="170" y="24" width="150" height="44" fill="#fffcf0" stroke={INK} />
+      <text x="245" y="43" textAnchor="middle" fontSize="11" fill={INK} className="font-mono">key-point</text>
+      <text x="245" y="58" textAnchor="middle" fontSize="11" fill={INK} className="font-mono">analysis</text>
+
+      <line x1="320" y1="46" x2="344" y2="46" stroke={INK2} strokeWidth="1.2" markerEnd="url(#pa)" />
+
+      <rect x="350" y="24" width="170" height="44" fill="#fffcf0" stroke={RED} strokeWidth="1.4" />
+      <text x="435" y="43" textAnchor="middle" fontSize="11" fill={RED} className="font-mono">grill-me</text>
+      <text x="435" y="58" textAnchor="middle" fontSize="9.5" fill={INK3} className="font-mono">design interrogation</text>
+
+      {/* elbow grill -> agents */}
+      <path d="M 435 68 V 92 H 410 V 108" fill="none" stroke={INK2} strokeWidth="1.2" markerEnd="url(#pa)" />
+
+      {/* row 2: skills -> agents -> PR */}
+      <rect x="48" y="124" width="180" height="48" fill={WASH} stroke={INK} />
+      <rect x="40" y="116" width="180" height="48" fill="#fffcf0" stroke={INK} />
+      <text x="130" y="136" textAnchor="middle" fontSize="11" fill={INK} className="font-mono">skills library</text>
+      <text x="130" y="151" textAnchor="middle" fontSize="9.5" fill={INK3} className="font-mono">auto-invoked · verified</text>
+
+      <line x1="228" y1="140" x2="294" y2="140" stroke={INK2} strokeWidth="1.2" markerEnd="url(#pa)" />
+      <text x="261" y="132" textAnchor="middle" fontSize="9" fill={INK3} className="font-mono">loads</text>
+
+      <rect x="300" y="116" width="220" height="48" fill="#fffcf0" stroke={INK} strokeWidth="1.4" />
+      <text x="410" y="136" textAnchor="middle" fontSize="11" fill={INK} className="font-mono">skill agents</text>
+      <text x="410" y="151" textAnchor="middle" fontSize="9.5" fill={INK3} className="font-mono">frontend · backend</text>
+
+      <line x1="520" y1="140" x2="544" y2="140" stroke={INK2} strokeWidth="1.2" markerEnd="url(#pa)" />
+
+      <rect x="550" y="116" width="170" height="48" fill="#fffcf0" stroke={INK} />
+      <text x="635" y="145" textAnchor="middle" fontSize="11" fill={INK} className="font-mono">pull request</text>
+
+      {/* codebase sitemap */}
+      <rect x="300" y="196" width="220" height="26" fill={WASH} stroke={INK} strokeDasharray="4 3" />
+      <text x="410" y="213" textAnchor="middle" fontSize="10" fill={INK2} className="font-mono">codebase sitemap</text>
+      <line x1="410" y1="196" x2="410" y2="168" stroke={INK2} strokeWidth="1.1" strokeDasharray="4 3" markerEnd="url(#pa)" />
+      <text x="530" y="213" fontSize="9.5" fill={INK3} className="font-mono">reuse before rebuild</text>
+
+      {/* connector PR -> harness */}
+      <path d="M 635 164 V 240 H 150 V 262" fill="none" stroke={INK2} strokeWidth="1.2" markerEnd="url(#pa)" />
+
+      {/* row 3: harness -> gate -> merged */}
+      <rect x="40" y="268" width="220" height="52" fill="#fffcf0" stroke={INK} />
+      <text x="150" y="289" textAnchor="middle" fontSize="11" fill={INK} className="font-mono">E2E harness</text>
+      <text x="150" y="304" textAnchor="middle" fontSize="9.5" fill={INK3} className="font-mono">Playwright · replayable · asserts</text>
+
+      <line x1="260" y1="294" x2="294" y2="294" stroke={INK2} strokeWidth="1.2" markerEnd="url(#pa)" />
+
+      <rect x="300" y="268" width="150" height="52" fill={WASH} stroke={INK} strokeWidth="1.4" />
+      <text x="375" y="289" textAnchor="middle" fontSize="11" fill={INK} className="font-mono">human gate</text>
+      <text x="375" y="304" textAnchor="middle" fontSize="9.5" fill={INK3} className="font-mono">approve · reject</text>
+
+      <line x1="450" y1="294" x2="484" y2="294" stroke={INK2} strokeWidth="1.2" markerEnd="url(#pa)" />
+
+      <rect x="490" y="268" width="130" height="52" fill="#fffcf0" stroke={INK} />
+      <text x="555" y="299" textAnchor="middle" fontSize="11" fill={INK} className="font-mono">merged</text>
+
+      {/* feedback: judgments -> skills */}
+      <path d="M 375 320 V 356 H 24 V 132 H 34" fill="none" stroke={INK3} strokeWidth="1.1" strokeDasharray="4 4" markerEnd="url(#pa)" />
+      <text x="250" y="348" textAnchor="middle" fontSize="10" fill={INK3} className="font-mono">recurring judgments accumulate as skills</text>
+    </svg>
+  );
+}
+
 export function HarnessDiagram() {
   return (
     <svg

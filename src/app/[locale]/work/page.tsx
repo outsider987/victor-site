@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Nav, Footer, Row, SectionTitle, Card, EMAIL, GITHUB, LINKEDIN } from "@/components/site";
-import { HarnessDiagram } from "@/components/case-diagrams";
+import { DeliveryPipelineDiagram } from "@/components/case-diagrams";
 import { altFor, isLocale, type Locale } from "@/i18n";
 
 const meta = {
@@ -111,7 +111,7 @@ const content: Record<
       },
       {
         meta: "ai, engineered",
-        text: "Agents drive real test environments through Playwright — replayable inputs (synthetic traffic, event replay), verifiable assertions, human-approved output. Operating knowledge is written down as reusable skills.",
+        text: "Requirements get split into key points; designs are grilled before any code. Frontend and backend skill agents take the work, with a codebase sitemap so nothing gets rebuilt. Verification: agents drive real test environments through Playwright — replayable inputs, verifiable assertions, human-approved output. Recurring judgments accumulate as skills, auto-invoked and verified.",
       },
       {
         meta: "overlap",
@@ -121,7 +121,7 @@ const content: Record<
     ctaLead: "Want the resume, references, or a conversation? Write to",
     ctaTail: " — replies within 24h, UTC+8.",
     harnessCaption:
-      "The harness loop: skills load the agent · the agent drives a real test environment via Playwright · replayable inputs, verifiable assertions · agents draft, humans approve · verified knowledge written back as skills.",
+      "Requirement → key points → grill-me design interrogation → frontend/backend skill agents (codebase sitemap: reuse before rebuild) → PR → E2E harness → human gate → merged. Recurring judgments accumulate as skills, auto-invoked and verified.",
   },
   zh: {
     eyebrow: "給正在找人的團隊",
@@ -178,7 +178,7 @@ const content: Record<
       },
       {
         meta: "AI 工程化",
-        text: "agent 用 Playwright 打真實測試環境——輸入可重放（合成流量、事件重播）、結果可斷言、輸出人核准。操作知識寫成可重用的 skill。",
+        text: "需求先拆重點，設計用 grill-me 審問過才動工；前端與後端各自的 skill agent 接走工程，codebase sitemap 防止重複造輪。驗證面：agent 用 Playwright 打真實測試環境——輸入可重放、結果可斷言、輸出人核准。重複的判斷沉澱成 skill，自動呼叫並驗證。",
       },
       {
         meta: "時區配合",
@@ -188,7 +188,7 @@ const content: Record<
     ctaLead: "想要履歷、推薦人，或直接聊聊？寫信到",
     ctaTail: "——24 小時內回覆（UTC+8）。",
     harnessCaption:
-      "harness 迴路：skill 載入 agent · agent 經 Playwright 驅動真實測試環境 · 輸入可重放、斷言可驗 · agent 起草、人核准 · 驗證過的知識回寫成 skill。",
+      "需求 → 拆重點 → grill-me 設計審問 → 前後端 skill agent 接工（codebase sitemap：先重用再重造）→ PR → E2E harness → 人核准 → 合併。重複判斷沉澱成 skill，自動呼叫並驗證。",
   },
 };
 
@@ -283,7 +283,7 @@ export default async function WorkPage({
             ))}
           </div>
           <figure className="mt-6 border-y border-rule py-6">
-            <HarnessDiagram />
+            <DeliveryPipelineDiagram />
             <figcaption className="mt-3 font-mono text-xs leading-relaxed text-ink-3">
               {t.harnessCaption}
             </figcaption>
