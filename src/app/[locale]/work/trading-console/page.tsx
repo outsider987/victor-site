@@ -89,7 +89,7 @@ export default async function TradingConsolePage({
           numbers: [
             {
               meta: "ai practice",
-              text: "Spec-first delivery with Claude Code as the daily driver, agent-run E2E harnesses exercising live environments before humans do, and reusable skills encoding how the platform is operated and tested.",
+              text: "Spec-first delivery with Claude Code as the daily driver. The E2E harness: agents drive real environments through Playwright, against replayable inputs and verifiable assertions, with humans gating the output. Reusable skills encode how the platform is operated and tested.",
             },
             {
               meta: "3 services",
@@ -145,7 +145,7 @@ export default async function TradingConsolePage({
           numbers: [
             {
               meta: "AI 實踐",
-              text: "規格先行、以 Claude Code 為日常開發；agent 驅動的 E2E harness 在人工介入前就先跑過真實環境；平台的操作與測試知識則寫成可重用的 skill。",
+              text: "規格先行、以 Claude Code 為日常開發。E2E harness 的運作：agent 透過 Playwright 驅動真實環境，吃可重放的輸入、對可驗證的斷言，輸出由人核准。平台的操作與測試知識則寫成可重用的 skill。",
             },
             {
               meta: "3 個服務",
