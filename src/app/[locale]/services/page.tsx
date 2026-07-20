@@ -7,12 +7,11 @@ const meta = {
   en: {
     title: "Services — Victor Chang",
     description:
-      "Freelance delivery: websites, admin systems, e-commerce, real-time dashboards, integrations, MVPs. English / 中文.",
+      "Freelance delivery: websites, admin systems, e-commerce, MVPs. English / 中文.",
   },
   zh: {
     title: "服務 — Victor Chang",
-    description:
-      "接案交付：網站、後台管理系統、購物車、即時儀表板、API 串接、MVP。中英文皆可合作。",
+    description: "接案交付：網站、後台管理系統、購物車、MVP。中英文皆可合作。",
   },
 } as const;
 
