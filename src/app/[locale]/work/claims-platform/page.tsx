@@ -214,7 +214,7 @@ export default async function ClaimsPlatformPage({
 
         <section>
           <SectionTitle>{t.archTitle}</SectionTitle>
-          <figure className="border-y border-rule py-6">
+          <figure className="draw-on-scroll border-y border-rule py-6">
             <ClaimsArchDiagram />
             <figcaption className="mt-3 font-mono text-xs leading-relaxed text-ink-3">
               {t.archCaption}
@@ -235,7 +235,7 @@ export default async function ClaimsPlatformPage({
 
         <section>
           <SectionTitle>{t.sketchTitle}</SectionTitle>
-          <figure className="border-y border-rule py-6">
+          <figure className="draw-on-scroll border-y border-rule py-6">
             <OcrSketch />
             <figcaption className="mt-3 font-mono text-xs leading-relaxed text-ink-3">
               {t.sketchCaption}

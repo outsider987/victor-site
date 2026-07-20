@@ -177,7 +177,7 @@ export default async function TradingConsolePage({
 
         <section>
           <SectionTitle>{t.archTitle}</SectionTitle>
-          <figure className="border-y border-rule py-6">
+          <figure className="draw-on-scroll border-y border-rule py-6">
             <TradingArchDiagram />
             <figcaption className="mt-3 font-mono text-xs leading-relaxed text-ink-3">
               {t.archCaption}
@@ -198,7 +198,7 @@ export default async function TradingConsolePage({
 
         <section>
           <SectionTitle>{t.sketchTitle}</SectionTitle>
-          <figure className="border-y border-rule py-6">
+          <figure className="draw-on-scroll border-y border-rule py-6">
             <ConsoleSketch />
             <figcaption className="mt-3 font-mono text-xs leading-relaxed text-ink-3">
               {t.sketchCaption}

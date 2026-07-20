@@ -23,6 +23,7 @@ export function Nav({ locale, path }: { locale: Locale; path: string }) {
   const t = navLabels[locale];
   return (
     <header className="border-b border-rule">
+      <div className="scroll-progress" aria-hidden />
       <nav className="mx-auto flex max-w-3xl items-baseline justify-between px-5 py-4 font-mono text-[13px] text-ink-2">
         <Link href={`/${locale}`} className="text-ink hover:text-red-ink">
           victor chang
@@ -115,7 +116,7 @@ export function Row({
   href?: string;
 }) {
   const inner = (
-    <div className="grid gap-1 border-t border-rule py-4 sm:grid-cols-[9.5rem_1fr] sm:gap-6">
+    <div className="reveal grid gap-1 border-t border-rule py-4 sm:grid-cols-[9.5rem_1fr] sm:gap-6">
       <div className="tnum font-mono text-xs leading-6 text-ink-3">{meta}</div>
       <div>{children}</div>
     </div>
@@ -146,7 +147,7 @@ export function Card({
   href?: string;
   className?: string;
 }) {
-  const base = `block border border-ink bg-paper p-6 card-shadow ${className}`;
+  const base = `reveal block border border-ink bg-paper p-6 card-shadow ${className}`;
   if (href) {
     return (
       <Link

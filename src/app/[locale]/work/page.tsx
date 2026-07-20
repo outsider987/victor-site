@@ -282,7 +282,7 @@ export default async function WorkPage({
               </Row>
             ))}
           </div>
-          <figure className="mt-6 border-y border-rule py-6">
+          <figure className="draw-on-scroll mt-6 border-y border-rule py-6">
             <DeliveryPipelineDiagram />
             <figcaption className="mt-3 font-mono text-xs leading-relaxed text-ink-3">
               {t.harnessCaption}

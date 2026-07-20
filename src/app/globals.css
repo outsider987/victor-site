@@ -121,3 +121,67 @@ h1 em {
 html[data-theme="dark"] .desk-down {
   color: #d14d41;
 }
+
+/* scroll-driven enhancements: pure CSS, compositor-threaded.
+   Firefox/old browsers and reduced-motion users get the static page. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: reveal-in linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 70%;
+    }
+
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--ink);
+      transform-origin: 0 50%;
+      transform: scaleX(0);
+      animation: progress-grow linear both;
+      animation-timeline: scroll(root);
+      z-index: 50;
+    }
+
+    /* architecture diagrams draw themselves as they enter */
+    .draw-on-scroll :is(line, path):not([stroke-dasharray]):not(marker *) {
+      stroke-dasharray: 1200;
+      stroke-dashoffset: 1200;
+      animation: draw-stroke linear both;
+      animation-timeline: view();
+      animation-range: entry 5% cover 55%;
+    }
+    .draw-on-scroll :is(line[stroke-dasharray], path[stroke-dasharray]),
+    .draw-on-scroll :is(rect, text, circle) {
+      animation: reveal-in linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 40%;
+    }
+  }
+}
+
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes progress-grow {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes draw-stroke {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
