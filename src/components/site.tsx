@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Locale } from "@/i18n";
 import { LangSwitch } from "./lang-switch";
+import { ThemeToggle } from "./theme-toggle";
 
 export const EMAIL = "t790219520@gmail.com";
 export const GITHUB = "https://github.com/outsider987";
@@ -37,6 +38,7 @@ export function Nav({ locale, path }: { locale: Locale; path: string }) {
             github
           </a>
           <LangSwitch locale={locale} path={path} />
+          <ThemeToggle />
         </div>
       </nav>
     </header>
@@ -144,12 +146,12 @@ export function Card({
   href?: string;
   className?: string;
 }) {
-  const base = `block border border-ink bg-paper p-6 shadow-[4px_4px_0_0_#100f0f] ${className}`;
+  const base = `block border border-ink bg-paper p-6 card-shadow ${className}`;
   if (href) {
     return (
       <Link
         href={href}
-        className={`${base} transition-[transform,box-shadow] duration-150 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_#100f0f]`}
+        className={`${base} card-hover transition-[transform,box-shadow] duration-150 hover:-translate-x-0.5 hover:-translate-y-0.5`}
       >
         {children}
       </Link>

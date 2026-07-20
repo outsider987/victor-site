@@ -11,6 +11,23 @@
   --ink-3: #878580;
   --red-ink: #af3029;
   --up: #66800b;
+  --shadow: #100f0f;
+  color-scheme: light;
+}
+
+/* Flexoki dark: same inks, night paper */
+html[data-theme="dark"] {
+  --paper: #100f0f;
+  --wash: #1c1b1a;
+  --rule: #282726;
+  --rule-mid: #403e3c;
+  --ink: #cecdc3;
+  --ink-2: #b7b5ac;
+  --ink-3: #878580;
+  --red-ink: #d14d41;
+  --up: #879a39;
+  --shadow: #000000;
+  color-scheme: dark;
 }
 
 @theme inline {
@@ -56,6 +73,14 @@ body[data-locale="zh"] {
 /* numbers behave like a ledger */
 .tnum {
   font-variant-numeric: tabular-nums;
+}
+
+/* index-card shadow, theme-aware */
+.card-shadow {
+  box-shadow: 4px 4px 0 0 var(--shadow);
+}
+.card-hover:hover {
+  box-shadow: 6px 6px 0 0 var(--shadow);
 }
 
 /* live-desk demo: brief wash on updated cells */

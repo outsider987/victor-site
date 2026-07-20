@@ -71,9 +71,15 @@ export default async function RootLayout({
   return (
     <html
       lang={l === "zh" ? "zh-Hant" : "en"}
+      suppressHydrationWarning
       className={`${newsreader.variable} ${plexMono.variable} ${notoSerifTC.variable} h-full`}
     >
       <body data-locale={l} className="min-h-full flex flex-col">
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{var q=new URLSearchParams(location.search).get("theme");var t=q||localStorage.getItem("theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");document.documentElement.dataset.theme=t}catch(e){}`,
+          }}
+        />
         {children}
       </body>
     </html>

@@ -226,7 +226,7 @@ export default function Desk({ explainer }: { explainer: string }) {
       <p className="mt-3 font-mono text-xs leading-relaxed text-ink-3">{explainer}</p>
 
       {/* the grid */}
-      <div className="mt-4 overflow-x-auto border border-ink bg-paper shadow-[4px_4px_0_0_#100f0f]">
+      <div className="mt-4 overflow-x-auto border border-ink bg-paper card-shadow">
         <table className="w-full min-w-[560px] border-collapse">
           <thead>
             <tr className="bg-wash font-mono text-[11px] uppercase tracking-wider text-ink-2">

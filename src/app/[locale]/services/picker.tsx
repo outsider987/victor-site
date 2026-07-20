@@ -58,7 +58,7 @@ export function ProjectPicker({
   };
 
   return (
-    <div className="border border-ink bg-paper p-5 shadow-[4px_4px_0_0_#100f0f]">
+    <div className="border border-ink bg-paper p-5 card-shadow">
       <div className="flex flex-wrap gap-2">
         {types.map((t) => {
           const on = selected.has(t);

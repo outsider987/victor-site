@@ -142,7 +142,7 @@ export default async function Home({
                 alt="Victor Chang — pixel portrait"
                 width={136}
                 height={136}
-                className="order-first shrink-0 border border-ink shadow-[4px_4px_0_0_#100f0f] [image-rendering:pixelated] sm:order-none sm:mt-2"
+                className="order-first shrink-0 border border-ink card-shadow [image-rendering:pixelated] sm:order-none sm:mt-2"
               />
             )}
           </div>
