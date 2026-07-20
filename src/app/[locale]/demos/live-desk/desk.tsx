@@ -27,7 +27,7 @@ function PriceCell({ value, dir, seq }: { value: number; dir: 1 | -1 | 0; seq: n
 }
 
 function ChgCell({ chg }: { chg: number }) {
-  const cls = chg > 0 ? "text-up" : chg < 0 ? "text-red-ink" : "text-ink-3";
+  const cls = chg > 0 ? "text-up" : chg < 0 ? "desk-down" : "text-ink-3";
   const glyph = chg > 0 ? "▲" : chg < 0 ? "▼" : "·";
   return (
     <td className={`tnum px-3 py-1.5 text-right font-mono text-[13px] ${cls}`}>

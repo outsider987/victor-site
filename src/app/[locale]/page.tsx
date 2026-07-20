@@ -21,7 +21,8 @@ const content = {
     status: "Taipei · UTC+8 · open to remote roles & scoped freelance work",
     h1: (
       <>
-        I build real-time, <em>real-money</em> systems.
+        I build real-time,{" "}
+        <span className="bg-ink px-2 text-paper">real-money</span> systems.
       </>
     ),
     lede: (
@@ -68,7 +69,7 @@ const content = {
     status: "台北 · UTC+8 · 開放遠端正職與固定範圍接案",
     h1: (
       <>
-        我打造即時運作、<span className="text-red-ink">真金白銀</span>的系統。
+        我打造即時運作、<span className="bg-ink px-1.5 text-paper">真金白銀</span>的系統。
       </>
     ),
     lede: (

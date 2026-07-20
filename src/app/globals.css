@@ -1,46 +1,53 @@
 @import "tailwindcss";
 
-/* Flexoki-derived ink-on-paper palette (stephango.com/flexoki, MIT) */
+/* Swiss monochrome: black on white, one ink */
 :root {
-  --paper: #fffcf0;
-  --wash: #f2f0e5;
-  --rule: #dad8ce;
-  --rule-mid: #b7b5ac;
-  --ink: #100f0f;
-  --ink-2: #575653;
-  --ink-3: #878580;
-  --red-ink: #af3029;
+  --paper: #ffffff;
+  --wash: #f2f2f2;
+  --rule: #e4e4e4;
+  --rule-mid: #b3b3b3;
+  --ink: #0a0a0a;
+  --ink-2: #4d4d4d;
+  --ink-3: #8a8a8a;
+  /* monochrome design: the historical accent slot resolves to ink */
+  --red-ink: #0a0a0a;
   --up: #66800b;
-  --shadow: #100f0f;
+  --shadow: transparent;
   color-scheme: light;
 }
 
-/* Flexoki dark: same inks, night paper */
 html[data-theme="dark"] {
-  --paper: #100f0f;
-  --wash: #1c1b1a;
-  --rule: #282726;
-  --rule-mid: #403e3c;
-  --ink: #cecdc3;
-  --ink-2: #b7b5ac;
-  --ink-3: #878580;
-  --red-ink: #d14d41;
+  --paper: #0a0a0a;
+  --wash: #171717;
+  --rule: #262626;
+  --rule-mid: #525252;
+  --ink: #f5f5f5;
+  --ink-2: #b3b3b3;
+  --ink-3: #7a7a7a;
+  --red-ink: #f5f5f5;
   --up: #879a39;
-  --shadow: #000000;
+  --shadow: transparent;
   color-scheme: dark;
 }
 
 @theme inline {
   --color-paper: var(--paper);
+  --color-panel: var(--wash);
+  --color-panel-2: var(--wash);
+  --color-line: var(--rule);
   --color-wash: var(--wash);
   --color-rule: var(--rule);
   --color-rule-mid: var(--rule-mid);
+  --color-foreground: var(--ink);
+  --color-muted: var(--ink-2);
   --color-ink: var(--ink);
   --color-ink-2: var(--ink-2);
   --color-ink-3: var(--ink-3);
   --color-red-ink: var(--red-ink);
   --color-up: var(--up);
-  --font-serif: var(--font-newsreader);
+  /* `font-serif` utilities across pages resolve to the grotesque on purpose */
+  --font-serif: var(--font-grotesk);
+  --font-sans: var(--font-grotesk);
   --font-mono: var(--font-plex-mono);
 }
 
@@ -51,23 +58,33 @@ html {
 body {
   background: var(--paper);
   color: var(--ink);
-  font-family: var(--font-newsreader), Georgia, serif;
-  font-size: 17px;
-  line-height: 1.65;
+  font-family: var(--font-grotesk), "Helvetica Neue", Arial, sans-serif;
+  font-size: 16.5px;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
-/* Traditional Chinese: extend the serif stack and open up CJK line rhythm */
+/* Traditional Chinese: grotesque falls through to Noto Sans TC */
 body[data-locale="zh"] {
-  font-family: var(--font-newsreader), var(--font-noto-serif-tc), "Songti TC",
-    "Noto Serif CJK TC", serif;
-  line-height: 1.8;
+  font-family: var(--font-grotesk), var(--font-noto-sans-tc), "PingFang TC",
+    "Microsoft JhengHei", sans-serif;
+  line-height: 1.75;
   letter-spacing: 0.01em;
 }
 
+/* Swiss display: heavy and tight */
+h1 {
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+h1 em {
+  font-style: normal;
+}
+
 ::selection {
-  background: rgba(175, 48, 41, 0.14);
+  background: var(--ink);
+  color: var(--paper);
 }
 
 /* numbers behave like a ledger */
@@ -75,12 +92,12 @@ body[data-locale="zh"] {
   font-variant-numeric: tabular-nums;
 }
 
-/* index-card shadow, theme-aware */
+/* flat monochrome cards: the border is the design */
 .card-shadow {
-  box-shadow: 4px 4px 0 0 var(--shadow);
+  box-shadow: none;
 }
 .card-hover:hover {
-  box-shadow: 6px 6px 0 0 var(--shadow);
+  box-shadow: none;
 }
 
 /* live-desk demo: brief wash on updated cells */
@@ -90,9 +107,17 @@ body[data-locale="zh"] {
 }
 @keyframes desk-flash {
   from {
-    background: rgba(175, 48, 41, 0.16);
+    background: var(--wash);
   }
   to {
     background: transparent;
   }
+}
+
+/* semantic market colors survive the monochrome chrome */
+.desk-down {
+  color: #af3029;
+}
+html[data-theme="dark"] .desk-down {
+  color: #d14d41;
 }

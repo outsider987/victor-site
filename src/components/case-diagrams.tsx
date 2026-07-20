@@ -3,12 +3,12 @@
  * locales — they are engineering artifacts, like code.
  */
 
-const INK = "#100f0f";
-const INK2 = "#575653";
-const INK3 = "#878580";
-const WASH = "#f2f0e5";
-const RULE = "#dad8ce";
-const RED = "#af3029";
+const INK = "#0a0a0a";
+const INK2 = "#4d4d4d";
+const INK3 = "#8a8a8a";
+const WASH = "#f2f2f2";
+const RULE = "#e4e4e4";
+const RED = "#0a0a0a";
 
 export function TradingArchDiagram() {
   return (
@@ -29,13 +29,13 @@ export function TradingArchDiagram() {
 
       {/* vendor feeds */}
       <rect x="28" y="38" width="128" height="46" fill={WASH} stroke={INK} />
-      <rect x="20" y="30" width="128" height="46" fill="#fffcf0" stroke={INK} />
+      <rect x="20" y="30" width="128" height="46" fill="#ffffff" stroke={INK} />
       <text x="84" y="50" textAnchor="middle" fontSize="11" fill={INK} className="font-mono">vendor odds</text>
       <text x="84" y="64" textAnchor="middle" fontSize="11" fill={INK} className="font-mono">feeds (n)</text>
 
       {/* normalizer */}
       <line x1="156" y1="53" x2="216" y2="53" stroke={INK2} strokeWidth="1.2" markerEnd="url(#ta)" />
-      <rect x="220" y="30" width="140" height="46" fill="#fffcf0" stroke={INK} />
+      <rect x="220" y="30" width="140" height="46" fill="#ffffff" stroke={INK} />
       <text x="290" y="50" textAnchor="middle" fontSize="11" fill={INK} className="font-mono">feed normalizer</text>
       <text x="290" y="64" textAnchor="middle" fontSize="10" fill={INK3} className="font-mono">one standard schema</text>
 
@@ -48,7 +48,7 @@ export function TradingArchDiagram() {
       <line x1="290" y1="138" x2="290" y2="172" stroke={INK2} strokeWidth="1.2" markerEnd="url(#ta)" />
       <rect x="246" y="192" width="160" height="56" fill={WASH} stroke={INK} />
       <rect x="238" y="184" width="160" height="56" fill={WASH} stroke={INK} />
-      <rect x="230" y="176" width="160" height="56" fill="#fffcf0" stroke={INK} />
+      <rect x="230" y="176" width="160" height="56" fill="#ffffff" stroke={INK} />
       <text x="310" y="198" textAnchor="middle" fontSize="11" fill={INK} className="font-mono">real-time BFF (Go)</text>
       <text x="310" y="213" textAnchor="middle" fontSize="10" fill={INK3} className="font-mono">pods ×3 on k8s</text>
       <text x="310" y="226" textAnchor="middle" fontSize="10" fill={RED} className="font-mono">cross-pod fan-out</text>
@@ -63,7 +63,7 @@ export function TradingArchDiagram() {
       <line x1="406" y1="204" x2="536" y2="204" stroke={RED} strokeWidth="1.3" markerEnd="url(#tr)" />
       <text x="470" y="196" textAnchor="middle" fontSize="10" fill={RED} className="font-mono">WebSocket</text>
 
-      <rect x="540" y="170" width="190" height="70" fill="#fffcf0" stroke={INK} strokeWidth="1.4" />
+      <rect x="540" y="170" width="190" height="70" fill="#ffffff" stroke={INK} strokeWidth="1.4" />
       <text x="635" y="196" textAnchor="middle" fontSize="12" fill={INK} className="font-mono">trader console</text>
       <text x="635" y="212" textAnchor="middle" fontSize="10" fill={INK3} className="font-mono">React 18 · live odds grid</text>
       <text x="635" y="226" textAnchor="middle" fontSize="10" fill={INK3} className="font-mono">row-level re-render</text>
@@ -73,7 +73,7 @@ export function TradingArchDiagram() {
       <text x="450" y="300" textAnchor="middle" fontSize="10" fill={INK3} className="font-mono">poll fallback when WS degrades — silent background refetch</text>
 
       {/* ops plane */}
-      <rect x="620" y="30" width="110" height="46" fill="#fffcf0" stroke={INK} strokeDasharray="4 3" />
+      <rect x="620" y="30" width="110" height="46" fill="#ffffff" stroke={INK} strokeDasharray="4 3" />
       <text x="675" y="50" textAnchor="middle" fontSize="10" fill={INK2} className="font-mono">ops actions</text>
       <text x="675" y="63" textAnchor="middle" fontSize="10" fill={INK2} className="font-mono">maker-checker</text>
       <line x1="675" y1="76" x2="647" y2="166" stroke={INK3} strokeWidth="1.1" strokeDasharray="4 3" markerEnd="url(#ta)" />
@@ -91,7 +91,7 @@ export function ConsoleSketch() {
       className="w-full"
     >
       {/* window */}
-      <rect x="20" y="16" width="720" height="360" fill="#fffcf0" stroke={INK} strokeWidth="1.4" />
+      <rect x="20" y="16" width="720" height="360" fill="#ffffff" stroke={INK} strokeWidth="1.4" />
       <line x1="20" y1="52" x2="740" y2="52" stroke={INK} strokeWidth="1" />
       <circle cx="42" cy="34" r="5" fill="none" stroke={INK2} />
       <circle cx="60" cy="34" r="5" fill="none" stroke={INK2} />
@@ -124,7 +124,7 @@ export function ConsoleSketch() {
               y={y}
               width="52"
               height="22"
-              fill="#fffcf0"
+              fill="#ffffff"
               stroke={RULE}
             />
           ))}
@@ -139,7 +139,7 @@ export function ConsoleSketch() {
       <rect x="596" y="72" width="128" height="9" fill={WASH} />
       {[96, 156, 216].map((y) => (
         <g key={y}>
-          <rect x="596" y={y} width="128" height="48" fill="#fffcf0" stroke={RULE} />
+          <rect x="596" y={y} width="128" height="48" fill="#ffffff" stroke={RULE} />
           <rect x="604" y={y + 8} width="80" height="8" fill={WASH} />
           <rect x="604" y={y + 22} width="56" height="8" fill={WASH} />
           <rect x="604" y={y + 34} width="26" height="9" fill="none" stroke={RED} />
@@ -177,12 +177,12 @@ export function ClaimsArchDiagram() {
       </defs>
 
       {/* clinic portal */}
-      <rect x="20" y="26" width="150" height="50" fill="#fffcf0" stroke={INK} strokeWidth="1.4" />
+      <rect x="20" y="26" width="150" height="50" fill="#ffffff" stroke={INK} strokeWidth="1.4" />
       <text x="95" y="47" textAnchor="middle" fontSize="11" fill={INK} className="font-mono">clinic portal</text>
       <text x="95" y="62" textAnchor="middle" fontSize="10" fill={INK3} className="font-mono">React · used daily</text>
 
       {/* insurer systems */}
-      <rect x="590" y="26" width="150" height="50" fill="#fffcf0" stroke={INK} strokeDasharray="4 3" />
+      <rect x="590" y="26" width="150" height="50" fill="#ffffff" stroke={INK} strokeDasharray="4 3" />
       <text x="665" y="47" textAnchor="middle" fontSize="11" fill={INK2} className="font-mono">insurer systems</text>
       <text x="665" y="62" textAnchor="middle" fontSize="10" fill={INK3} className="font-mono">external APIs</text>
 
@@ -204,7 +204,7 @@ export function ClaimsArchDiagram() {
             strokeWidth="1.1"
             markerEnd="url(#ca)"
           />
-          <rect x={s.x} y="140" width="180" height="48" fill="#fffcf0" stroke={INK} />
+          <rect x={s.x} y="140" width="180" height="48" fill="#ffffff" stroke={INK} />
           <text x={s.x + 90} y="160" textAnchor="middle" fontSize="11" fill={INK} className="font-mono">{s.label}</text>
           <text x={s.x + 90} y="175" textAnchor="middle" fontSize="10" fill={INK3} className="font-mono">{s.sub}</text>
         </g>
@@ -212,7 +212,7 @@ export function ClaimsArchDiagram() {
       <text x="20" y="122" fontSize="10" fill={INK3} className="font-mono">NestJS microservices</text>
 
       {/* docs into OCR */}
-      <rect x="330" y="242" width="120" height="56" fill="#fffcf0" stroke={INK} />
+      <rect x="330" y="242" width="120" height="56" fill="#ffffff" stroke={INK} />
       <line x1="342" y1="256" x2="426" y2="256" stroke={RULE} />
       <line x1="342" y1="268" x2="426" y2="268" stroke={RULE} />
       <line x1="342" y1="280" x2="406" y2="280" stroke={RULE} />
@@ -248,18 +248,18 @@ export function DeliveryPipelineDiagram() {
       </defs>
 
       {/* row 1: requirement -> analysis -> grill-me */}
-      <rect x="20" y="24" width="120" height="44" fill="#fffcf0" stroke={INK} />
+      <rect x="20" y="24" width="120" height="44" fill="#ffffff" stroke={INK} />
       <text x="80" y="50" textAnchor="middle" fontSize="11" fill={INK} className="font-mono">requirement</text>
 
       <line x1="140" y1="46" x2="164" y2="46" stroke={INK2} strokeWidth="1.2" markerEnd="url(#pa)" />
 
-      <rect x="170" y="24" width="150" height="44" fill="#fffcf0" stroke={INK} />
+      <rect x="170" y="24" width="150" height="44" fill="#ffffff" stroke={INK} />
       <text x="245" y="43" textAnchor="middle" fontSize="11" fill={INK} className="font-mono">key-point</text>
       <text x="245" y="58" textAnchor="middle" fontSize="11" fill={INK} className="font-mono">analysis</text>
 
       <line x1="320" y1="46" x2="344" y2="46" stroke={INK2} strokeWidth="1.2" markerEnd="url(#pa)" />
 
-      <rect x="350" y="24" width="170" height="44" fill="#fffcf0" stroke={RED} strokeWidth="1.4" />
+      <rect x="350" y="24" width="170" height="44" fill="#ffffff" stroke={RED} strokeWidth="1.4" />
       <text x="435" y="43" textAnchor="middle" fontSize="11" fill={RED} className="font-mono">grill-me</text>
       <text x="435" y="58" textAnchor="middle" fontSize="9.5" fill={INK3} className="font-mono">design interrogation</text>
 
@@ -268,20 +268,20 @@ export function DeliveryPipelineDiagram() {
 
       {/* row 2: skills -> agents -> PR */}
       <rect x="48" y="124" width="180" height="48" fill={WASH} stroke={INK} />
-      <rect x="40" y="116" width="180" height="48" fill="#fffcf0" stroke={INK} />
+      <rect x="40" y="116" width="180" height="48" fill="#ffffff" stroke={INK} />
       <text x="130" y="136" textAnchor="middle" fontSize="11" fill={INK} className="font-mono">skills library</text>
       <text x="130" y="151" textAnchor="middle" fontSize="9.5" fill={INK3} className="font-mono">auto-invoked · verified</text>
 
       <line x1="228" y1="140" x2="294" y2="140" stroke={INK2} strokeWidth="1.2" markerEnd="url(#pa)" />
       <text x="261" y="132" textAnchor="middle" fontSize="9" fill={INK3} className="font-mono">loads</text>
 
-      <rect x="300" y="116" width="220" height="48" fill="#fffcf0" stroke={INK} strokeWidth="1.4" />
+      <rect x="300" y="116" width="220" height="48" fill="#ffffff" stroke={INK} strokeWidth="1.4" />
       <text x="410" y="136" textAnchor="middle" fontSize="11" fill={INK} className="font-mono">skill agents</text>
       <text x="410" y="151" textAnchor="middle" fontSize="9.5" fill={INK3} className="font-mono">frontend · backend</text>
 
       <line x1="520" y1="140" x2="544" y2="140" stroke={INK2} strokeWidth="1.2" markerEnd="url(#pa)" />
 
-      <rect x="550" y="116" width="170" height="48" fill="#fffcf0" stroke={INK} />
+      <rect x="550" y="116" width="170" height="48" fill="#ffffff" stroke={INK} />
       <text x="635" y="145" textAnchor="middle" fontSize="11" fill={INK} className="font-mono">pull request</text>
 
       {/* codebase sitemap */}
@@ -294,7 +294,7 @@ export function DeliveryPipelineDiagram() {
       <path d="M 635 164 V 240 H 150 V 262" fill="none" stroke={INK2} strokeWidth="1.2" markerEnd="url(#pa)" />
 
       {/* row 3: harness -> gate -> merged */}
-      <rect x="40" y="268" width="220" height="52" fill="#fffcf0" stroke={INK} />
+      <rect x="40" y="268" width="220" height="52" fill="#ffffff" stroke={INK} />
       <text x="150" y="289" textAnchor="middle" fontSize="11" fill={INK} className="font-mono">E2E harness</text>
       <text x="150" y="304" textAnchor="middle" fontSize="9.5" fill={INK3} className="font-mono">Playwright · replayable · asserts</text>
 
@@ -306,7 +306,7 @@ export function DeliveryPipelineDiagram() {
 
       <line x1="450" y1="294" x2="484" y2="294" stroke={INK2} strokeWidth="1.2" markerEnd="url(#pa)" />
 
-      <rect x="490" y="268" width="130" height="52" fill="#fffcf0" stroke={INK} />
+      <rect x="490" y="268" width="130" height="52" fill="#ffffff" stroke={INK} />
       <text x="555" y="299" textAnchor="middle" fontSize="11" fill={INK} className="font-mono">merged</text>
 
       {/* feedback: judgments -> skills */}
@@ -335,7 +335,7 @@ export function HarnessDiagram() {
 
       {/* skills library (stacked cards) */}
       <rect x="28" y="38" width="140" height="50" fill={WASH} stroke={INK} />
-      <rect x="20" y="30" width="140" height="50" fill="#fffcf0" stroke={INK} />
+      <rect x="20" y="30" width="140" height="50" fill="#ffffff" stroke={INK} />
       <text x="90" y="51" textAnchor="middle" fontSize="11" fill={INK} className="font-mono">skills library</text>
       <text x="90" y="66" textAnchor="middle" fontSize="10" fill={INK3} className="font-mono">operating knowledge</text>
 
@@ -344,7 +344,7 @@ export function HarnessDiagram() {
       <text x="100" y="122" fontSize="10" fill={INK3} className="font-mono">loads</text>
 
       {/* agent */}
-      <rect x="20" y="150" width="140" height="56" fill="#fffcf0" stroke={INK} strokeWidth="1.4" />
+      <rect x="20" y="150" width="140" height="56" fill="#ffffff" stroke={INK} strokeWidth="1.4" />
       <text x="90" y="173" textAnchor="middle" fontSize="11" fill={INK} className="font-mono">agent</text>
       <text x="90" y="188" textAnchor="middle" fontSize="10" fill={INK3} className="font-mono">Claude Code</text>
 
@@ -353,7 +353,7 @@ export function HarnessDiagram() {
       <text x="210" y="170" textAnchor="middle" fontSize="10" fill={RED} className="font-mono">Playwright</text>
 
       {/* real test environment (mini browser) */}
-      <rect x="264" y="136" width="180" height="84" fill="#fffcf0" stroke={INK} strokeWidth="1.4" />
+      <rect x="264" y="136" width="180" height="84" fill="#ffffff" stroke={INK} strokeWidth="1.4" />
       <line x1="264" y1="158" x2="444" y2="158" stroke={INK} />
       <circle cx="278" cy="147" r="3.5" fill="none" stroke={INK2} />
       <circle cx="290" cy="147" r="3.5" fill="none" stroke={INK2} />
@@ -362,7 +362,7 @@ export function HarnessDiagram() {
       <text x="354" y="197" textAnchor="middle" fontSize="11" fill={INK} className="font-mono">environment</text>
 
       {/* replayable inputs */}
-      <rect x="264" y="252" width="180" height="42" fill="#fffcf0" stroke={INK} strokeDasharray="4 3" />
+      <rect x="264" y="252" width="180" height="42" fill="#ffffff" stroke={INK} strokeDasharray="4 3" />
       <text x="354" y="269" textAnchor="middle" fontSize="10" fill={INK2} className="font-mono">synthetic traffic</text>
       <text x="354" y="283" textAnchor="middle" fontSize="10" fill={INK2} className="font-mono">event replay</text>
       <line x1="354" y1="252" x2="354" y2="224" stroke={INK2} strokeWidth="1.1" strokeDasharray="4 3" markerEnd="url(#ha)" />
@@ -370,7 +370,7 @@ export function HarnessDiagram() {
 
       {/* env -> assertions */}
       <line x1="444" y1="178" x2="504" y2="178" stroke={INK2} strokeWidth="1.2" markerEnd="url(#ha)" />
-      <rect x="508" y="150" width="100" height="56" fill="#fffcf0" stroke={INK} />
+      <rect x="508" y="150" width="100" height="56" fill="#ffffff" stroke={INK} />
       <text x="558" y="173" textAnchor="middle" fontSize="11" fill={INK} className="font-mono">assertions</text>
       <text x="558" y="189" textAnchor="middle" fontSize="11" fill={INK2} className="font-mono">✓ / ✗</text>
 
@@ -404,7 +404,7 @@ export function OcrSketch() {
       </defs>
 
       {/* document */}
-      <rect x="48" y="28" width="200" height="244" fill="#fffcf0" stroke={INK} strokeWidth="1.4" />
+      <rect x="48" y="28" width="200" height="244" fill="#ffffff" stroke={INK} strokeWidth="1.4" />
       {[52, 70, 88, 106, 148, 166, 184, 222, 240].map((y, i) => (
         <line key={y} x1="64" y1={y} x2={i % 3 === 2 ? 180 : 232} y2={y} stroke={RULE} strokeWidth="6" />
       ))}
@@ -418,7 +418,7 @@ export function OcrSketch() {
       <text x="340" y="172" textAnchor="middle" fontSize="10" fill={INK3} className="font-mono">· validate</text>
 
       {/* form */}
-      <rect x="428" y="28" width="284" height="244" fill="#fffcf0" stroke={INK} strokeWidth="1.4" />
+      <rect x="428" y="28" width="284" height="244" fill="#ffffff" stroke={INK} strokeWidth="1.4" />
       {[
         { y: 56, ok: true },
         { y: 108, ok: true },
@@ -427,7 +427,7 @@ export function OcrSketch() {
       ].map((f) => (
         <g key={f.y}>
           <rect x="446" y={f.y - 14} width="90" height="8" fill={WASH} />
-          <rect x="446" y={f.y} width="200" height="24" fill="#fffcf0" stroke={f.ok ? RULE : RED} strokeWidth={f.ok ? 1 : 1.3} />
+          <rect x="446" y={f.y} width="200" height="24" fill="#ffffff" stroke={f.ok ? RULE : RED} strokeWidth={f.ok ? 1 : 1.3} />
           <rect x="454" y={f.y + 8} width="120" height="8" fill={WASH} />
           {f.ok ? (
             <path d={`M 656 ${f.y + 6} l 5 7 l 10 -13`} fill="none" stroke={INK2} strokeWidth="1.6" />

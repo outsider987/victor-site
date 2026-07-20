@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Newsreader, IBM_Plex_Mono, Noto_Serif_TC } from "next/font/google";
+import { Bricolage_Grotesque, IBM_Plex_Mono, Noto_Sans_TC } from "next/font/google";
 import { locales, isLocale, type Locale } from "@/i18n";
 import "../globals.css";
 
-const newsreader = Newsreader({
-  variable: "--font-newsreader",
+const grotesk = Bricolage_Grotesque({
+  variable: "--font-grotesk",
   subsets: ["latin"],
-  style: ["normal", "italic"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
 });
 
 const plexMono = IBM_Plex_Mono({
@@ -17,9 +16,9 @@ const plexMono = IBM_Plex_Mono({
   weight: ["400", "500"],
 });
 
-const notoSerifTC = Noto_Serif_TC({
-  variable: "--font-noto-serif-tc",
-  weight: ["400", "500", "600"],
+const notoSansTC = Noto_Sans_TC({
+  variable: "--font-noto-sans-tc",
+  weight: ["400", "500", "700"],
   preload: false,
 });
 
@@ -72,7 +71,7 @@ export default async function RootLayout({
     <html
       lang={l === "zh" ? "zh-Hant" : "en"}
       suppressHydrationWarning
-      className={`${newsreader.variable} ${plexMono.variable} ${notoSerifTC.variable} h-full`}
+      className={`${grotesk.variable} ${plexMono.variable} ${notoSansTC.variable} h-full`}
     >
       <body data-locale={l} className="min-h-full flex flex-col">
         <script

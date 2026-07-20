@@ -50,8 +50,8 @@ const footerLabels = {
     place: "Taipei, Taiwan · UTC+8",
     colophon: (
       <>
-        Set in Newsreader &amp; IBM Plex Mono on Flexoki paper. Built with
-        Next.js — deployed {BUILD_DATE}.
+        Set in Bricolage Grotesque &amp; IBM Plex Mono, black on white. Built
+        with Next.js — deployed {BUILD_DATE}.
       </>
     ),
     source: "Source",
@@ -60,8 +60,8 @@ const footerLabels = {
     place: "台北 · UTC+8",
     colophon: (
       <>
-        字體 Newsreader、Noto Serif TC 與 IBM Plex Mono，Flexoki
-        紙墨色系。以 Next.js 構建——部署於 {BUILD_DATE}。
+        字體 Bricolage Grotesque、Noto Sans TC 與 IBM Plex
+        Mono，黑白單色。以 Next.js 構建——部署於 {BUILD_DATE}。
       </>
     ),
     source: "原始碼",
