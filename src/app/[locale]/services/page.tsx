@@ -72,16 +72,6 @@ const content: Record<
         p: "Catalog, cart, checkout, payment integration — with the order backoffice behind it.",
       },
       {
-        tag: "real-time",
-        h: "Live dashboards",
-        p: "WebSocket data, boards, monitoring — thousands of updates a minute without dropping frames.",
-      },
-      {
-        tag: "integrations",
-        h: "APIs & automation",
-        p: "Third-party APIs, document/OCR pipelines, AI workflow automation.",
-      },
-      {
         tag: "mvp",
         h: "MVP sprints",
         p: "Fixed scope, fixed price — idea to shippable in weeks.",
@@ -92,8 +82,6 @@ const content: Record<
       "Personal / brand website",
       "Admin system",
       "E-commerce",
-      "Live dashboard",
-      "API / automation",
       "MVP",
       "Something else",
     ],
@@ -159,16 +147,6 @@ const content: Record<
         p: "商品、購物車、金流串接，後面配訂單管理後台。",
       },
       {
-        tag: "即時",
-        h: "即時儀表板",
-        p: "WebSocket 即時數據、看板、監控——每分鐘數千次更新不掉幀。",
-      },
-      {
-        tag: "串接",
-        h: "API 串接／自動化",
-        p: "第三方 API、文件/OCR 流程、AI 工作流自動化。",
-      },
-      {
         tag: "mvp",
         h: "MVP 衝刺",
         p: "固定範圍、固定價格——數週內從想法到可上線。",
@@ -179,8 +157,6 @@ const content: Record<
       "個人網站／官網",
       "後台管理系統",
       "購物車／電商",
-      "即時儀表板",
-      "API／自動化",
       "MVP",
       "其他",
     ],
@@ -241,7 +217,7 @@ export default async function ServicesPage({
 
         <section>
           <SectionTitle>{t.offersTitle}</SectionTitle>
-          <div className="mt-4 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-4 grid gap-5 sm:grid-cols-2">
             {t.offers.map((o) => (
               <Card key={o.tag}>
                 <p className="font-mono text-xs text-ink-3">{o.tag}</p>
