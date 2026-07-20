@@ -1,17 +1,18 @@
 import type { Metadata } from "next";
 import { Nav, Footer, Row, SectionTitle, Card, EMAIL } from "@/components/site";
 import { altFor, isLocale, type Locale } from "@/i18n";
+import { ProjectPicker, type PickerCopy } from "./picker";
 
 const meta = {
   en: {
     title: "Services — Victor Chang",
     description:
-      "Freelance full-stack delivery: real-time dashboards, product platforms, and AI-accelerated development. English / 中文.",
+      "Freelance delivery: websites, admin systems, e-commerce, real-time dashboards, integrations, MVPs. English / 中文.",
   },
   zh: {
     title: "服務 — Victor Chang",
     description:
-      "接案全端交付：即時儀表板、產品平台、AI 加速開發。中英文皆可合作。",
+      "接案交付：網站、後台管理系統、購物車、即時儀表板、API 串接、MVP。中英文皆可合作。",
   },
 } as const;
 
@@ -25,41 +26,114 @@ export async function generateMetadata({
   return { ...t, alternates: altFor("/services") };
 }
 
-const content = {
+type Offer = { tag: string; h: string; p: string };
+
+const content: Record<
+  Locale,
+  {
+    eyebrow: string;
+    h1: string;
+    lede: string;
+    ledeZh: string;
+    offersTitle: string;
+    offers: Offer[];
+    pickerTitle: string;
+    pickerTypes: string[];
+    picker: PickerCopy;
+    trackTitle: string;
+    track: { meta: string; text: string }[];
+    howTitle: string;
+    how1: string;
+    how2: string;
+    ctaLead: string;
+    ctaTail: string;
+  }
+> = {
   en: {
     eyebrow: "For clients · 接案",
     h1: "Systems that touch money, built to be trusted.",
     lede: "Seven years on insurance claims, live wagering markets, and crypto products — software where bugs cost real money. That is the standard your project gets, whatever its size.",
     ledeZh: "中文合作無障礙——需求訪談、報價、交付文件皆可全中文進行。",
-    offersTitle: "What I take on",
+    offersTitle: "What you can order",
     offers: [
       {
-        tag: "platforms",
-        h: "Full-stack product delivery",
-        p: "A feature, a module, or a whole platform — React/Next.js front, Node or Go behind, deployed and documented. For teams that need senior hands without a hiring cycle.",
+        tag: "site",
+        h: "Personal & brand websites",
+        p: "Like this one: design, build, deploy — bilingual and SEO-ready.",
+      },
+      {
+        tag: "backoffice",
+        h: "Admin & management systems",
+        p: "Dashboards, roles & permissions, audit trails. Trading-desk-grade backoffice is my day job.",
+      },
+      {
+        tag: "commerce",
+        h: "E-commerce & carts",
+        p: "Catalog, cart, checkout, payment integration — with the order backoffice behind it.",
       },
       {
         tag: "real-time",
-        h: "Real-time systems & dashboards",
-        p: "WebSocket feeds, live consoles, event-driven backends — built to stay smooth under thousands of updates a minute. Trading, gaming, logistics, monitoring.",
+        h: "Live dashboards",
+        p: "WebSocket data, boards, monitoring — thousands of updates a minute without dropping frames.",
       },
       {
-        tag: "velocity",
-        h: "AI-accelerated delivery",
-        p: "I run a production-grade agentic workflow (Claude Code) — with the agent harnesses and reusable skills that make it reliable. Senior-quality output, fast, without the AI debt. Best for MVPs and deadline-bound builds.",
+        tag: "integrations",
+        h: "APIs & automation",
+        p: "Third-party APIs, document/OCR pipelines, AI workflow automation.",
+      },
+      {
+        tag: "mvp",
+        h: "MVP sprints",
+        p: "Fixed scope, fixed price — idea to shippable in weeks.",
       },
     ],
+    pickerTitle: "How to start: pick what you need",
+    pickerTypes: [
+      "Personal / brand website",
+      "Admin system",
+      "E-commerce",
+      "Live dashboard",
+      "API / automation",
+      "MVP",
+      "Something else",
+    ],
+    picker: {
+      hint: "Opens a pre-filled email — edit and send.",
+      timelineLabel: "timeline",
+      timelines: ["urgent (<1 month)", "1–3 months", "flexible"],
+      button: "Compose inquiry",
+      emailSubject: "Project inquiry",
+      bodyIntro: "Hi Victor,",
+      bodyNeed: "What I need: ",
+      bodyTimeline: "Timeline: ",
+      bodyDesc: "About the project:",
+      bodyDescPlaceholder: "(a few sentences on what you're building)",
+      bodyBudget: "Budget range (optional):",
+      bodyName: "Name / company:",
+    },
     trackTitle: "Track record",
     track: [
-      { meta: "2026 —", text: "Real-time sports wagering exchange: live odds consoles, event-driven Go services." },
-      { meta: "freelance", text: "Delivery for a leading crypto gaming platform — frontend architecture and features." },
-      { meta: "2022 – 26", text: "Health-insurance claims platform used daily by 150+ clinics across Hong Kong." },
-      { meta: "earlier", text: "Custom CMS platforms that let non-technical teams run content independently." },
+      {
+        meta: "2026 —",
+        text: "Real-time sports wagering exchange: live odds consoles, event-driven Go services.",
+      },
+      {
+        meta: "freelance",
+        text: "Delivery for a leading crypto gaming platform — frontend architecture and features.",
+      },
+      {
+        meta: "2022 – 26",
+        text: "Health-insurance claims platform used daily by 150+ clinics across Hong Kong.",
+      },
+      {
+        meta: "earlier",
+        text: "Custom CMS platforms that let non-technical teams run content independently.",
+      },
     ],
     howTitle: "How it works",
     how1: "We start with a free 30–60 minute scope call, in English or 中文, and define what done looks like. You get a fixed-scope proposal in writing — deliverables, timeline, price.",
     how2: "Then a weekly demo cadence: working software every week, async written updates in between. At the end, handover — docs, tests, deploy pipeline — so your team can run it without me.",
-    ctaLead: "Have a project in mind? Tell me what you're building —",
+    ctaLead: "Prefer to just write? Tell me what you're building —",
     ctaTail: " — EN / 中文, replies within 24h.",
   },
   zh: {
@@ -67,27 +141,69 @@ const content = {
     h1: "經手金流的系統，做到值得信任。",
     lede: "七年都在做保險理賠、即時投注市場與加密產品——bug 直接等於賠錢的那種軟體。不論案子大小，你的專案拿到的就是這個標準。",
     ledeZh: "需求訪談、報價、週報與交付文件，全程可用中文進行；跨國團隊協作時亦可中英並行。",
-    offersTitle: "接什麼",
+    offersTitle: "可以委託的項目",
     offers: [
       {
-        tag: "平台開發",
-        h: "全端產品交付",
-        p: "一個功能、一個模組，或一整個平台——React/Next.js 前端、Node 或 Go 後端，部署完成、文件齊備。適合需要資深人手、又不想走招聘流程的團隊。",
+        tag: "網站",
+        h: "個人網站／形象官網",
+        p: "就像這個網站：設計、開發、部署一手包，含雙語與 SEO。",
       },
       {
-        tag: "即時系統",
-        h: "即時系統與儀表板",
-        p: "WebSocket 行情、即時操作台、事件驅動後端——每分鐘數千次更新下依然順滑。交易、遊戲、物流、監控都適用。",
+        tag: "後台",
+        h: "後台管理系統",
+        p: "儀表板、權限、審計軌跡——交易台等級的後台是我的日常。",
       },
       {
-        tag: "交付速度",
-        h: "AI 加速開發",
-        p: "我以生產等級的 agentic 工作流（Claude Code）開發，並自建 agent harness 與可重用 skill 讓它可靠——資深品質的產出、更快的速度，而不是 AI 技術債。最適合 MVP 與趕檔期的案子。",
+        tag: "電商",
+        h: "購物車／電商",
+        p: "商品、購物車、金流串接，後面配訂單管理後台。",
+      },
+      {
+        tag: "即時",
+        h: "即時儀表板",
+        p: "WebSocket 即時數據、看板、監控——每分鐘數千次更新不掉幀。",
+      },
+      {
+        tag: "串接",
+        h: "API 串接／自動化",
+        p: "第三方 API、文件/OCR 流程、AI 工作流自動化。",
+      },
+      {
+        tag: "mvp",
+        h: "MVP 衝刺",
+        p: "固定範圍、固定價格——數週內從想法到可上線。",
       },
     ],
+    pickerTitle: "怎麼開始：點選你需要的",
+    pickerTypes: [
+      "個人網站／官網",
+      "後台管理系統",
+      "購物車／電商",
+      "即時儀表板",
+      "API／自動化",
+      "MVP",
+      "其他",
+    ],
+    picker: {
+      hint: "會打開一封寫好一半的信——改一改就能寄。",
+      timelineLabel: "時程",
+      timelines: ["急件（<1 個月）", "1–3 個月", "彈性"],
+      button: "產生需求信",
+      emailSubject: "專案洽詢",
+      bodyIntro: "Victor 你好，",
+      bodyNeed: "我需要：",
+      bodyTimeline: "時程：",
+      bodyDesc: "專案說明：",
+      bodyDescPlaceholder: "（幾句話描述你想做什麼）",
+      bodyBudget: "預算範圍（可不填）：",
+      bodyName: "稱呼／公司：",
+    },
     trackTitle: "實績",
     track: [
-      { meta: "2026 —", text: "即時運動博彩交易所：即時賠率操作台、事件驅動 Go 服務。" },
+      {
+        meta: "2026 —",
+        text: "即時運動博彩交易所：即時賠率操作台、事件驅動 Go 服務。",
+      },
       { meta: "接案", text: "為知名加密遊戲平台交付前端架構與功能。" },
       { meta: "2022 – 26", text: "香港 150+ 診所每日使用的健保理賠平台。" },
       { meta: "更早", text: "客製 CMS 平台，讓非技術團隊能獨立經營內容。" },
@@ -95,10 +211,10 @@ const content = {
     howTitle: "合作方式",
     how1: "先來一場免費的 30–60 分鐘需求訪談（中英文皆可），一起定義「做完」長什麼樣。你會收到書面的固定範圍報價——交付物、時程、價格。",
     how2: "接著是每週 demo 的節奏：每週都有能動的軟體，中間以非同步文字回報進度。結案時完整交接——文件、測試、部署管線——你的團隊不需要我也能運轉它。",
-    ctaLead: "有案子想做？跟我說你在打造什麼——",
+    ctaLead: "想直接用寫的？跟我說你在打造什麼——",
     ctaTail: "——中英文皆可，24 小時內回覆。",
   },
-} as const;
+};
 
 export default async function ServicesPage({
   params,
@@ -125,14 +241,21 @@ export default async function ServicesPage({
 
         <section>
           <SectionTitle>{t.offersTitle}</SectionTitle>
-          <div className="mt-4 grid gap-5 lg:grid-cols-3">
+          <div className="mt-4 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {t.offers.map((o) => (
               <Card key={o.tag}>
                 <p className="font-mono text-xs text-ink-3">{o.tag}</p>
-                <p className="mt-2 font-serif text-lg font-medium leading-snug">{o.h}</p>
-                <p className="mt-2 text-[15px] leading-relaxed text-ink-2">{o.p}</p>
+                <p className="mt-1.5 font-serif text-lg font-medium leading-snug">{o.h}</p>
+                <p className="mt-1.5 text-[14.5px] leading-relaxed text-ink-2">{o.p}</p>
               </Card>
             ))}
+          </div>
+        </section>
+
+        <section>
+          <SectionTitle>{t.pickerTitle}</SectionTitle>
+          <div className="mt-4">
+            <ProjectPicker email={EMAIL} types={t.pickerTypes} copy={t.picker} />
           </div>
         </section>
 
