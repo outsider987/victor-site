@@ -54,6 +54,7 @@ const content: Record<
     ctaLead: string;
     ctaTail: string;
     harnessCaption: string;
+    demosLine: { label: string; items: { href: string; text: string }[] };
   }
 > = {
   en: {
@@ -103,6 +104,10 @@ const content: Record<
     demoLink: "→ try the live demo",
     ndaNote:
       "Real product UIs stay behind NDAs — the demos here are de-identified rebuilds of the same techniques, running live.",
+    demosLine: { label: "Live demos:", items: [
+      { href: "/demos/live-desk", text: "trading desk (render isolation)" },
+      { href: "/demos/composer", text: "email composer (Tiptap, slash commands)" },
+    ] },
     howTitle: "How I work remotely",
     how: [
       {
@@ -170,6 +175,10 @@ const content: Record<
     demoLink: "→ 玩玩 live demo",
     ndaNote:
       "真實產品介面受 NDA 保護——這裡的 demo 是同一套技術去識別化後的重建，而且是活的。",
+    demosLine: { label: "Live demos：", items: [
+      { href: "/demos/live-desk", text: "即時交易台（重繪隔離）" },
+      { href: "/demos/composer", text: "email 編輯器（Tiptap、slash 指令）" },
+    ] },
     howTitle: "我的遠端工作方式",
     how: [
       {
@@ -271,6 +280,17 @@ export default async function WorkPage({
             ))}
           </div>
           <p className="mt-4 font-mono text-xs leading-relaxed text-ink-3">{t.ndaNote}</p>
+          <p className="mt-2 font-mono text-xs leading-relaxed text-ink-3">
+            {t.demosLine.label}{" "}
+            {t.demosLine.items.map((d, i) => (
+              <span key={d.href}>
+                {i > 0 && " · "}
+                <Link href={`/${l}${d.href}`} className="text-red-ink hover:underline">
+                  {d.text}
+                </Link>
+              </span>
+            ))}
+          </p>
         </section>
 
         <section>

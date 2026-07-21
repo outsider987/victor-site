@@ -114,6 +114,66 @@ h1 em {
   }
 }
 
+/* composer demo: editor prose */
+.composer-prose {
+  min-height: 220px;
+  padding: 16px;
+  outline: none;
+  font-size: 15.5px;
+  line-height: 1.65;
+}
+.composer-prose p {
+  margin: 0 0 0.6em;
+}
+.composer-prose h2 {
+  font-weight: 700;
+  font-size: 1.25em;
+  letter-spacing: -0.01em;
+  margin: 0.8em 0 0.4em;
+}
+.composer-prose ul,
+.composer-prose ol {
+  padding-left: 1.4em;
+  margin: 0 0 0.6em;
+}
+.composer-prose ul {
+  list-style: disc;
+}
+.composer-prose ol {
+  list-style: decimal;
+}
+.composer-prose blockquote {
+  border-left: 2px solid var(--ink);
+  padding-left: 0.9em;
+  color: var(--ink-2);
+  margin: 0 0 0.6em;
+}
+.composer-prose pre {
+  font-family: var(--font-plex-mono), monospace;
+  font-size: 13px;
+  background: var(--wash);
+  border: 1px solid var(--rule);
+  padding: 10px 12px;
+  margin: 0 0 0.6em;
+  overflow-x: auto;
+}
+.composer-prose code {
+  font-family: var(--font-plex-mono), monospace;
+  font-size: 0.9em;
+}
+.composer-prose hr {
+  border: 0;
+  border-top: 1px solid var(--rule-mid);
+  margin: 1em 0;
+}
+.composer-prose p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  color: var(--ink-3);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
 /* semantic market colors survive the monochrome chrome */
 .desk-down {
   color: #af3029;
