@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900">
+  <rect width="1440" height="900" fill="#f4f6f6"/>
+  <rect x="1" y="1" width="1438" height="898" rx="22" fill="none" stroke="#d8dfe0"/>
+  <rect width="1440" height="72" fill="#ffffff"/>
+  <circle cx="38" cy="36" r="16" fill="#16aa75"/><path d="M30 36h16M38 28v16" stroke="#fff" stroke-width="3"/>
+  <text x="66" y="42" fill="#17242a" font-family="Arial" font-size="18" font-weight="700">Care operations</text>
+  <circle cx="1380" cy="36" r="17" fill="#e8edef"/><text x="1344" y="41" fill="#7b898e" font-family="Arial" font-size="12" text-anchor="end">Demo workspace</text>
+  <rect y="72" width="106" height="828" fill="#ffffff"/>
+  <g font-family="Arial" font-size="11" text-anchor="middle" fill="#859399">
+    <rect x="29" y="112" width="48" height="48" rx="11" fill="#e4f7ef"/><path d="M40 126h26v20H40zM45 121v9M61 121v9M45 136h16" fill="none" stroke="#13a872" stroke-width="2"/><text x="53" y="180" fill="#17996b">Verify</text>
+    <rect x="29" y="214" width="48" height="48" rx="11" fill="#eef2f3"/><path d="M41 226h24v24H41zM46 232h14M46 238h14M46 244h8" fill="none" stroke="#7e8e94" stroke-width="2"/><text x="53" y="282">Work queue</text>
+    <rect x="29" y="316" width="48" height="48" rx="11" fill="#eef2f3"/><path d="M42 327h22v25H42zM47 323h12v8M47 339h12M47 345h9" fill="none" stroke="#7e8e94" stroke-width="2"/><text x="53" y="384">Records</text>
+    <rect x="29" y="418" width="48" height="48" rx="11" fill="#eef2f3"/><path d="M41 453l7-11 7 5 10-17" fill="none" stroke="#7e8e94" stroke-width="2"/><text x="53" y="486">Reports</text>
+  </g>
+  <text x="144" y="132" fill="#17242a" font-family="Arial" font-size="30" font-weight="700">Verified visits</text>
+  <text x="144" y="160" fill="#77868c" font-family="Arial" font-size="14">Eligibility → consultation → settlement → record</text>
+  <g font-family="Arial">
+    <rect x="144" y="192" width="236" height="92" rx="13" fill="#ffffff" stroke="#dbe2e3"/><text x="164" y="220" fill="#829096" font-size="11" font-weight="700">READY FOR CARE</text><text x="164" y="260" fill="#17272d" font-size="29" font-weight="700">08</text><circle cx="350" cy="238" r="6" fill="#15aa75"/>
+    <rect x="396" y="192" width="236" height="92" rx="13" fill="#ffffff" stroke="#dbe2e3"/><text x="416" y="220" fill="#829096" font-size="11" font-weight="700">IN CONSULTATION</text><text x="416" y="260" fill="#17272d" font-size="29" font-weight="700">03</text><circle cx="602" cy="238" r="6" fill="#5a88dc"/>
+    <rect x="648" y="192" width="236" height="92" rx="13" fill="#ffffff" stroke="#dbe2e3"/><text x="668" y="220" fill="#829096" font-size="11" font-weight="700">AWAITING SETTLEMENT</text><text x="668" y="260" fill="#17272d" font-size="29" font-weight="700">02</text><circle cx="854" cy="238" r="6" fill="#e0a637"/>
+  </g>
+  <rect x="144" y="310" width="774" height="510" rx="16" fill="#ffffff" stroke="#d7dfe1"/>
+  <text x="170" y="350" fill="#1d2d33" font-family="Arial" font-size="18" font-weight="700">Clinic work queue</text>
+  <rect x="724" y="329" width="168" height="36" rx="8" fill="#f6f8f8" stroke="#d7dfe1"/><text x="808" y="352" fill="#68777d" font-family="Arial" font-size="12" text-anchor="middle">Search demo visit</text>
+  <line x1="144" y1="380" x2="918" y2="380" stroke="#dfe5e6"/>
+  <g font-family="Arial" font-size="11" font-weight="700" fill="#87949a"><text x="170" y="410">VISIT</text><text x="294" y="410">ELIGIBILITY</text><text x="482" y="410">CARE STEP</text><text x="744" y="410">STATUS</text></g>
+  <rect x="156" y="432" width="750" height="94" rx="10" fill="#edf9f4"/><rect x="156" y="432" width="4" height="94" rx="2" fill="#14aa74"/>
+  <g font-family="Arial"><text x="170" y="468" fill="#1b2d33" font-size="15" font-weight="700">DEMO-024</text><text x="170" y="492" fill="#819096" font-size="11">Fictional visit</text><circle cx="302" cy="468" r="5" fill="#13a872"/><text x="316" y="472" fill="#288165" font-size="12" font-weight="700">Verified</text><text x="482" y="468" fill="#1f3036" font-size="14" font-weight="700">Consultation</text><text x="482" y="492" fill="#79888e" font-size="11">Diagnosis and medicine</text><rect x="744" y="451" width="132" height="30" rx="15" fill="#dff5ec"/><text x="810" y="471" fill="#15885f" font-size="11" font-weight="700" text-anchor="middle">Ready</text></g>
+  <line x1="170" y1="550" x2="892" y2="550" stroke="#e8ecee"/>
+  <g font-family="Arial"><text x="170" y="588" fill="#1b2d33" font-size="15" font-weight="700">DEMO-025</text><text x="170" y="612" fill="#819096" font-size="11">Fictional visit</text><circle cx="302" cy="588" r="5" fill="#13a872"/><text x="316" y="592" fill="#288165" font-size="12" font-weight="700">Verified</text><text x="482" y="588" fill="#1f3036" font-size="14" font-weight="700">Settlement</text><text x="482" y="612" fill="#79888e" font-size="11">Review and confirmation</text><rect x="744" y="571" width="132" height="30" rx="15" fill="#fff3d8"/><text x="810" y="591" fill="#9a6b10" font-size="11" font-weight="700" text-anchor="middle">Waiting</text></g>
+  <line x1="170" y1="670" x2="892" y2="670" stroke="#e8ecee"/>
+  <g font-family="Arial"><text x="170" y="708" fill="#1b2d33" font-size="15" font-weight="700">DEMO-026</text><text x="170" y="732" fill="#819096" font-size="11">Fictional visit</text><circle cx="302" cy="708" r="5" fill="#13a872"/><text x="316" y="712" fill="#288165" font-size="12" font-weight="700">Verified</text><text x="482" y="708" fill="#1f3036" font-size="14" font-weight="700">Record</text><text x="482" y="732" fill="#79888e" font-size="11">Operational history</text><rect x="744" y="691" width="132" height="30" rx="15" fill="#e8eef9"/><text x="810" y="711" fill="#4a70b9" font-size="11" font-weight="700" text-anchor="middle">Completed</text></g>
+  <rect x="944" y="192" width="352" height="628" rx="16" fill="#142027"/>
+  <text x="972" y="232" fill="#ffffff" font-family="Arial" font-size="18" font-weight="700">Visit DEMO-024</text><text x="972" y="258" fill="#92a0a5" font-family="Arial" font-size="12">No personal information · fictional data</text><line x1="972" y1="286" x2="1268" y2="286" stroke="#324047"/>
+  <g font-family="Arial"><line x1="992" y1="330" x2="992" y2="650" stroke="#3b4c52" stroke-width="2"/>
+    <circle cx="992" cy="334" r="9" fill="#13aa74"/><path d="M988 334l3 3 6-7" fill="none" stroke="#fff" stroke-width="2"/><text x="1020" y="330" fill="#dce5e2" font-size="14" font-weight="700">Visit setup</text><text x="1020" y="351" fill="#829198" font-size="11">Service and practitioner selected</text>
+    <circle cx="992" cy="414" r="9" fill="#13aa74"/><path d="M988 414l3 3 6-7" fill="none" stroke="#fff" stroke-width="2"/><text x="1020" y="410" fill="#dce5e2" font-size="14" font-weight="700">Eligibility verified</text><text x="1020" y="431" fill="#829198" font-size="11">Work item created</text>
+    <circle cx="992" cy="494" r="10" fill="#17252c" stroke="#69d8b2" stroke-width="3"/><circle cx="992" cy="494" r="4" fill="#69d8b2"/><text x="1020" y="490" fill="#ffffff" font-size="14" font-weight="700">Consultation</text><text x="1020" y="511" fill="#91a09f" font-size="11">Current step</text>
+    <circle cx="992" cy="574" r="8" fill="#26353c" stroke="#526169"/><text x="1020" y="570" fill="#829198" font-size="14" font-weight="700">Settlement</text><text x="1020" y="591" fill="#68777d" font-size="11">Waiting</text>
+    <circle cx="992" cy="654" r="8" fill="#26353c" stroke="#526169"/><text x="1020" y="650" fill="#829198" font-size="14" font-weight="700">Record</text><text x="1020" y="671" fill="#68777d" font-size="11">Waiting</text></g>
+  <rect x="972" y="722" width="296" height="66" rx="10" fill="#1c2c32" stroke="#34464b"/><text x="990" y="748" fill="#7f908f" font-family="Arial" font-size="10" font-weight="700">NEXT ACTION</text><text x="990" y="772" fill="#70dbb6" font-family="Arial" font-size="14" font-weight="700">Add diagnosis and medicine →</text>
+</svg>

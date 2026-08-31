@@ -1,0 +1,211 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 1100" role="img" aria-labelledby="title desc">
+  <title id="title">CypherLab case-study desktop and mobile wireframe</title>
+  <desc id="desc">A dark editorial case-study layout with one large sportsbook operations surface, an observe flow above it, a control return loop below it, and a single-column mobile version.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0 0 9 4.5 0 9z" fill="#d9dc42"/>
+    </marker>
+    <style>
+      .sans{font-family:Inter,Arial,sans-serif}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+      .paper{fill:#080a0b}.ink{fill:#f4f4ef}.muted{fill:#8c9299}.accent{fill:#d9dc42}.line{stroke:#34383d;stroke-width:1;fill:none}
+      .flow{stroke:#d9dc42;stroke-width:1.8;fill:none;marker-end:url(#arrow)}.node{fill:#0d1012;stroke:#41464c;stroke-width:1}
+      .ui{fill:#0b0e10;stroke:#4a5056;stroke-width:1}.ui-soft{fill:#121619}.ui-accent{fill:#262712;stroke:#d9dc42;stroke-width:1.4}
+    </style>
+  </defs>
+
+  <rect width="1800" height="1100" fill="#dad8d0"/>
+
+  <!-- Desktop composition -->
+  <rect x="34" y="34" width="1282" height="1032" class="paper"/>
+  <g class="sans">
+    <text x="72" y="75" class="muted" font-size="12">← ALL WORK</text>
+    <text x="675" y="75" class="muted mono" font-size="11" text-anchor="middle">01 / 04 · SPORTSBOOK OPERATIONS</text>
+    <text x="1278" y="75" class="ink" font-size="13" text-anchor="end">CLOSE ×</text>
+    <line x1="72" y1="94" x2="1278" y2="94" class="line"/>
+
+    <text x="72" y="169" class="ink" font-size="70" font-weight="700" letter-spacing="-4">CYPHERLAB</text>
+    <text x="760" y="132" class="ink" font-size="20" font-weight="600">One live market. Two trust loops.</text>
+    <text x="760" y="164" class="muted" font-size="15">Version-check incoming state. Confirm resolved operator state.</text>
+    <text x="760" y="190" class="muted" font-size="14">一個即時市場，兩個可信閉環。</text>
+    <line x1="72" y1="218" x2="1278" y2="218" class="line"/>
+
+    <!-- Observe lane -->
+    <text x="72" y="253" class="accent mono" font-size="12">01 · OBSERVE A COMPUTED UPDATE</text>
+    <text x="1278" y="253" class="muted" font-size="12" text-anchor="end">Small signal now · scoped authoritative read next</text>
+
+    <rect x="72" y="274" width="174" height="76" class="node"/>
+    <text x="88" y="301" class="ink" font-size="16" font-weight="600">Provider event</text>
+    <text x="88" y="327" class="muted" font-size="12">price · line · context</text>
+    <path d="M246 312 H273" class="flow"/>
+    <text x="260" y="296" class="accent mono" font-size="9" text-anchor="middle">NORMALIZE</text>
+
+    <rect x="282" y="274" width="174" height="76" class="node"/>
+    <text x="298" y="301" class="ink" font-size="16" font-weight="600">Canonical event</text>
+    <text x="298" y="327" class="muted" font-size="12">fixture · market · selection</text>
+    <path d="M456 312 H483" class="flow"/>
+    <text x="470" y="296" class="accent mono" font-size="9" text-anchor="middle">STREAM</text>
+
+    <rect x="492" y="274" width="194" height="76" class="node"/>
+    <text x="508" y="301" class="ink" font-size="16" font-weight="600">Pricing boundary</text>
+    <text x="508" y="327" class="muted" font-size="12">internal algorithm not shown</text>
+    <path d="M686 312 H713" class="flow"/>
+    <text x="700" y="296" class="accent mono" font-size="9" text-anchor="middle">COMPUTE</text>
+
+    <rect x="722" y="274" width="202" height="76" class="node"/>
+    <text x="738" y="301" class="ink" font-size="16" font-weight="600">Full / diff update</text>
+    <text x="738" y="327" class="muted" font-size="12">older ComputeSeq rejected</text>
+    <path d="M924 312 H951" class="flow"/>
+    <text x="938" y="296" class="accent mono" font-size="9" text-anchor="middle">MERGE</text>
+
+    <rect x="960" y="274" width="230" height="76" class="ui-accent"/>
+    <text x="976" y="301" class="ink" font-size="16" font-weight="600">Fixture projection</text>
+    <text x="976" y="327" class="muted" font-size="12">refresh only the affected view</text>
+    <path d="M1075 350 C1075 387 920 382 850 420" class="flow"/>
+
+    <!-- Central product surface -->
+    <rect x="72" y="414" width="780" height="355" class="ui"/>
+    <rect x="72" y="414" width="780" height="44" fill="#15191c"/>
+    <text x="92" y="441" class="muted mono" font-size="11">LIVE MARKET / DEMO-024</text>
+    <circle cx="788" cy="436" r="4" class="accent"/>
+    <text x="805" y="441" class="ink mono" font-size="10">LIVE</text>
+
+    <rect x="92" y="483" width="182" height="258" class="ui-soft"/>
+    <text x="110" y="511" class="muted mono" font-size="10">MATCH CONTEXT</text>
+    <text x="110" y="542" class="ink" font-size="17" font-weight="600">E-sports fixture</text>
+    <text x="110" y="568" class="muted" font-size="12">Round 2 · Map 1</text>
+    <line x1="110" y1="594" x2="256" y2="594" class="line"/>
+    <text x="110" y="624" class="ink" font-size="15">Team North</text>
+    <text x="249" y="624" class="accent" font-size="18" font-weight="700" text-anchor="end">1</text>
+    <text x="110" y="654" class="ink" font-size="15">Team South</text>
+    <text x="249" y="654" class="accent" font-size="18" font-weight="700" text-anchor="end">0</text>
+    <text x="110" y="712" class="muted mono" font-size="10">PHASE · SCORE · CLOCK</text>
+
+    <text x="304" y="497" class="muted mono" font-size="10">FULL TIME · 1X2</text>
+    <text x="710" y="497" class="muted mono" font-size="10" text-anchor="end">COMPUTESEQ 4812</text>
+    <line x1="304" y1="512" x2="828" y2="512" class="line"/>
+    <text x="318" y="545" class="muted" font-size="11">SELECTION</text>
+    <text x="650" y="545" class="muted" font-size="11">STATUS</text>
+    <text x="790" y="545" class="muted" font-size="11" text-anchor="end">ODDS</text>
+
+    <rect x="304" y="560" width="524" height="54" class="ui-accent"/>
+    <text x="320" y="592" class="ink" font-size="15">Home</text>
+    <text x="650" y="592" class="accent mono" font-size="11">OPEN</text>
+    <text x="790" y="593" class="accent mono" font-size="22" font-weight="700" text-anchor="end">1.84</text>
+    <rect x="304" y="624" width="524" height="54" class="node"/>
+    <text x="320" y="656" class="ink" font-size="15">Away</text>
+    <text x="650" y="656" class="muted mono" font-size="11">OPEN</text>
+    <text x="790" y="657" class="ink mono" font-size="20" font-weight="700" text-anchor="end">1.88</text>
+    <rect x="304" y="688" width="524" height="40" class="node"/>
+    <text x="320" y="713" class="ink" font-size="14">Draw</text>
+    <text x="650" y="713" class="muted mono" font-size="11">SUSPENDED</text>
+    <text x="790" y="714" class="ink mono" font-size="18" text-anchor="end">5.50</text>
+
+    <!-- Product-effect annotations -->
+    <text x="894" y="438" class="accent mono" font-size="12">WHAT THE OPERATOR SEES</text>
+    <line x1="894" y1="456" x2="1278" y2="456" class="line"/>
+    <text x="894" y="500" class="accent mono" font-size="12">A</text>
+    <text x="926" y="500" class="ink" font-size="18" font-weight="600">Odds</text>
+    <text x="926" y="524" class="muted" font-size="13">Computed price · line · probability</text>
+    <line x1="894" y1="552" x2="1278" y2="552" class="line"/>
+    <text x="894" y="596" class="accent mono" font-size="12">B</text>
+    <text x="926" y="596" class="ink" font-size="18" font-weight="600">Availability</text>
+    <text x="926" y="620" class="muted" font-size="13">Selection state · derived market state</text>
+    <line x1="894" y1="648" x2="1278" y2="648" class="line"/>
+    <text x="894" y="692" class="accent mono" font-size="12">C</text>
+    <text x="926" y="692" class="ink" font-size="18" font-weight="600">Match context</text>
+    <text x="926" y="716" class="muted" font-size="13">Lifecycle · score · phase · clock</text>
+    <text x="894" y="758" class="muted" font-size="12">One projection, three product effects.</text>
+
+    <!-- Control return loop -->
+    <line x1="72" y1="803" x2="1278" y2="803" class="line"/>
+    <text x="72" y="837" class="accent mono" font-size="12">02 · CHANGE, THEN VERIFY</text>
+    <text x="1278" y="837" class="muted" font-size="12" text-anchor="end">Requested ≠ resolved</text>
+
+    <rect x="72" y="858" width="184" height="72" class="node"/>
+    <text x="88" y="886" class="ink" font-size="15" font-weight="600">Operator edit</text>
+    <text x="88" y="911" class="muted" font-size="11">price or availability</text>
+    <path d="M256 894 H283" class="flow"/>
+    <text x="270" y="878" class="accent mono" font-size="9" text-anchor="middle">SUBMIT</text>
+
+    <rect x="292" y="858" width="184" height="72" class="node"/>
+    <text x="308" y="886" class="ink" font-size="15" font-weight="600">Command gate</text>
+    <text x="308" y="911" class="muted" font-size="11">reason · permission · audit</text>
+    <path d="M476 894 H503" class="flow"/>
+    <text x="490" y="878" class="accent mono" font-size="9" text-anchor="middle">CHECK</text>
+
+    <rect x="512" y="858" width="184" height="72" class="node"/>
+    <text x="528" y="886" class="ink" font-size="15" font-weight="600">Approve if needed</text>
+    <text x="528" y="911" class="muted" font-size="11">accepted · pending</text>
+    <path d="M696 894 H723" class="flow"/>
+    <text x="710" y="878" class="accent mono" font-size="9" text-anchor="middle">PUBLISH</text>
+
+    <rect x="732" y="858" width="202" height="72" class="node"/>
+    <text x="748" y="886" class="ink" font-size="15" font-weight="600">Watched override</text>
+    <text x="748" y="911" class="muted" font-size="11">scoped state · NATS KV</text>
+    <path d="M934 894 H961" class="flow"/>
+    <text x="948" y="878" class="accent mono" font-size="9" text-anchor="middle">REPRICE</text>
+
+    <rect x="970" y="858" width="220" height="72" class="ui-accent"/>
+    <text x="986" y="886" class="ink" font-size="15" font-weight="600">Resolved projection</text>
+    <text x="986" y="911" class="muted" font-size="11">UI confirms engine-visible state</text>
+    <path d="M1190 894 C1242 894 1248 750 1210 680" class="flow"/>
+
+    <text x="72" y="974" class="ink" font-size="16" font-weight="600">Trust boundary:</text>
+    <text x="202" y="974" class="muted" font-size="15">reject older state on read · do not present requested state as applied on write</text>
+    <line x1="72" y1="1006" x2="1278" y2="1006" class="line"/>
+    <text x="72" y="1034" class="muted mono" font-size="10">REACT · GO · NATS / JETSTREAM · REDIS</text>
+    <text x="1278" y="1034" class="muted mono" font-size="10" text-anchor="end">FICTIONAL DATA · PRICING LOGIC OMITTED</text>
+  </g>
+
+  <!-- Mobile composition: same section, natural vertical flow -->
+  <rect x="1360" y="34" width="406" height="1032" rx="20" class="paper"/>
+  <g class="sans">
+    <text x="1384" y="72" class="muted" font-size="10">← ALL WORK</text>
+    <text x="1742" y="72" class="muted mono" font-size="9" text-anchor="end">01 / 04</text>
+    <line x1="1384" y1="88" x2="1742" y2="88" class="line"/>
+    <text x="1384" y="136" class="ink" font-size="38" font-weight="700" letter-spacing="-2">CYPHERLAB</text>
+    <text x="1384" y="166" class="ink" font-size="16" font-weight="600">One live market. Two trust loops.</text>
+    <text x="1384" y="190" class="muted" font-size="11">Same story · native vertical scroll</text>
+
+    <text x="1384" y="229" class="accent mono" font-size="10">01 · OBSERVE</text>
+    <line x1="1392" y1="248" x2="1392" y2="337" class="flow"/>
+    <text x="1414" y="255" class="ink" font-size="13" font-weight="600">Normalize provider event</text>
+    <text x="1414" y="278" class="muted" font-size="10">Canonical fixture / market / selection</text>
+    <text x="1414" y="309" class="ink" font-size="13" font-weight="600">Compute, version-check, merge</text>
+    <text x="1414" y="332" class="muted" font-size="10">Pricing internals omitted</text>
+
+    <rect x="1384" y="360" width="358" height="244" class="ui"/>
+    <rect x="1384" y="360" width="358" height="34" fill="#15191c"/>
+    <text x="1400" y="381" class="muted mono" font-size="9">LIVE MARKET / DEMO-024</text>
+    <text x="1400" y="424" class="muted mono" font-size="9">FULL TIME · 1X2</text>
+    <rect x="1400" y="441" width="326" height="43" class="ui-accent"/>
+    <text x="1414" y="467" class="ink" font-size="12">HOME · OPEN</text>
+    <text x="1708" y="468" class="accent mono" font-size="18" font-weight="700" text-anchor="end">1.84</text>
+    <rect x="1400" y="493" width="326" height="43" class="node"/>
+    <text x="1414" y="519" class="ink" font-size="12">AWAY · OPEN</text>
+    <text x="1708" y="520" class="ink mono" font-size="17" text-anchor="end">1.88</text>
+    <rect x="1400" y="545" width="326" height="39" class="node"/>
+    <text x="1414" y="570" class="muted mono" font-size="9">COMPUTESEQ 4812 · FIXTURE REFRESHED</text>
+
+    <text x="1384" y="634" class="accent mono" font-size="9">PRODUCT EFFECT</text>
+    <text x="1384" y="660" class="ink" font-size="13">Odds</text>
+    <text x="1490" y="660" class="ink" font-size="13">Availability</text>
+    <text x="1620" y="660" class="ink" font-size="13">Match context</text>
+    <line x1="1384" y1="678" x2="1742" y2="678" class="line"/>
+
+    <text x="1384" y="716" class="accent mono" font-size="10">02 · CHANGE, THEN VERIFY</text>
+    <line x1="1392" y1="735" x2="1392" y2="920" class="flow"/>
+    <text x="1414" y="744" class="ink" font-size="13" font-weight="600">Operator edit</text>
+    <text x="1414" y="767" class="muted" font-size="10">price or availability</text>
+    <text x="1414" y="805" class="ink" font-size="13" font-weight="600">Gate and approve if needed</text>
+    <text x="1414" y="828" class="muted" font-size="10">reason · idempotency · audit</text>
+    <text x="1414" y="866" class="ink" font-size="13" font-weight="600">Watched override → reprice</text>
+    <text x="1414" y="889" class="muted" font-size="10">accepted · pending · applied</text>
+    <text x="1414" y="927" class="ink" font-size="13" font-weight="600">Resolved state returns</text>
+
+    <line x1="1384" y1="960" x2="1742" y2="960" class="line"/>
+    <text x="1384" y="990" class="ink" font-size="12" font-weight="600">Requested ≠ resolved.</text>
+    <text x="1384" y="1013" class="muted" font-size="10">Trust becomes visible in both directions.</text>
+    <text x="1384" y="1042" class="muted mono" font-size="9">NO TABS · NO HORIZONTAL RAILS</text>
+  </g>
+</svg>
