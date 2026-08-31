@@ -52,23 +52,47 @@ function CypherArchitecture({ lang }: { lang: "en" | "zh" }) {
       boundary: "Pricing internals omitted. Accepted, pending approval, and engine-applied remain distinct states.",
     },
     delivery: {
-      eyebrow: "02 / HARNESS ENGINEERING",
-      title: "The model writes code. The harness makes the work reliable.",
-      lede: "A harness is the engineered environment around an agent: context, tools, guardrails, and feedback connected into one repeatable loop.",
-      definition: ["THE HARNESS", "CONTEXT + TOOLS + GUARDRAILS + FEEDBACK"],
-      human: ["HUMAN INTENT", "goal · constraints · acceptance criteria"],
-      left: [
-        { title: "CONTEXT", items: ["repository map · architecture", "task · acceptance criteria", "plans · prior decisions"] },
-        { title: "GUARDRAILS", items: ["permissions · boundaries", "types · lint · tests", "architecture invariants"] },
+      eyebrow: "02 / MY AGENT DELIVERY HARNESS",
+      title: "From a Linear ticket to a merge-ready PR",
+      lede: "I use a Harness that can stop, recover, and rerun every AI change: unclear intent stops the work; evidence must pass before a PR is created.",
+      principle: ["HUMAN STEERS · AGENT EXECUTES", "EVIDENCE DECIDES"],
+      frame: "MY HARNESS / REPEATABLE DELIVERY SYSTEM",
+      stages: [
+        {
+          number: "01", title: "SELECT & ALIGN", rows: [
+            ["HUMAN", "Pick the highest-priority Linear ticket"],
+            ["AGENT", "Extract goal, scope, and acceptance criteria"],
+            ["GATE", "Unclear → Task Owner updates the spec"],
+          ],
+        },
+        {
+          number: "02", title: "CONTEXT & PLAN", rows: [
+            ["HARNESS", "Load frontend / backend skills + project sitemap"],
+            ["AGENT", "Reuse existing modules and call paths"],
+            ["AGENT", "Plan only the necessary change"],
+          ],
+        },
+        {
+          number: "03", title: "BUILD & VERIFY", rows: [
+            ["AGENT", "Implement → inspect → repair"],
+            ["HARNESS", "Before / after + Playwright E2E"],
+            ["GATE", "Pass → PR · unclear → stop"],
+          ],
+        },
+        {
+          number: "04", title: "PR & DOUBLE REVIEW", rows: [
+            ["AGENT", "Create PR after verification"],
+            ["AGENT REVIEW", "Codex / Claude second check"],
+            ["HUMAN", "Code review + one manual run"],
+          ],
+        },
       ],
-      agent: ["CODING AGENT", "understand → plan → act", "inspect → repair"],
-      right: [
-        { title: "TOOLS", items: ["source · terminal · browser", "documentation · search", "runtime · observability"] },
-        { title: "FEEDBACK", items: ["compiler · tests · CI", "screenshots · logs · metrics", "review signals"] },
+      gates: [
+        ["↺ REPAIR LOOP", "Verification fails → fix → rerun", "RETURN TO 03 / VERIFY"],
+        ["■ STOP & CLARIFY", "Intent missing → update spec → replan", "RETURN TO 02 / PLAN"],
       ],
-      loop: ["CLOSED LOOP", "Agent acts → environment responds → evidence returns → Agent corrects"],
-      outcomes: [["VERIFIED CHANGE", "ready for review / merge"], ["ESCALATE", "judgment or capability missing"]],
-      note: "Harness engineering improves the system around the model, then turns repeated failures into better context, tools, and rules.",
+      outcome: ["MERGE READY", "Evidence passed · agent-reviewed · human-run"],
+      note: "Frontend verification path shown. Backend evidence is selected to match the change rather than invented for the diagram.",
     },
   } : {
     product: {
@@ -103,23 +127,47 @@ function CypherArchitecture({ lang }: { lang: "en" | "zh" }) {
       boundary: "內部定價邏輯不公開；已接受、待核准與引擎已套用是不同狀態。",
     },
     delivery: {
-      eyebrow: "02 / HARNESS ENGINEERING",
-      title: "Agent 負責寫程式；Harness 負責讓結果可靠。",
-      lede: "Harness 是包住 Agent 的工程環境：把 context、tools、guardrails 與 feedback 接成一個可重複執行的閉環。",
-      definition: ["THE HARNESS", "CONTEXT + TOOLS + GUARDRAILS + FEEDBACK"],
-      human: ["人的意圖", "目標 · 限制 · 驗收條件"],
-      left: [
-        { title: "CONTEXT", items: ["repository map · architecture", "任務 · 驗收條件", "計畫 · 過往決策"] },
-        { title: "GUARDRAILS", items: ["權限 · 邊界", "types · lint · tests", "架構不變量"] },
+      eyebrow: "02 / 我的 AGENT DELIVERY HARNESS",
+      title: "從 Linear Ticket 到可合併 PR",
+      lede: "我用一套可停下、可修正、可重跑的 Harness 控制 AI 變更；需求不清就停止，證據通過才建立 PR。",
+      principle: ["HUMAN STEERS · AGENT EXECUTES", "EVIDENCE DECIDES"],
+      frame: "MY HARNESS / 可重複的交付系統",
+      stages: [
+        {
+          number: "01", title: "選擇與對齊", rows: [
+            ["HUMAN", "選最高優先序 Linear Ticket"],
+            ["AGENT", "整理目標、範圍、驗收條件"],
+            ["GATE", "不清楚 → Task Owner 補充 Spec"],
+          ],
+        },
+        {
+          number: "02", title: "載入脈絡與規劃", rows: [
+            ["HARNESS", "載入 Frontend / Backend Skill 與 Sitemap"],
+            ["AGENT", "沿用既有模組與呼叫路徑"],
+            ["AGENT", "只規劃必要變更"],
+          ],
+        },
+        {
+          number: "03", title: "實作與驗證", rows: [
+            ["AGENT", "實作 → 檢查 → 修復"],
+            ["HARNESS", "前後截圖＋Playwright E2E"],
+            ["GATE", "通過 → PR · 不清楚 → 停止"],
+          ],
+        },
+        {
+          number: "04", title: "PR 與雙重複驗", rows: [
+            ["AGENT", "驗證完成後建立 PR"],
+            ["AGENT REVIEW", "Codex / Claude 二次檢查"],
+            ["HUMAN", "人工 Review＋手動跑一次"],
+          ],
+        },
       ],
-      agent: ["CODING AGENT", "理解 → 規劃 → 執行", "檢查 → 修正"],
-      right: [
-        { title: "TOOLS", items: ["source · terminal · browser", "文件 · 搜尋", "runtime · observability"] },
-        { title: "FEEDBACK", items: ["compiler · tests · CI", "截圖 · logs · metrics", "review signals"] },
+      gates: [
+        ["↺ 修復閉環", "驗證失敗 → 修復 → 重跑", "回到 03 / 驗證"],
+        ["■ 停止並釐清", "意圖不足 → 補 Spec → 重規劃", "回到 02 / 規劃"],
       ],
-      loop: ["閉環", "Agent 執行 → 環境回應 → 證據返回 → Agent 修正"],
-      outcomes: [["已驗證的變更", "可進入 review / merge"], ["交由人判斷", "需要決策或缺少能力"]],
-      note: "Harness Engineering 改善的是模型周圍的系統，並把重複發生的失敗轉成更好的 context、tools 與 rules。",
+      outcome: ["可合併", "證據通過 · Agent 複驗 · 人工執行"],
+      note: "圖中呈現前端驗證路徑；後端證據依變更內容選擇，不為示意圖虛構流程。",
     },
   };
 
@@ -189,25 +237,24 @@ function CypherArchitecture({ lang }: { lang: "en" | "zh" }) {
 
         <div className="delivery-canvas">
           <div className="harness-definition">
-            <strong>{copy.delivery.definition[0]}</strong><span>{copy.delivery.definition[1]}</span>
+            <strong>{copy.delivery.principle[0]}</strong><span>{copy.delivery.principle[1]}</span>
           </div>
-          <div className="harness-intent"><strong>{copy.delivery.human[0]}</strong><span>{copy.delivery.human[1]}</span><i aria-hidden="true">↓</i></div>
           <div className="harness-frame">
-            <span className="harness-frame-label">HARNESS / ENGINEERED ENVIRONMENT</span>
-            <div className="harness-column harness-inputs">
-              {copy.delivery.left.map((block) => <article key={block.title}><h3>{block.title}</h3><ul>{block.items.map((item) => <li key={item}>{item}</li>)}</ul></article>)}
+            <span className="harness-frame-label">{copy.delivery.frame}</span>
+            <ol className="harness-stages">
+              {copy.delivery.stages.map((stage, index) => <li className="harness-stage" key={stage.number}>
+                <header><span>{stage.number}</span><h3>{stage.title}</h3></header>
+                <div>{stage.rows.map(([role, detail]) => <p key={`${role}-${detail}`}><b>{role}</b><span>{detail}</span></p>)}</div>
+                {index < copy.delivery.stages.length - 1 && <i aria-hidden="true">→</i>}
+              </li>)}
+            </ol>
+            <div className="harness-gates">
+              {copy.delivery.gates.map(([title, detail, target], index) => <article className={index ? "harness-stop" : "harness-repair"} key={title}>
+                <strong>{title}</strong><span>{detail}</span><small>{target}</small>
+              </article>)}
             </div>
-            <div className="harness-agent">
-              <span>MODEL</span><strong>{copy.delivery.agent[0]}</strong><p>{copy.delivery.agent[1]}</p><b>↺ {copy.delivery.agent[2]}</b>
-            </div>
-            <div className="harness-column harness-capabilities">
-              {copy.delivery.right.map((block) => <article key={block.title}><h3>{block.title}</h3><ul>{block.items.map((item) => <li key={item}>{item}</li>)}</ul></article>)}
-            </div>
-            <div className="harness-loop"><strong>{copy.delivery.loop[0]}</strong><span>{copy.delivery.loop[1]}</span></div>
           </div>
-          <div className="harness-outputs">
-            {copy.delivery.outcomes.map(([title, detail]) => <article key={title}><strong>{title}</strong><span>{detail}</span></article>)}
-          </div>
+          <div className="harness-outcome"><i aria-hidden="true">↓</i><article><strong>{copy.delivery.outcome[0]}</strong><span>{copy.delivery.outcome[1]}</span></article></div>
         </div>
         <footer className="delivery-note">{copy.delivery.note}</footer>
       </motion.section>
