@@ -35,9 +35,9 @@ button { color: inherit; font: inherit; }
 .home-tools > a { padding-block: 8px; transition: color .18s ease; }
 .home-tools > a:hover, .home-tools > a:focus-visible { color: #f3f3f0; }
 .coverflow-shell { --rail: clamp(268px, 18.5vw, 304px); --stage-gap: clamp(40px, 4vw, 64px); --intro-opacity: 1; --intro-shift: 0px; position: relative; height: 100svh; overflow: hidden; background: radial-gradient(circle at 62% 48%, #0c0f10 0, #07090a 42%, #030405 78%); }
-.coverflow-scroll { position: relative; z-index: 4; width: 100%; height: 100svh; overflow-x: hidden; overflow-y: auto; overscroll-behavior-y: contain; scrollbar-width: none; }
+.coverflow-scroll { position: relative; z-index: 4; width: 100%; height: 100svh; overflow-x: hidden; overflow-y: auto; overscroll-behavior-y: contain; scroll-snap-type: y mandatory; scrollbar-width: none; }
 .coverflow-scroll::-webkit-scrollbar { display: none; }
-.coverflow-section { position: relative; width: 100%; height: 100svh; pointer-events: none; }
+.coverflow-section { position: relative; width: 100%; height: 100svh; pointer-events: none; scroll-snap-align: start; scroll-snap-stop: always; }
 .three-deck, .fallback-deck { position: fixed; inset: 0; z-index: 2; pointer-events: none; }
 .three-canvas { display: block; width: 100%; height: 100%; }
 .fallback-deck { z-index: 1; perspective: 1200px; transition: opacity .25s ease; }
