@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { links } from "@/data/projects";
 import { useLanguage } from "./language";
 
 export function Header() {
@@ -17,6 +18,9 @@ export function Header() {
     <nav className="home-language home-tools" aria-label={lang === "en" ? "Homepage utilities" : "首頁工具列"}>
       <a href="#about">{lang === "en" ? "About" : "關於"}</a>
       <Link href="/resume" target="_blank">{lang === "en" ? "Resume ↗" : "履歷 ↗"}</Link>
+      <a href={links.linkedin} target="_blank" rel="noreferrer">LinkedIn ↗</a>
+      <a href={links.email}>Email ↗</a>
+      <a href={links.github} target="_blank" rel="noreferrer">GitHub ↗</a>
       {languageSwitch}
     </nav>
   );
