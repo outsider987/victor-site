@@ -43,6 +43,7 @@ export function ThreeDeck({ scrollerRef, onActiveChange, onReady }: {
     const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     let anchors: number[] = [];
     let progress = 0;
+    let visualProgress = 0;
     let active = -1;
     let scheduleRender: () => void = () => undefined;
 
@@ -102,7 +103,9 @@ export function ThreeDeck({ scrollerRef, onActiveChange, onReady }: {
     let disposed = false;
 
     const render = () => {
-      const visualProgress = reducedMotion ? Math.round(progress) : progress;
+      const targetProgress = reducedMotion ? Math.round(progress) : progress;
+      visualProgress = reducedMotion ? targetProgress : THREE.MathUtils.lerp(visualProgress, targetProgress, 0.08);
+      if (!reducedMotion && Math.abs(targetProgress - visualProgress) > 0.001) scheduleRender();
       const projectProgress = Math.max(0, visualProgress - 1);
       const deckOpacity = reducedMotion ? Number(visualProgress >= 1) : THREE.MathUtils.smoothstep(visualProgress, 0.08, 0.65);
       const currentIndex = Math.min(projects.length - 1, Math.floor(projectProgress));
