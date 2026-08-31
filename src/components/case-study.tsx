@@ -56,6 +56,7 @@ function CypherArchitecture({ lang }: { lang: "en" | "zh" }) {
       title: "Harness engineering for every change",
       lede: "Spec-driven implementation, repeatable pre-PR evidence, and a human-return path.",
       spec: ["spec.md", "SPEC 005", "AC-07", "Acceptance criteria"],
+      implementation: "AGENT IMPLEMENTATION",
       claude: ["CLAUDE CODE", "research callers · shared helpers · blast radius"],
       plan: ["plan.md", "+ tasks.md"],
       repos: [
@@ -69,7 +70,8 @@ function CypherArchitecture({ lang }: { lang: "en" | "zh" }) {
       result: ["result.json", "screenshots · trace"],
       verdict: "HARNESS RESULT",
       pass: "PASS",
-      fail: "FAIL → IMPLEMENTATION",
+      fail: "FAIL",
+      retry: "fix the change → rerun Harness",
       blocked: "BLOCKED",
       manual: [
         ["Human check", "reason · exact steps · expected result"],
@@ -122,6 +124,7 @@ function CypherArchitecture({ lang }: { lang: "en" | "zh" }) {
       title: "每項變更的 Harness 工程",
       lede: "由規格驅動實作，Harness 通過後才建立 PR，並留下可重跑證據。",
       spec: ["spec.md", "SPEC 005", "AC-07", "驗收條件"],
+      implementation: "AGENT 實作",
       claude: ["CLAUDE CODE", "搜尋 callers · 共用 helpers · 影響範圍"],
       plan: ["plan.md", "+ tasks.md"],
       repos: [
@@ -135,7 +138,8 @@ function CypherArchitecture({ lang }: { lang: "en" | "zh" }) {
       result: ["result.json", "截圖 · trace"],
       verdict: "HARNESS 結果",
       pass: "通過",
-      fail: "失敗 → 回到實作",
+      fail: "失敗",
+      retry: "修正變更 → 重跑 Harness",
       blocked: "需要人工介入",
       manual: [
         ["人工交接", "原因 · 明確步驟 · 預期結果"],
@@ -218,38 +222,39 @@ function CypherArchitecture({ lang }: { lang: "en" | "zh" }) {
         </header>
 
         <div className="delivery-canvas">
-          <motion.svg className="delivery-routes" viewBox="0 0 1000 520" preserveAspectRatio="none" aria-hidden="true" initial={reduceMotion ? false : { opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: .18, duration: .55 }}>
-            <path className="delivery-route-main" d="M45 160H955" />
-            <path className="delivery-route-main" d="M330 160V105M330 160V215M430 105V160M430 215V160" />
-            <path className="delivery-route-manual" d="M715 235V338H565M760 440V250" />
-            <path className="delivery-route-critical" d="M855 235V338H875M940 440H520V250" />
-          </motion.svg>
-
           <div className="delivery-main-flow">
             <article className="delivery-document delivery-spec"><strong>{copy.delivery.spec[0]}</strong><span>{copy.delivery.spec[1]}</span><span>{copy.delivery.spec[2]}</span><small>{copy.delivery.spec[3]}</small></article>
-            <i className="delivery-arrow" aria-hidden="true">→</i>
-            <article className="delivery-workbench"><strong>{copy.delivery.claude[0]}</strong><small>{copy.delivery.claude[1]}</small></article>
-            <i className="delivery-arrow" aria-hidden="true">→</i>
-            <article className="delivery-document delivery-plan"><strong>{copy.delivery.plan[0]}</strong><span>{copy.delivery.plan[1]}</span></article>
-            <i className="delivery-arrow" aria-hidden="true">→</i>
-            <div className="delivery-repos">
-              {copy.delivery.repos.map(([name, stack, rule]) => <article key={name}><span>{rule}</span><strong>{name}</strong><small>{stack}</small></article>)}
+            <i className="delivery-arrow" aria-hidden="true" />
+            <article className="delivery-implementation">
+              <h3>{copy.delivery.implementation}</h3>
+              <ol>
+                <li><span>01</span><div><strong>{copy.delivery.claude[0]}</strong><small>{copy.delivery.claude[1]}</small></div></li>
+                <li><span>02</span><div><strong>{copy.delivery.plan[0]}</strong><small>{copy.delivery.plan[1]}</small></div></li>
+                <li><span>03</span><div><strong>{copy.delivery.repos.map(([name]) => name).join(" + ")}</strong><small>{copy.delivery.repos.map(([, stack, rule]) => `${rule} · ${stack}`).join(" / ")}</small></div></li>
+              </ol>
               <p>{copy.delivery.hooks}</p>
-            </div>
-            <i className="delivery-arrow" aria-hidden="true">→</i>
+            </article>
+            <i className="delivery-arrow" aria-hidden="true" />
             <article className="delivery-harness">
               <h3>{copy.delivery.harness}</h3>
               <ol>{copy.delivery.evidence.map((item) => <li key={item}>{item}</li>)}</ol>
               <div><strong>{copy.delivery.result[0]}</strong><small>{copy.delivery.result[1]}</small></div>
             </article>
-            <div className="delivery-verdict"><strong>{copy.delivery.verdict}</strong><span>{copy.delivery.pass}</span><small>{copy.delivery.fail}</small><small>{copy.delivery.blocked}</small></div>
+            <i className="delivery-arrow" aria-hidden="true" />
+            <div className="delivery-verdict"><strong>{copy.delivery.verdict}</strong></div>
+            <i className="delivery-arrow delivery-pass" aria-hidden="true"><span>{copy.delivery.pass}</span></i>
             <article className="delivery-pr"><strong>{copy.delivery.pr}</strong><span>+ —</span><span>+ —</span><span>− —</span></article>
-            <i className="delivery-arrow" aria-hidden="true">→</i>
+            <i className="delivery-arrow" aria-hidden="true" />
             <article className="delivery-review"><h3>{copy.delivery.review}</h3><p>{copy.delivery.compare}</p><ul>{copy.delivery.checks.map((check) => <li key={check}>{check}</li>)}</ul></article>
+            <i className="delivery-arrow" aria-hidden="true" />
             <strong className="delivery-merge">{copy.delivery.merge}</strong>
           </div>
 
           <div className="delivery-feedback">
+            <section className="delivery-fail" aria-label={copy.delivery.fail}>
+              <strong>{copy.delivery.fail}</strong>
+              <span>↺ {copy.delivery.retry}</span>
+            </section>
             <section className="delivery-manual" aria-label={copy.delivery.blocked}>
               <strong>{copy.delivery.blocked}</strong>
               <ol>{copy.delivery.manual.map(([title, detail]) => <li key={title}><span>{title}</span><small>{detail}</small></li>)}</ol>
