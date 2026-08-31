@@ -54,7 +54,7 @@ function CypherArchitecture({ lang }: { lang: "en" | "zh" }) {
     delivery: {
       eyebrow: "02 / HARNESS ENGINEERING",
       title: "Harness engineering for every change",
-      lede: "Spec-driven implementation, repeatable evidence, and a human-return path.",
+      lede: "Spec-driven implementation, repeatable pre-PR evidence, and a human-return path.",
       spec: ["spec.md", "SPEC 005", "AC-07", "Acceptance criteria"],
       claude: ["CLAUDE CODE", "research callers · shared helpers · blast radius"],
       plan: ["plan.md", "+ tasks.md"],
@@ -62,8 +62,8 @@ function CypherArchitecture({ lang }: { lang: "en" | "zh" }) {
         ["backoffice-ui", "React · TypeScript", "FRONTEND SKILL"],
         ["backoffice-v2", "Go · NATS · PostgreSQL", "BACKEND SKILL"],
       ],
-      hooks: "HOOKS · branch · commit · PR gates",
-      pr: "PR",
+      hooks: "HOOKS · branch · commit · local gates",
+      pr: "OPEN PR",
       harness: "VERIFICATION HARNESS",
       evidence: ["PLAYWRIGHT", "BROWSER", "REST", "WEBSOCKET", "PG / CLICKHOUSE"],
       result: ["result.json", "screenshots · trace"],
@@ -83,7 +83,7 @@ function CypherArchitecture({ lang }: { lang: "en" | "zh" }) {
       critical: "CRITICAL → HUMAN DECISION",
       stop: "STOP",
       fix: "FIX PR → HARNESS → REVIEW",
-      note: "Agent-driven verification; human-controlled review and issue filing.",
+      note: "The local harness validates the change before PR creation; PR checks and review protect the merge.",
     },
   } : {
     product: {
@@ -120,7 +120,7 @@ function CypherArchitecture({ lang }: { lang: "en" | "zh" }) {
     delivery: {
       eyebrow: "02 / HARNESS 工程",
       title: "每項變更的 Harness 工程",
-      lede: "由規格驅動實作、留下可重跑證據，並讓人工介入能回到驗證閉環。",
+      lede: "由規格驅動實作，Harness 通過後才建立 PR，並留下可重跑證據。",
       spec: ["spec.md", "SPEC 005", "AC-07", "驗收條件"],
       claude: ["CLAUDE CODE", "搜尋 callers · 共用 helpers · 影響範圍"],
       plan: ["plan.md", "+ tasks.md"],
@@ -128,8 +128,8 @@ function CypherArchitecture({ lang }: { lang: "en" | "zh" }) {
         ["backoffice-ui", "React · TypeScript", "前端 SKILL"],
         ["backoffice-v2", "Go · NATS · PostgreSQL", "後端 SKILL"],
       ],
-      hooks: "HOOKS · 分支 · commit · PR gate",
-      pr: "PR",
+      hooks: "HOOKS · 分支 · commit · 本機 gate",
+      pr: "建立 PR",
       harness: "驗證 HARNESS",
       evidence: ["PLAYWRIGHT", "瀏覽器", "REST", "WEBSOCKET", "PG / CLICKHOUSE"],
       result: ["result.json", "截圖 · trace"],
@@ -149,7 +149,7 @@ function CypherArchitecture({ lang }: { lang: "en" | "zh" }) {
       critical: "重大問題 → 人工決策",
       stop: "停止",
       fix: "修正 PR → HARNESS → 審查",
-      note: "由 agent 執行驗證；審查與開單權限保留給人。",
+      note: "本機 Harness 先驗證變更，再建立 PR；PR checks 與審查共同保護合併。",
     },
   };
 
@@ -237,14 +237,14 @@ function CypherArchitecture({ lang }: { lang: "en" | "zh" }) {
               <p>{copy.delivery.hooks}</p>
             </div>
             <i className="delivery-arrow" aria-hidden="true">→</i>
-            <article className="delivery-pr"><strong>{copy.delivery.pr}</strong><span>+ —</span><span>+ —</span><span>− —</span></article>
-            <i className="delivery-arrow" aria-hidden="true">→</i>
             <article className="delivery-harness">
               <h3>{copy.delivery.harness}</h3>
               <ol>{copy.delivery.evidence.map((item) => <li key={item}>{item}</li>)}</ol>
               <div><strong>{copy.delivery.result[0]}</strong><small>{copy.delivery.result[1]}</small></div>
             </article>
             <div className="delivery-verdict"><strong>{copy.delivery.verdict}</strong><span>{copy.delivery.pass}</span><small>{copy.delivery.fail}</small><small>{copy.delivery.blocked}</small></div>
+            <article className="delivery-pr"><strong>{copy.delivery.pr}</strong><span>+ —</span><span>+ —</span><span>− —</span></article>
+            <i className="delivery-arrow" aria-hidden="true">→</i>
             <article className="delivery-review"><h3>{copy.delivery.review}</h3><p>{copy.delivery.compare}</p><ul>{copy.delivery.checks.map((check) => <li key={check}>{check}</li>)}</ul></article>
             <strong className="delivery-merge">{copy.delivery.merge}</strong>
           </div>

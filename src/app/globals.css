@@ -228,7 +228,7 @@ html[lang="zh-Hant"] .about-bio { letter-spacing: 0; line-height: 1.42; }
 .delivery-route-main { stroke: rgba(217,220,66,.42); }
 .delivery-route-manual { stroke: rgba(217,166,60,.62); stroke-dasharray: 5 5; }
 .delivery-route-critical { stroke: rgba(239,90,83,.56); }
-.delivery-main-flow { position: relative; z-index: 1; min-height: 350px; display: grid; grid-template-columns: minmax(100px,.72fr) 18px minmax(118px,.82fr) 18px minmax(82px,.55fr) 18px minmax(150px,1.08fr) 18px minmax(64px,.45fr) 18px minmax(150px,1.04fr) minmax(92px,.62fr) minmax(158px,1.06fr) minmax(104px,.68fr); align-items: center; gap: 9px; }
+.delivery-main-flow { position: relative; z-index: 1; min-height: 350px; display: grid; grid-template-columns: minmax(100px,.72fr) 18px minmax(118px,.82fr) 18px minmax(82px,.55fr) 18px minmax(150px,1.08fr) 18px minmax(150px,1.04fr) minmax(92px,.62fr) minmax(64px,.45fr) 18px minmax(158px,1.06fr) minmax(104px,.68fr); align-items: center; gap: 9px; }
 .delivery-arrow { color: var(--cypher); font-size: 18px; font-style: normal; text-align: center; }
 .delivery-document, .delivery-workbench, .delivery-pr, .delivery-harness, .delivery-review { min-width: 0; border: 1px solid #50555a; background: #0b0d0f; }
 .delivery-document { min-height: 188px; display: flex; flex-direction: column; gap: 13px; padding: 17px 14px; clip-path: polygon(0 0, calc(100% - 23px) 0, 100% 23px, 100% 100%, 0 100%); }
