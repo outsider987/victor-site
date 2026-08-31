@@ -52,40 +52,21 @@ function CypherArchitecture({ lang }: { lang: "en" | "zh" }) {
       boundary: "Pricing internals omitted. Accepted, pending approval, and engine-applied remain distinct states.",
     },
     delivery: {
-      eyebrow: "02 / HARNESS ENGINEERING",
-      title: "Harness engineering for every change",
-      lede: "Spec-driven implementation, repeatable pre-PR evidence, and a human-return path.",
-      spec: ["spec.md", "SPEC 005", "AC-07", "Acceptance criteria"],
-      implementation: "AGENT IMPLEMENTATION",
-      claude: ["CLAUDE CODE", "research callers · shared helpers · blast radius"],
-      plan: ["plan.md", "+ tasks.md"],
-      repos: [
-        ["backoffice-ui", "React · TypeScript", "FRONTEND SKILL"],
-        ["backoffice-v2", "Go · NATS · PostgreSQL", "BACKEND SKILL"],
+      eyebrow: "02 / AGENT QA HARNESS",
+      title: "A live-system harness agents can execute and humans can trust",
+      lede: "Repository context tells the agent what to do; module skills make live DEV verifiable; evidence and human gates close the loop.",
+      trigger: ["DEPLOY SIGNAL", "MERGE TO DEV", "CI BUILD + ARGOCD", "DEV READY → QA"],
+      blocks: [
+        { number: "01", title: "CONTEXT & RULES", items: ["CLAUDE.md · repo map · hard laws", "spec → plan → tasks", "12 module skills · caveat catalogs"] },
+        { number: "02", title: "AGENT RUNNER", items: ["MCP Playwright · browser", "curl · psql · replay", "case-by-case judgment"] },
+        { number: "03", title: "LIVE DEV SYSTEM", items: ["real login · RBAC", "UI ↔ REST ↔ WS ↔ data stores", "write → verify → revert"] },
+        { number: "04", title: "EVIDENCE CONTRACT", items: ["schema-validated result.json", "screenshots · API / WS / DB", "local ticket draft"] },
       ],
-      hooks: "HOOKS · branch · commit · local gates",
-      pr: "OPEN PR",
-      harness: "VERIFICATION HARNESS",
-      evidence: ["PLAYWRIGHT", "BROWSER", "REST", "WEBSOCKET", "PG / CLICKHOUSE"],
-      result: ["result.json", "screenshots · trace"],
-      verdict: "HARNESS RESULT",
-      pass: "PASS",
-      fail: "FAIL",
-      retry: "fix the change → rerun Harness",
-      blocked: "BLOCKED",
-      manual: [
-        ["Human check", "reason · exact steps · expected result"],
-        ["Human replay", "attach evidence"],
-        ["Rerun affected case", "return to harness"],
-      ],
-      review: "PR REVIEW",
-      compare: "spec ↔ diff ↔ evidence",
-      checks: ["Requirement covered", "Shared helper checked", "Core path changed"],
-      merge: "MERGE READY",
-      critical: "CRITICAL → HUMAN DECISION",
-      stop: "STOP",
-      fix: "FIX PR → HARNESS → REVIEW",
-      note: "The local harness validates the change before PR creation; PR checks and review protect the merge.",
+      loop: ["RUN LOOP", "pick scope → execute case → capture evidence → judge → revert writes"],
+      dashboard: ["ZERO-BACKEND DASHBOARD", "catalog · runs · evidence"],
+      human: ["HUMAN GATE", "review evidence + root cause", "approve → issue tracker"],
+      feedback: "FAIL / CHANGED SENTINEL → approved ticket → next change → rerun affected cases",
+      note: "Not a CI test runner. CI only signals that DEV is ready; the agent runs the live-system suite.",
     },
   } : {
     product: {
@@ -120,40 +101,21 @@ function CypherArchitecture({ lang }: { lang: "en" | "zh" }) {
       boundary: "內部定價邏輯不公開；已接受、待核准與引擎已套用是不同狀態。",
     },
     delivery: {
-      eyebrow: "02 / HARNESS 工程",
-      title: "每項變更的 Harness 工程",
-      lede: "由規格驅動實作，Harness 通過後才建立 PR，並留下可重跑證據。",
-      spec: ["spec.md", "SPEC 005", "AC-07", "驗收條件"],
-      implementation: "AGENT 實作",
-      claude: ["CLAUDE CODE", "搜尋 callers · 共用 helpers · 影響範圍"],
-      plan: ["plan.md", "+ tasks.md"],
-      repos: [
-        ["backoffice-ui", "React · TypeScript", "前端 SKILL"],
-        ["backoffice-v2", "Go · NATS · PostgreSQL", "後端 SKILL"],
+      eyebrow: "02 / AGENT QA HARNESS",
+      title: "讓 Agent 能執行、讓人能信任的真實系統 Harness",
+      lede: "Repository context 告訴 Agent 如何工作；模組 skills 讓真實 DEV 可被驗證；證據與人工關卡完成閉環。",
+      trigger: ["部署信號", "合併至 DEV", "CI BUILD + ARGOCD", "DEV READY → QA"],
+      blocks: [
+        { number: "01", title: "CONTEXT 與規則", items: ["CLAUDE.md · repo map · hard laws", "spec → plan → tasks", "12 組模組 skills · caveat catalogs"] },
+        { number: "02", title: "AGENT RUNNER", items: ["MCP Playwright · 瀏覽器", "curl · psql · replay", "逐案例判定結果"] },
+        { number: "03", title: "真實 DEV 系統", items: ["真實登入 · RBAC", "UI ↔ REST ↔ WS ↔ data stores", "寫入 → 驗證 → 還原"] },
+        { number: "04", title: "證據 CONTRACT", items: ["schema 驗證的 result.json", "截圖 · API / WS / DB", "本機 ticket 草稿"] },
       ],
-      hooks: "HOOKS · 分支 · commit · 本機 gate",
-      pr: "建立 PR",
-      harness: "驗證 HARNESS",
-      evidence: ["PLAYWRIGHT", "瀏覽器", "REST", "WEBSOCKET", "PG / CLICKHOUSE"],
-      result: ["result.json", "截圖 · trace"],
-      verdict: "HARNESS 結果",
-      pass: "通過",
-      fail: "失敗",
-      retry: "修正變更 → 重跑 Harness",
-      blocked: "需要人工介入",
-      manual: [
-        ["人工交接", "原因 · 明確步驟 · 預期結果"],
-        ["人工重測", "附上證據"],
-        ["重跑受影響案例", "回到 harness"],
-      ],
-      review: "PR 審查",
-      compare: "規格 ↔ diff ↔ 證據",
-      checks: ["需求已覆蓋", "已檢查共用 helper", "修改位於核心路徑"],
-      merge: "可合併",
-      critical: "重大問題 → 人工決策",
-      stop: "停止",
-      fix: "修正 PR → HARNESS → 審查",
-      note: "本機 Harness 先驗證變更，再建立 PR；PR checks 與審查共同保護合併。",
+      loop: ["執行閉環", "選範圍 → 逐案例執行 → 保存證據 → 判定 → 還原寫入"],
+      dashboard: ["無後端 DASHBOARD", "catalog · runs · evidence"],
+      human: ["人工關卡", "審查證據與 root cause", "核准 → issue tracker"],
+      feedback: "FAIL / SENTINEL_CHANGED → 人工核准 ticket → 下一輪變更 → 重跑受影響案例",
+      note: "這不是 CI test runner。CI 只通知 DEV 已就緒；Agent 才是執行真實系統測試的 runner。",
     },
   };
 
@@ -222,49 +184,23 @@ function CypherArchitecture({ lang }: { lang: "en" | "zh" }) {
         </header>
 
         <div className="delivery-canvas">
-          <div className="delivery-main-flow">
-            <article className="delivery-document delivery-spec"><strong>{copy.delivery.spec[0]}</strong><span>{copy.delivery.spec[1]}</span><span>{copy.delivery.spec[2]}</span><small>{copy.delivery.spec[3]}</small></article>
-            <i className="delivery-arrow" aria-hidden="true" />
-            <article className="delivery-implementation">
-              <h3>{copy.delivery.implementation}</h3>
-              <ol>
-                <li><span>01</span><div><strong>{copy.delivery.claude[0]}</strong><small>{copy.delivery.claude[1]}</small></div></li>
-                <li><span>02</span><div><strong>{copy.delivery.plan[0]}</strong><small>{copy.delivery.plan[1]}</small></div></li>
-                <li><span>03</span><div><strong>{copy.delivery.repos.map(([name]) => name).join(" + ")}</strong><small>{copy.delivery.repos.map(([, stack, rule]) => `${rule} · ${stack}`).join(" / ")}</small></div></li>
-              </ol>
-              <p>{copy.delivery.hooks}</p>
-            </article>
-            <i className="delivery-arrow" aria-hidden="true" />
-            <article className="delivery-harness">
-              <h3>{copy.delivery.harness}</h3>
-              <ol>{copy.delivery.evidence.map((item) => <li key={item}>{item}</li>)}</ol>
-              <div><strong>{copy.delivery.result[0]}</strong><small>{copy.delivery.result[1]}</small></div>
-            </article>
-            <i className="delivery-arrow" aria-hidden="true" />
-            <div className="delivery-verdict"><strong>{copy.delivery.verdict}</strong></div>
-            <i className="delivery-arrow delivery-pass" aria-hidden="true"><span>{copy.delivery.pass}</span></i>
-            <article className="delivery-pr"><strong>{copy.delivery.pr}</strong><span>+ —</span><span>+ —</span><span>− —</span></article>
-            <i className="delivery-arrow" aria-hidden="true" />
-            <article className="delivery-review"><h3>{copy.delivery.review}</h3><p>{copy.delivery.compare}</p><ul>{copy.delivery.checks.map((check) => <li key={check}>{check}</li>)}</ul></article>
-            <i className="delivery-arrow" aria-hidden="true" />
-            <strong className="delivery-merge">{copy.delivery.merge}</strong>
+          <div className="harness-trigger">
+            <strong>{copy.delivery.trigger[0]}</strong>
+            <ol>{copy.delivery.trigger.slice(1).map((step) => <li key={step}>{step}</li>)}</ol>
           </div>
-
-          <div className="delivery-feedback">
-            <section className="delivery-fail" aria-label={copy.delivery.fail}>
-              <strong>{copy.delivery.fail}</strong>
-              <span>↺ {copy.delivery.retry}</span>
-            </section>
-            <section className="delivery-manual" aria-label={copy.delivery.blocked}>
-              <strong>{copy.delivery.blocked}</strong>
-              <ol>{copy.delivery.manual.map(([title, detail]) => <li key={title}><span>{title}</span><small>{detail}</small></li>)}</ol>
-              <b>↺ {copy.delivery.harness}</b>
-            </section>
-            <section className="delivery-critical" aria-label={copy.delivery.critical}>
-              <strong>{copy.delivery.critical}</strong>
-              <div><span>{copy.delivery.stop}</span><span>{copy.delivery.fix}</span></div>
-            </section>
+          <div className="harness-grid">
+            {copy.delivery.blocks.map((block) => <article className="harness-card" key={block.number}>
+              <span>{block.number}</span><h3>{block.title}</h3>
+              <ul>{block.items.map((item) => <li key={item}>{item}</li>)}</ul>
+            </article>)}
           </div>
+          <div className="harness-loop"><strong>{copy.delivery.loop[0]}</strong><span>{copy.delivery.loop[1]}</span></div>
+          <div className="harness-outputs">
+            <article><strong>{copy.delivery.dashboard[0]}</strong><span>{copy.delivery.dashboard[1]}</span></article>
+            <i aria-hidden="true">→</i>
+            <article><strong>{copy.delivery.human[0]}</strong><span>{copy.delivery.human[1]}</span><b>{copy.delivery.human[2]}</b></article>
+          </div>
+          <p className="harness-feedback">↺ {copy.delivery.feedback}</p>
         </div>
         <footer className="delivery-note">{copy.delivery.note}</footer>
       </motion.section>
