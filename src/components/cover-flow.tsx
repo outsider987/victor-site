@@ -124,6 +124,17 @@ function IntroStage({ hidden }: { hidden: boolean }) {
             <li>{about.location[lang]}</li>
             <li>{about.availability[lang]}</li>
           </ul>
+          <div className="intro-links" aria-label={lang === "en" ? "Contact links" : "聯絡連結"}>
+            <a href={links.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.37 3.26a2.13 2.13 0 1 1-4.26 0 2.13 2.13 0 0 1 4.26 0ZM1.5 8.15h3.74V20H1.5V8.15Zm6.08 0h3.58v1.62h.05c.5-.94 1.72-1.93 3.54-1.93C18.53 7.84 19.2 10.3 19.2 13.5V20h-3.73v-5.76c0-1.37-.03-3.13-1.9-3.13-1.9 0-2.2 1.5-2.2 3.03V20H7.63V8.15Z" /></svg>
+            </a>
+            <a href={links.email} aria-label="Email">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 5.5h17v13h-17v-13Zm1.8 1.5L12 12.02 18.7 7H5.3Zm13.7 10V8.88L12 14.12 5 8.88V17h14Z" /></svg>
+            </a>
+            <a href={links.github} target="_blank" rel="noreferrer" aria-label="GitHub">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.8a10.2 10.2 0 0 0-3.23 19.88c.51.1.7-.22.7-.5v-1.97c-2.85.62-3.45-1.21-3.45-1.21-.47-1.19-1.14-1.5-1.14-1.5-.93-.63.07-.62.07-.62 1.03.07 1.57 1.05 1.57 1.05.91 1.56 2.4 1.11 2.98.85.09-.66.36-1.11.65-1.36-2.28-.26-4.68-1.14-4.68-5.06 0-1.12.4-2.03 1.05-2.75-.1-.26-.46-1.3.1-2.7 0 0 .86-.28 2.8 1.05a9.73 9.73 0 0 1 5.1 0c1.94-1.33 2.8-1.05 2.8-1.05.56 1.4.2 2.44.1 2.7.65.72 1.05 1.63 1.05 2.75 0 3.93-2.4 4.8-4.69 5.06.37.32.7.95.7 1.92v2.85c0 .28.18.6.7.5A10.2 10.2 0 0 0 12 1.8Z" /></svg>
+            </a>
+          </div>
         </div>
       </div>
     </div>

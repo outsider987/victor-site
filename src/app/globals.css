@@ -29,7 +29,7 @@ button { color: inherit; font: inherit; }
 .language-switch { display: flex; gap: 2px; padding: 3px; border: 1px solid #303238; border-radius: 7px; background: #15161a; }
 .language-switch button { min-width: 28px; height: 23px; padding: 0 5px; border: 0; border-radius: 4px; background: transparent; color: #7f8288; cursor: pointer; font-size: 10px; }
 .language-switch button.active { background: #303238; color: white; }
-.language-switch button:focus-visible, .home-tools > a:focus-visible, .focus-controls button:focus-visible, .active-hit:focus-visible, .project-cta:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.language-switch button:focus-visible, .home-tools > a:focus-visible, .intro-links a:focus-visible, .focus-controls button:focus-visible, .active-hit:focus-visible, .project-cta:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 .home-language { position: fixed; z-index: 7; top: 24px; right: 28px; }
 .home-tools { display: flex; align-items: center; gap: 22px; color: #8e9294; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }
 .home-tools > a { padding-block: 8px; transition: color .18s ease; }
@@ -96,6 +96,10 @@ button { color: inherit; font: inherit; }
 .intro-capability-track { display: grid; grid-auto-rows: 20px; color: #a7aaab; animation: intro-capabilities 10s infinite cubic-bezier(.76,0,.24,1); will-change: transform; }
 .intro-capability-track span { min-width: 0; line-height: 20px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .intro-copy ul { display: flex; flex-wrap: wrap; gap: 9px 24px; margin: 18px 0 0; padding: 0; border: 0; list-style: none; color: #85898a; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; }
+.intro-links { display: flex; gap: 9px; margin-top: 20px; pointer-events: auto; }
+.intro-links a { display: grid; width: 30px; height: 30px; place-items: center; border: 1px solid rgba(255,255,255,.24); border-radius: 50%; color: #b2b5b4; transition: border-color .18s ease, color .18s ease, transform .18s ease; }
+.intro-links a:hover, .intro-links a:focus-visible { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+.intro-links svg { width: 14px; height: 14px; fill: currentColor; }
 @keyframes intro-orbit { to { transform: rotate(1turn); } }
 @keyframes intro-capabilities {
   0%, 22% { transform: translateY(0); }
@@ -444,6 +448,7 @@ html[lang="zh-Hant"] .about-bio { letter-spacing: 0; line-height: 1.42; }
   .intro-capability-track { grid-auto-rows: 18px; }
   .intro-capability-track span { line-height: 18px; }
   .intro-copy ul { justify-content: center; margin-top: 19px; padding-top: 13px; font-size: 8px; }
+  .intro-links { justify-content: center; margin-top: 17px; }
   .scroll-hint { display: none; }
 }
 
