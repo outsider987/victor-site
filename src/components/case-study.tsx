@@ -52,21 +52,23 @@ function CypherArchitecture({ lang }: { lang: "en" | "zh" }) {
       boundary: "Pricing internals omitted. Accepted, pending approval, and engine-applied remain distinct states.",
     },
     delivery: {
-      eyebrow: "02 / AGENT QA HARNESS",
-      title: "A live-system harness agents can execute and humans can trust",
-      lede: "Repository context tells the agent what to do; module skills make live DEV verifiable; evidence and human gates close the loop.",
-      trigger: ["DEPLOY SIGNAL", "MERGE TO DEV", "CI BUILD + ARGOCD", "DEV READY → QA"],
-      blocks: [
-        { number: "01", title: "CONTEXT & RULES", items: ["CLAUDE.md · repo map · hard laws", "spec → plan → tasks", "12 module skills · caveat catalogs"] },
-        { number: "02", title: "AGENT RUNNER", items: ["MCP Playwright · browser", "curl · psql · replay", "case-by-case judgment"] },
-        { number: "03", title: "LIVE DEV SYSTEM", items: ["real login · RBAC", "UI ↔ REST ↔ WS ↔ data stores", "write → verify → revert"] },
-        { number: "04", title: "EVIDENCE CONTRACT", items: ["schema-validated result.json", "screenshots · API / WS / DB", "local ticket draft"] },
+      eyebrow: "02 / HARNESS ENGINEERING",
+      title: "The model writes code. The harness makes the work reliable.",
+      lede: "A harness is the engineered environment around an agent: context, tools, guardrails, and feedback connected into one repeatable loop.",
+      definition: ["THE HARNESS", "CONTEXT + TOOLS + GUARDRAILS + FEEDBACK"],
+      human: ["HUMAN INTENT", "goal · constraints · acceptance criteria"],
+      left: [
+        { title: "CONTEXT", items: ["repository map · architecture", "task · acceptance criteria", "plans · prior decisions"] },
+        { title: "GUARDRAILS", items: ["permissions · boundaries", "types · lint · tests", "architecture invariants"] },
       ],
-      loop: ["RUN LOOP", "pick scope → execute case → capture evidence → judge → revert writes"],
-      dashboard: ["ZERO-BACKEND DASHBOARD", "catalog · runs · evidence"],
-      human: ["HUMAN GATE", "review evidence + root cause", "approve → issue tracker"],
-      feedback: "FAIL / CHANGED SENTINEL → approved ticket → next change → rerun affected cases",
-      note: "Not a CI test runner. CI only signals that DEV is ready; the agent runs the live-system suite.",
+      agent: ["CODING AGENT", "understand → plan → act", "inspect → repair"],
+      right: [
+        { title: "TOOLS", items: ["source · terminal · browser", "documentation · search", "runtime · observability"] },
+        { title: "FEEDBACK", items: ["compiler · tests · CI", "screenshots · logs · metrics", "review signals"] },
+      ],
+      loop: ["CLOSED LOOP", "Agent acts → environment responds → evidence returns → Agent corrects"],
+      outcomes: [["VERIFIED CHANGE", "ready for review / merge"], ["ESCALATE", "judgment or capability missing"]],
+      note: "Harness engineering improves the system around the model, then turns repeated failures into better context, tools, and rules.",
     },
   } : {
     product: {
@@ -101,21 +103,23 @@ function CypherArchitecture({ lang }: { lang: "en" | "zh" }) {
       boundary: "內部定價邏輯不公開；已接受、待核准與引擎已套用是不同狀態。",
     },
     delivery: {
-      eyebrow: "02 / AGENT QA HARNESS",
-      title: "讓 Agent 能執行、讓人能信任的真實系統 Harness",
-      lede: "Repository context 告訴 Agent 如何工作；模組 skills 讓真實 DEV 可被驗證；證據與人工關卡完成閉環。",
-      trigger: ["部署信號", "合併至 DEV", "CI BUILD + ARGOCD", "DEV READY → QA"],
-      blocks: [
-        { number: "01", title: "CONTEXT 與規則", items: ["CLAUDE.md · repo map · hard laws", "spec → plan → tasks", "12 組模組 skills · caveat catalogs"] },
-        { number: "02", title: "AGENT RUNNER", items: ["MCP Playwright · 瀏覽器", "curl · psql · replay", "逐案例判定結果"] },
-        { number: "03", title: "真實 DEV 系統", items: ["真實登入 · RBAC", "UI ↔ REST ↔ WS ↔ data stores", "寫入 → 驗證 → 還原"] },
-        { number: "04", title: "證據 CONTRACT", items: ["schema 驗證的 result.json", "截圖 · API / WS / DB", "本機 ticket 草稿"] },
+      eyebrow: "02 / HARNESS ENGINEERING",
+      title: "Agent 負責寫程式；Harness 負責讓結果可靠。",
+      lede: "Harness 是包住 Agent 的工程環境：把 context、tools、guardrails 與 feedback 接成一個可重複執行的閉環。",
+      definition: ["THE HARNESS", "CONTEXT + TOOLS + GUARDRAILS + FEEDBACK"],
+      human: ["人的意圖", "目標 · 限制 · 驗收條件"],
+      left: [
+        { title: "CONTEXT", items: ["repository map · architecture", "任務 · 驗收條件", "計畫 · 過往決策"] },
+        { title: "GUARDRAILS", items: ["權限 · 邊界", "types · lint · tests", "架構不變量"] },
       ],
-      loop: ["執行閉環", "選範圍 → 逐案例執行 → 保存證據 → 判定 → 還原寫入"],
-      dashboard: ["無後端 DASHBOARD", "catalog · runs · evidence"],
-      human: ["人工關卡", "審查證據與 root cause", "核准 → issue tracker"],
-      feedback: "FAIL / SENTINEL_CHANGED → 人工核准 ticket → 下一輪變更 → 重跑受影響案例",
-      note: "這不是 CI test runner。CI 只通知 DEV 已就緒；Agent 才是執行真實系統測試的 runner。",
+      agent: ["CODING AGENT", "理解 → 規劃 → 執行", "檢查 → 修正"],
+      right: [
+        { title: "TOOLS", items: ["source · terminal · browser", "文件 · 搜尋", "runtime · observability"] },
+        { title: "FEEDBACK", items: ["compiler · tests · CI", "截圖 · logs · metrics", "review signals"] },
+      ],
+      loop: ["閉環", "Agent 執行 → 環境回應 → 證據返回 → Agent 修正"],
+      outcomes: [["已驗證的變更", "可進入 review / merge"], ["交由人判斷", "需要決策或缺少能力"]],
+      note: "Harness Engineering 改善的是模型周圍的系統，並把重複發生的失敗轉成更好的 context、tools 與 rules。",
     },
   };
 
@@ -184,23 +188,26 @@ function CypherArchitecture({ lang }: { lang: "en" | "zh" }) {
         </header>
 
         <div className="delivery-canvas">
-          <div className="harness-trigger">
-            <strong>{copy.delivery.trigger[0]}</strong>
-            <ol>{copy.delivery.trigger.slice(1).map((step) => <li key={step}>{step}</li>)}</ol>
+          <div className="harness-definition">
+            <strong>{copy.delivery.definition[0]}</strong><span>{copy.delivery.definition[1]}</span>
           </div>
-          <div className="harness-grid">
-            {copy.delivery.blocks.map((block) => <article className="harness-card" key={block.number}>
-              <span>{block.number}</span><h3>{block.title}</h3>
-              <ul>{block.items.map((item) => <li key={item}>{item}</li>)}</ul>
-            </article>)}
+          <div className="harness-intent"><strong>{copy.delivery.human[0]}</strong><span>{copy.delivery.human[1]}</span><i aria-hidden="true">↓</i></div>
+          <div className="harness-frame">
+            <span className="harness-frame-label">HARNESS / ENGINEERED ENVIRONMENT</span>
+            <div className="harness-column harness-inputs">
+              {copy.delivery.left.map((block) => <article key={block.title}><h3>{block.title}</h3><ul>{block.items.map((item) => <li key={item}>{item}</li>)}</ul></article>)}
+            </div>
+            <div className="harness-agent">
+              <span>MODEL</span><strong>{copy.delivery.agent[0]}</strong><p>{copy.delivery.agent[1]}</p><b>↺ {copy.delivery.agent[2]}</b>
+            </div>
+            <div className="harness-column harness-capabilities">
+              {copy.delivery.right.map((block) => <article key={block.title}><h3>{block.title}</h3><ul>{block.items.map((item) => <li key={item}>{item}</li>)}</ul></article>)}
+            </div>
+            <div className="harness-loop"><strong>{copy.delivery.loop[0]}</strong><span>{copy.delivery.loop[1]}</span></div>
           </div>
-          <div className="harness-loop"><strong>{copy.delivery.loop[0]}</strong><span>{copy.delivery.loop[1]}</span></div>
           <div className="harness-outputs">
-            <article><strong>{copy.delivery.dashboard[0]}</strong><span>{copy.delivery.dashboard[1]}</span></article>
-            <i aria-hidden="true">→</i>
-            <article><strong>{copy.delivery.human[0]}</strong><span>{copy.delivery.human[1]}</span><b>{copy.delivery.human[2]}</b></article>
+            {copy.delivery.outcomes.map(([title, detail]) => <article key={title}><strong>{title}</strong><span>{detail}</span></article>)}
           </div>
-          <p className="harness-feedback">↺ {copy.delivery.feedback}</p>
         </div>
         <footer className="delivery-note">{copy.delivery.note}</footer>
       </motion.section>
