@@ -57,42 +57,24 @@ function CypherArchitecture({ lang }: { lang: "en" | "zh" }) {
       lede: "I use a Harness that can stop, recover, and rerun every AI change: unclear intent stops the work; evidence must pass before a PR is created.",
       principle: ["HUMAN STEERS · AGENT EXECUTES", "EVIDENCE DECIDES"],
       frame: "MY HARNESS / REPEATABLE DELIVERY SYSTEM",
-      stages: [
-        {
-          number: "01", title: "SELECT & ALIGN", rows: [
-            ["HUMAN", "Pick the highest-priority Linear ticket"],
-            ["AGENT", "Extract goal, scope, and acceptance criteria"],
-            ["GATE", "Unclear → Task Owner updates the spec"],
-          ],
-        },
-        {
-          number: "02", title: "CONTEXT & PLAN", rows: [
-            ["HARNESS", "Load frontend / backend skills + project sitemap"],
-            ["AGENT", "Reuse existing modules and call paths"],
-            ["AGENT", "Plan only the necessary change"],
-          ],
-        },
-        {
-          number: "03", title: "BUILD & VERIFY", rows: [
-            ["AGENT", "Implement → inspect → repair"],
-            ["HARNESS", "Before / after + Playwright E2E"],
-            ["GATE", "Pass → PR · unclear → stop"],
-          ],
-        },
-        {
-          number: "04", title: "PR & DOUBLE REVIEW", rows: [
-            ["AGENT", "Create PR after verification"],
-            ["AGENT REVIEW", "Codex / Claude second check"],
-            ["HUMAN", "Code review + one manual run"],
-          ],
-        },
-      ],
-      gates: [
-        ["↺ REPAIR LOOP", "Verification fails → fix → rerun", "RETURN TO 03 / VERIFY"],
-        ["■ STOP & CLARIFY", "Intent missing → update spec → replan", "RETURN TO 02 / PLAN"],
-      ],
-      outcome: ["MERGE READY", "Evidence passed · agent-reviewed · human-run"],
-      note: "Frontend verification path shown. Backend evidence is selected to match the change rather than invented for the diagram.",
+      flow: {
+        ticket: ["01 / LINEAR", "Highest-priority ticket"],
+        brief: ["02 / AI BRIEF", "Goal · scope · acceptance criteria"],
+        spec: ["SPEC CLEAR?", "No → Task Owner clarifies → return to 02"],
+        context: ["03 / CONTEXT", "Skills · sitemap · existing code"],
+        plan: ["04 / PLAN", "Only necessary changes"],
+        build: ["05 / BUILD", "Agent implements"],
+        evidence: ["06 / VERIFY", "Before / after · Playwright E2E"],
+        pass: ["EVIDENCE PASSED?", "No → diagnose the failure"],
+        cause: ["CAUSE CLEAR?", "Choose repair or human intervention"],
+        repair: ["REPAIR ↺", "Agent fixes → return to 06"],
+        human: ["HUMAN INTERVENTION", "Clarify / correct → return to 06"],
+        pr: ["07 / PR", "Created only after verification"],
+        review: ["08 / DOUBLE REVIEW", "Codex / Claude + human run"],
+        merge: ["MERGE READY", "Evidence · agent review · human check"],
+      },
+      labels: ["YES", "NO", "UNDERSTOOD", "UNCLEAR", "RETURN TO 06"],
+      note: "If the agent cannot resolve a failed check, a human intervenes and the change returns to step 06 for the same verification evidence.",
     },
   } : {
     product: {
@@ -132,44 +114,27 @@ function CypherArchitecture({ lang }: { lang: "en" | "zh" }) {
       lede: "我用一套可停下、可修正、可重跑的 Harness 控制 AI 變更；需求不清就停止，證據通過才建立 PR。",
       principle: ["HUMAN STEERS · AGENT EXECUTES", "EVIDENCE DECIDES"],
       frame: "MY HARNESS / 可重複的交付系統",
-      stages: [
-        {
-          number: "01", title: "選擇與對齊", rows: [
-            ["HUMAN", "選最高優先序 Linear Ticket"],
-            ["AGENT", "整理目標、範圍、驗收條件"],
-            ["GATE", "不清楚 → Task Owner 補充 Spec"],
-          ],
-        },
-        {
-          number: "02", title: "載入脈絡與規劃", rows: [
-            ["HARNESS", "載入 Frontend / Backend Skill 與 Sitemap"],
-            ["AGENT", "沿用既有模組與呼叫路徑"],
-            ["AGENT", "只規劃必要變更"],
-          ],
-        },
-        {
-          number: "03", title: "實作與驗證", rows: [
-            ["AGENT", "實作 → 檢查 → 修復"],
-            ["HARNESS", "前後截圖＋Playwright E2E"],
-            ["GATE", "通過 → PR · 不清楚 → 停止"],
-          ],
-        },
-        {
-          number: "04", title: "PR 與雙重複驗", rows: [
-            ["AGENT", "驗證完成後建立 PR"],
-            ["AGENT REVIEW", "Codex / Claude 二次檢查"],
-            ["HUMAN", "人工 Review＋手動跑一次"],
-          ],
-        },
-      ],
-      gates: [
-        ["↺ 修復閉環", "驗證失敗 → 修復 → 重跑", "回到 03 / 驗證"],
-        ["■ 停止並釐清", "意圖不足 → 補 Spec → 重規劃", "回到 02 / 規劃"],
-      ],
-      outcome: ["可合併", "證據通過 · Agent 複驗 · 人工執行"],
-      note: "圖中呈現前端驗證路徑；後端證據依變更內容選擇，不為示意圖虛構流程。",
+      flow: {
+        ticket: ["01 / LINEAR", "最高優先序 Ticket"],
+        brief: ["02 / AI BRIEF", "目標 · 範圍 · 驗收條件"],
+        spec: ["SPEC 清楚嗎？", "否 → Task Owner 補充 → 回到 02"],
+        context: ["03 / CONTEXT", "Skills · Sitemap · Existing Code"],
+        plan: ["04 / PLAN", "只做必要變更"],
+        build: ["05 / BUILD", "Agent 實作"],
+        evidence: ["06 / 驗證", "前後截圖 · Playwright E2E"],
+        pass: ["驗證通過嗎？", "否 → 判斷失敗原因"],
+        cause: ["AI 明白原因嗎？", "選擇修復或人工介入"],
+        repair: ["修復 ↺", "Agent 修復 → 回到 06"],
+        human: ["人工介入", "釐清／修正 → 回到 06"],
+        pr: ["07 / PR", "驗證完成才建立"],
+        review: ["08 / 雙重複驗", "Codex / Claude＋人工執行"],
+        merge: ["可合併", "證據 · Agent 複驗 · 人工確認"],
+      },
+      labels: ["是", "否", "明白", "不明白", "回到 06"],
+      note: "AI 無法解決驗證問題時，由人工介入釐清或修正，再回到 06 重跑相同驗證。",
     },
   };
+  const flow = copy.delivery.flow;
 
   return (
     <div className="cypher-story">
@@ -241,20 +206,50 @@ function CypherArchitecture({ lang }: { lang: "en" | "zh" }) {
           </div>
           <div className="harness-frame">
             <span className="harness-frame-label">{copy.delivery.frame}</span>
-            <ol className="harness-stages">
-              {copy.delivery.stages.map((stage, index) => <li className="harness-stage" key={stage.number}>
-                <header><span>{stage.number}</span><h3>{stage.title}</h3></header>
-                <div>{stage.rows.map(([role, detail]) => <p key={`${role}-${detail}`}><b>{role}</b><span>{detail}</span></p>)}</div>
-                {index < copy.delivery.stages.length - 1 && <i aria-hidden="true">→</i>}
-              </li>)}
-            </ol>
-            <div className="harness-gates">
-              {copy.delivery.gates.map(([title, detail, target], index) => <article className={index ? "harness-stop" : "harness-repair"} key={title}>
-                <strong>{title}</strong><span>{detail}</span><small>{target}</small>
-              </article>)}
+            <div className="harness-decision-flow">
+              <svg className="harness-routes" viewBox="0 0 1200 620" preserveAspectRatio="none" aria-hidden="true">
+                <defs>
+                  <marker id="harness-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" /></marker>
+                  <marker id="harness-arrow-stop" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" /></marker>
+                </defs>
+                <path className="harness-route" d="M160 96H218M378 96H450M570 96H612M772 96H816M976 96H1040M1120 137V250M1040 291H912M792 291H784M624 291H568M408 291H160" />
+                <path className="harness-route-stop" d="M510 156C430 190 360 190 320 250V500" />
+                <path className="harness-route" d="M240 541C175 541 170 190 298 137" />
+                <path className="harness-route-stop" d="M852 351V446M792 506H760" />
+                <path className="harness-route" d="M912 506H1040M1120 500V380H1160V332M680 500C680 400 965 385 1040 315" />
+                <text x="580" y="82">{copy.delivery.labels[0]}</text><text x="355" y="210">{copy.delivery.labels[1]}</text>
+                <text x="770" y="276">{copy.delivery.labels[0]}</text><text x="864" y="398">{copy.delivery.labels[1]}</text>
+                <text x="950" y="493">{copy.delivery.labels[2]}</text><text x="735" y="493">{copy.delivery.labels[3]}</text>
+                <text x="990" y="410">{copy.delivery.labels[4]}</text><text x="770" y="390">{copy.delivery.labels[4]}</text>
+              </svg>
+              <article className="harness-flow-node harness-ticket"><strong>{flow.ticket[0]}</strong><span>{flow.ticket[1]}</span></article>
+              <article className="harness-flow-node harness-brief"><strong>{flow.brief[0]}</strong><span>{flow.brief[1]}</span></article>
+              <div className="harness-decision harness-spec"><strong>{flow.spec[0]}</strong></div>
+              <article className="harness-flow-node harness-context"><strong>{flow.context[0]}</strong><span>{flow.context[1]}</span></article>
+              <article className="harness-flow-node harness-plan"><strong>{flow.plan[0]}</strong><span>{flow.plan[1]}</span></article>
+              <article className="harness-flow-node harness-build"><strong>{flow.build[0]}</strong><span>{flow.build[1]}</span></article>
+              <article className="harness-flow-node harness-evidence"><strong>{flow.evidence[0]}</strong><span>{flow.evidence[1]}</span></article>
+              <div className="harness-decision harness-pass"><strong>{flow.pass[0]}</strong></div>
+              <article className="harness-flow-node harness-pr"><strong>{flow.pr[0]}</strong><span>{flow.pr[1]}</span></article>
+              <article className="harness-flow-node harness-review"><strong>{flow.review[0]}</strong><span>{flow.review[1]}</span></article>
+              <article className="harness-flow-node harness-merge"><strong>{flow.merge[0]}</strong><span>{flow.merge[1]}</span></article>
+              <article className="harness-flow-node harness-spec-help"><strong>{flow.spec[0]}</strong><span>{flow.spec[1]}</span></article>
+              <div className="harness-decision harness-cause"><strong>{flow.cause[0]}</strong></div>
+              <article className="harness-flow-node harness-repair"><strong>{flow.repair[0]}</strong><span>{flow.repair[1]}</span></article>
+              <article className="harness-flow-node harness-human"><strong>{flow.human[0]}</strong><span>{flow.human[1]}</span></article>
             </div>
+            <ol className="harness-mobile-flow">
+              {[flow.ticket, flow.brief].map(([title, detail]) => <li key={title}><strong>{title}</strong><span>{detail}</span></li>)}
+              <li className="harness-mobile-decision"><strong>{flow.spec[0]}</strong></li>
+              <li className="harness-mobile-branch"><b>{copy.delivery.labels[1]}</b><strong>{flow.spec[1]}</strong></li>
+              <li className="harness-mobile-yes"><b>{copy.delivery.labels[0]}</b><strong>{flow.context[0]}</strong><span>{flow.context[1]}</span></li>
+              {[flow.plan, flow.build, flow.evidence].map(([title, detail]) => <li key={title}><strong>{title}</strong><span>{detail}</span></li>)}
+              <li className="harness-mobile-decision"><strong>{flow.pass[0]}</strong></li>
+              <li className="harness-mobile-options"><b>{copy.delivery.labels[1]}</b><div><article><strong>{flow.repair[0]}</strong><span>{flow.repair[1]}</span></article><article><strong>{flow.human[0]}</strong><span>{flow.human[1]}</span></article></div></li>
+              <li className="harness-mobile-yes"><b>{copy.delivery.labels[0]}</b><strong>{flow.pr[0]}</strong><span>{flow.pr[1]}</span></li>
+              {[flow.review, flow.merge].map(([title, detail], index) => <li className={index ? "harness-mobile-merge" : ""} key={title}><strong>{title}</strong><span>{detail}</span></li>)}
+            </ol>
           </div>
-          <div className="harness-outcome"><i aria-hidden="true">↓</i><article><strong>{copy.delivery.outcome[0]}</strong><span>{copy.delivery.outcome[1]}</span></article></div>
         </div>
         <footer className="delivery-note">{copy.delivery.note}</footer>
       </motion.section>
