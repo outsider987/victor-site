@@ -34,7 +34,7 @@ function CypherArchitecture({ lang }: { lang: "en" | "zh" }) {
       ],
       callouts: [["01", "Frontend realtime", "WS signal → scoped query refresh"], ["02", "Go projection", "Full / diff merge → ComputeSeq guard"], ["03", "Controlled command", "Reason → idempotency → approval → audit"]],
       visualAlt: "Fictional e-sports market board used to explain CypherLab's realtime read and control paths",
-      fictional: "Recreated interface · fictional data",
+      fictional: "Generated product demo · fictional data",
       operator: "Operator change",
       market: "LIVE · MAP 2 · MATCH WINNER",
       selection: "NEON UNIT",
@@ -91,7 +91,7 @@ function CypherArchitecture({ lang }: { lang: "en" | "zh" }) {
       ],
       callouts: [["01", "前端即時更新", "WS 訊號 → 指定範圍 query 更新"], ["02", "Go 資料投影", "完整／差異合併 → ComputeSeq 保護"], ["03", "受控命令", "原因 → 冪等 → 核准 → 稽核"]],
       visualAlt: "以虛構資料重建的電競市場操作台，用來說明 CypherLab 的即時讀取與控制路徑",
-      fictional: "重建介面 · 虛構資料",
+      fictional: "生成操作示意 · 虛構資料",
       operator: "操作員變更",
       market: "即時 · MAP 2 · 勝負盤",
       selection: "NEON UNIT",
@@ -161,7 +161,9 @@ function CypherArchitecture({ lang }: { lang: "en" | "zh" }) {
           </ol>
 
           <figure className="cypher-market-visual">
-            <Image src={withBasePath("/projects/cypherlab/hero.webp")} alt={copy.product.visualAlt} width={1440} height={900} priority sizes="(max-width: 760px) 100vw, 62vw" />
+            {reduceMotion
+              ? <Image src={withBasePath("/projects/cypherlab/hero.webp")} alt={copy.product.visualAlt} width={1440} height={900} priority sizes="(max-width: 760px) 100vw, 62vw" />
+              : <video src={withBasePath("/projects/cypherlab/odds-workflow.mp4")} poster={withBasePath("/projects/cypherlab/hero.webp")} aria-label={copy.product.visualAlt} width="1280" height="720" autoPlay muted loop playsInline controls preload="metadata" onCanPlay={({ currentTarget }) => void currentTarget.play().catch(() => {})} />}
             <figcaption>{copy.product.fictional}</figcaption>
           </figure>
 
