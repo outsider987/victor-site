@@ -70,8 +70,8 @@ function CypherArchitecture({ lang }: { lang: "en" | "zh" }) {
         repair: ["REPAIR ↺", "Agent fixes → return to 06"],
         human: ["HUMAN INTERVENTION", "Clarify / correct → return to 06"],
         pr: ["07 / PR", "Created only after verification"],
-        review: ["08 / DOUBLE REVIEW", "Codex / Claude + human run"],
-        merge: ["MERGE READY", "Evidence · agent review · human check"],
+        review: ["08 / AGENT REVIEW", "Independent agent review → report"],
+        merge: ["MERGE READY", "Evidence · review report · human check"],
       },
       labels: ["YES", "NO", "UNDERSTOOD", "UNCLEAR", "RETURN TO 06"],
       note: "If the agent cannot resolve a failed check, a human intervenes and the change returns to step 06 for the same verification evidence.",
@@ -127,8 +127,8 @@ function CypherArchitecture({ lang }: { lang: "en" | "zh" }) {
         repair: ["修復 ↺", "Agent 修復 → 回到 06"],
         human: ["人工介入", "釐清／修正 → 回到 06"],
         pr: ["07 / PR", "驗證完成才建立"],
-        review: ["08 / 雙重複驗", "Codex / Claude＋人工執行"],
-        merge: ["可合併", "證據 · Agent 複驗 · 人工確認"],
+        review: ["08 / AGENT 複驗", "獨立 Agent 審查 → 產出報告"],
+        merge: ["可合併", "證據 · Review 報告 · 人工確認"],
       },
       labels: ["是", "否", "明白", "不明白", "回到 06"],
       note: "AI 無法解決驗證問題時，由人工介入釐清或修正，再回到 06 重跑相同驗證。",
@@ -216,11 +216,11 @@ function CypherArchitecture({ lang }: { lang: "en" | "zh" }) {
                 <path className="harness-route-stop" d="M510 156C430 190 360 190 320 250V500" />
                 <path className="harness-route" d="M240 541C175 541 170 190 298 137" />
                 <path className="harness-route-stop" d="M852 351V446M792 506H760" />
-                <path className="harness-route" d="M912 506H1040M1120 500V380H1160V332M680 500C680 400 965 385 1040 315" />
+                <path className="harness-route" d="M912 506H1040M1120 500V370H1160V332M760 541V600H1010V315H1040" />
                 <text x="580" y="82">{copy.delivery.labels[0]}</text><text x="355" y="210">{copy.delivery.labels[1]}</text>
                 <text x="770" y="276">{copy.delivery.labels[0]}</text><text x="864" y="398">{copy.delivery.labels[1]}</text>
                 <text x="950" y="493">{copy.delivery.labels[2]}</text><text x="735" y="493">{copy.delivery.labels[3]}</text>
-                <text x="990" y="410">{copy.delivery.labels[4]}</text><text x="770" y="390">{copy.delivery.labels[4]}</text>
+                <text x="1128" y="415">{copy.delivery.labels[4]}</text><text x="870" y="590">{copy.delivery.labels[4]}</text>
               </svg>
               <article className="harness-flow-node harness-ticket"><strong>{flow.ticket[0]}</strong><span>{flow.ticket[1]}</span></article>
               <article className="harness-flow-node harness-brief"><strong>{flow.brief[0]}</strong><span>{flow.brief[1]}</span></article>
