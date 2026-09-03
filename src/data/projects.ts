@@ -108,12 +108,12 @@ export const projects: Project[] = [
       zh: "依 repository 工作流程，以虛構資料重建的診所就診待辦介面",
     },
     summary: {
-      en: "A clinic operations workflow carrying one verified visit through consultation, settlement, and records.",
-      zh: "把一次已驗證的就診，從診療待辦一路帶到結算與營運紀錄。",
+      en: "A clinic operations workflow carrying one verified visit through consultation, insurer validation, and records.",
+      zh: "把一次已驗證的就診，從診療待辦、保險交易驗證一路帶到營運紀錄。",
     },
     product: {
-      en: "A Next.js clinic portal backed by NestJS services for eligibility checks, verified work queues, consultation inputs, payment confirmation, and operational records.",
-      zh: "以 Next.js 診所端搭配 NestJS 服務，處理資格查核、已驗證待辦、診療輸入、付款確認與營運紀錄。",
+      en: "A Next.js clinic portal backed by NestJS services for eligibility checks, verified work queues, consultation inputs, insurer transaction validation, and operational records.",
+      zh: "以 Next.js 診所端搭配 NestJS 服務，處理資格查核、已驗證待辦、診療輸入、保險交易驗證與營運紀錄。",
     },
     users: {
       en: "Clinic staff, doctors, and operations administrators.",
@@ -123,12 +123,12 @@ export const projects: Project[] = [
       en: [
         "Select the payer, service, and practitioner before checking member eligibility.",
         "Turn a successful verification into a clinic work item for diagnosis and medicine.",
-        "Confirm payment and signature before moving the visit into records and reports.",
+        "Submit the completed visit through the configured insurer API for transaction validation before moving it into records and reports.",
       ],
       zh: [
         "先選擇保險方、服務與醫師，再確認會員資格。",
         "將成功驗證轉成診所待辦，加入診斷與藥品。",
-        "完成付款與簽名後，將就診移入紀錄與報表。",
+        "完成診療與結算後，透過已設定的保險公司 API 送出交易驗證，成功後再移入紀錄與報表。",
       ],
     },
     decisions: [
@@ -142,15 +142,15 @@ export const projects: Project[] = [
       {
         title: { en: "Keep consultation state explicit", zh: "讓診療狀態保持明確" },
         body: {
-          en: "Diagnosis, medicine, settlement, and confirmation remain distinct workflow steps.",
-          zh: "診斷、藥品、結算與確認維持為不同的流程步驟。",
+          en: "Diagnosis, medicine, settlement, insurer validation, and completion remain distinct workflow steps.",
+          zh: "診斷、藥品、結算、保險交易驗證與完成維持為不同的流程步驟。",
         },
       },
       {
         title: { en: "Completion becomes an operational record", zh: "完成後形成營運紀錄" },
         body: {
-          en: "Records and reports are produced after the settlement path completes.",
-          zh: "結算流程完成後，才進入紀錄與報表。",
+          en: "Records and reports are produced only after the configured insurer validates the transaction.",
+          zh: "已設定的保險公司完成交易驗證後，才進入紀錄與報表。",
         },
       },
     ],

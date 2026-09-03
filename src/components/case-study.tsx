@@ -263,11 +263,12 @@ function MediconcenJourney({ lang }: { lang: "en" | "zh" }) {
   const reduceMotion = useReducedMotion();
   const copy = lang === "en" ? {
     label: "ONE VERIFIED VISIT",
-    note: "From eligibility to the clinic workspace, then into an operational record.",
+    note: "From eligibility and clinic work to insurer validation, then into an operational record.",
     stages: [
       ["Verify eligibility", "Confirm the configured service and demo membership."],
-      ["Clinic workspace", "Run diagnosis, medicine, and settlement from one verified work item."],
-      ["Complete the record", "Move the settled visit into records and reporting."],
+      ["Clinic workspace", "Capture diagnosis, medicine, and settlement from one verified work item."],
+      ["Validate transaction", "Match the visit to an insurer API, validate it, and return the response."],
+      ["Complete the record", "Move only a validated transaction into records and reporting."],
     ],
     verification: "Visit verification",
     payer: "Payer and service",
@@ -278,31 +279,39 @@ function MediconcenJourney({ lang }: { lang: "en" | "zh" }) {
     verify: "Verify eligibility",
     workQueue: "Clinic work queue · verified visit",
     workAlt: "Fictional clinic work queue showing verified visits and consultation progress",
+    validation: "Insurer transaction validation",
+    validationTransaction: "Validation transaction",
+    matchPayer: "Match payer",
+    router: "API router",
+    insurers: ["Insurer A API", "Insurer B API", "Insurer C API"],
+    matched: "Matched",
+    response: "Validation response returns",
     completed: "Completed",
     record: "Operational record",
-    recordRows: ["Eligibility confirmed", "Consultation settled", "Record available"],
+    recordRows: ["Eligibility confirmed", "Consultation settled", "Transaction validated", "Record available"],
     reporting: "Available to records and reporting",
-    transitions: ["Create work item", "Complete settlement"],
+    transitions: ["Create work item", "Submit transaction", "Validation succeeds"],
     outcome: "Successful verification creates a trackable clinic work item.",
-    outcomeNote: "Settlement moves the completed visit into records and reporting.",
+    outcomeNote: "After settlement, the configured insurer API must validate the transaction before it becomes a record.",
     system: "SYSTEM BEHIND THE FLOW",
     nodes: {
       staff: ["Clinic staff", "Verify · work queue · records"],
       portal: ["Next.js portal", "Verified clinic workspace"],
       api: ["NestJS API", "Orchestrates · Redis cache"],
       mysql: ["MySQL", "Visit state"],
-      external: ["Eligibility / payment services", "External systems"],
+      external: ["Insurer validation / payment APIs", "Payer-specific integrations"],
     },
-    links: ["uses", "requests", "persists", "verifies / settles"],
+    links: ["uses", "requests", "persists", "validates transaction"],
     stack: "NEXT.JS · TYPESCRIPT · NESTJS · MYSQL · REDIS",
     boundary: "SIMPLIFIED ARCHITECTURE · FICTIONAL DATA · PARTNER RULES OMITTED",
   } : {
     label: "一次已驗證就診",
-    note: "從資格驗證、診所工作區，到完成後的營運紀錄。",
+    note: "從資格驗證、診所工作區與保險交易驗證，到完成後的營運紀錄。",
     stages: [
       ["資格驗證", "確認已設定的服務與示範會員資格。"],
       ["診所工作區", "在同一筆已驗證待辦完成診斷、藥品與結算。"],
-      ["完成營運紀錄", "將已結算的就診移入紀錄與報表。"],
+      ["驗證保險交易", "配對保險方 API、送出驗證，再將結果回傳。"],
+      ["完成營運紀錄", "只有驗證成功的交易才進入紀錄與報表。"],
     ],
     verification: "就診資格驗證",
     payer: "保險方與服務",
@@ -313,22 +322,29 @@ function MediconcenJourney({ lang }: { lang: "en" | "zh" }) {
     verify: "驗證資格",
     workQueue: "診所待辦 · 已驗證就診",
     workAlt: "使用虛構資料呈現資格已驗證與診療進度的診所待辦介面",
+    validation: "保險交易驗證",
+    validationTransaction: "Validation transaction",
+    matchPayer: "配對保險方",
+    router: "API 路由器",
+    insurers: ["保險公司 A API", "保險公司 B API", "保險公司 C API"],
+    matched: "已配對",
+    response: "驗證結果返回",
     completed: "已完成",
     record: "營運紀錄",
-    recordRows: ["資格已確認", "診療已結算", "紀錄可查閱"],
+    recordRows: ["資格已確認", "診療已結算", "交易驗證成功", "紀錄可查閱"],
     reporting: "可在紀錄與報表中查閱",
-    transitions: ["建立待辦", "完成結算"],
+    transitions: ["建立待辦", "送出交易", "驗證成功"],
     outcome: "資格驗證成功後，建立可追蹤的診所待辦。",
-    outcomeNote: "結算完成後，再將就診移入紀錄與報表。",
+    outcomeNote: "結算後須由已設定的保險公司 API 驗證交易，成功後才建立營運紀錄。",
     system: "支援流程的系統",
     nodes: {
       staff: ["診所人員", "驗證 · 待辦 · 紀錄"],
       portal: ["Next.js Portal", "已驗證的診所工作區"],
       api: ["NestJS API", "流程協調 · Redis 快取"],
       mysql: ["MySQL", "就診狀態"],
-      external: ["資格／付款服務", "外部系統"],
+      external: ["保險驗證／付款 API", "依保險方設定整合"],
     },
-    links: ["使用", "送出請求", "寫入", "驗證／結算"],
+    links: ["使用", "送出請求", "寫入", "驗證交易"],
     stack: "NEXT.JS · TYPESCRIPT · NESTJS · MYSQL · REDIS",
     boundary: "簡化架構 · 全部為虛構資料 · 合作方規則不公開",
   };
@@ -365,7 +381,19 @@ function MediconcenJourney({ lang }: { lang: "en" | "zh" }) {
               <figcaption><i />{copy.workQueue}</figcaption>
               <Image src={withBasePath("/projects/mediconcen/hero.webp")} alt={copy.workAlt} width={1600} height={900} priority sizes="(max-width: 760px) calc(100vw - 32px), 52vw" />
             </figure>}
-            {index === 2 && <div className="care-stage-panel care-record">
+            {index === 2 && <div className="care-stage-panel care-validation">
+              <div className="care-ui-header"><i /><span>{copy.validation}</span></div>
+              <div className="care-routing">
+                <div className="care-route-request"><small>TX</small><strong>{copy.validationTransaction}</strong></div>
+                <div className="care-route-entry"><span>{copy.matchPayer}</span><i /></div>
+                <div className="care-route-network">
+                  <strong className="care-route-router">{copy.router}</strong>
+                  <ul>{copy.insurers.map((insurer, route) => <li className={route === 1 ? "is-selected" : ""} key={insurer}><span>{insurer}</span>{route === 1 && <b>{copy.matched}</b>}</li>)}</ul>
+                </div>
+                <div className="care-route-return"><i /><span>{copy.response}</span></div>
+              </div>
+            </div>}
+            {index === 3 && <div className="care-stage-panel care-record">
               <div className="care-ui-header"><span>{copy.record}</span></div>
               <div className="care-record-body">
                 <span>{copy.completed}</span><h3>{copy.record}</h3>
@@ -373,7 +401,7 @@ function MediconcenJourney({ lang }: { lang: "en" | "zh" }) {
                 <p>{copy.reporting}</p>
               </div>
             </div>}
-            {index < 2 && <span className="care-transition"><em>{copy.transitions[index]}</em><i /></span>}
+            {index < 3 && <span className="care-transition"><em>{copy.transitions[index]}</em><i /></span>}
           </motion.li>
         ))}
       </ol>

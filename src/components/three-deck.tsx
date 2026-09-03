@@ -103,12 +103,12 @@ export function ThreeDeck({ scrollerRef, onActiveChange, onReady }: {
     let reducedMotion = motionQuery.matches;
     let frame = 0;
     let disposed = false;
-    let cypherVideo: HTMLVideoElement | undefined;
+    const projectVideos: Array<{ cardIndex: number; element: HTMLVideoElement }> = [];
 
     const render = () => {
       const targetProgress = reducedMotion ? Math.round(progress) : progress;
       visualProgress = reducedMotion ? targetProgress : THREE.MathUtils.lerp(visualProgress, targetProgress, 0.08);
-      if (!reducedMotion && (Math.abs(targetProgress - visualProgress) > 0.001 || active === 1 && cypherVideo && !cypherVideo.paused)) scheduleRender();
+      if (!reducedMotion && (Math.abs(targetProgress - visualProgress) > 0.001 || projectVideos.some(({ element }) => !element.paused))) scheduleRender();
       const projectProgress = Math.max(0, visualProgress - 1);
       const deckOpacity = reducedMotion ? Number(visualProgress >= 1) : THREE.MathUtils.smoothstep(visualProgress, 0.08, 0.65);
       const currentIndex = Math.min(projects.length - 1, Math.floor(projectProgress));
@@ -213,29 +213,33 @@ export function ThreeDeck({ scrollerRef, onActiveChange, onReady }: {
         cards.push(card);
         scene.add(card.group);
       });
-      cypherVideo = document.createElement("video");
-      cypherVideo.src = withBasePath("/projects/cypherlab/market-demo.mp4");
-      cypherVideo.muted = true;
-      cypherVideo.defaultMuted = true;
-      cypherVideo.loop = true;
-      cypherVideo.playsInline = true;
-      cypherVideo.preload = "auto";
       syncVideoPlayback = () => {
-        if (!cypherVideo) return;
-        if (active === 1 && !reducedMotion) void cypherVideo.play().then(scheduleRender).catch(() => {});
-        else cypherVideo.pause();
+        projectVideos.forEach(({ cardIndex, element }) => {
+          if (active === cardIndex + 1 && !reducedMotion) void element.play().then(scheduleRender).catch(() => {});
+          else element.pause();
+        });
       };
-      cypherVideo.addEventListener("canplay", () => {
-        if (disposed || !cypherVideo) return;
-        const texture = new THREE.VideoTexture(cypherVideo);
-        texture.colorSpace = THREE.SRGBColorSpace;
-        cards[0].image.material.map?.dispose();
-        cards[0].image.material.map = texture;
-        cards[0].image.material.needsUpdate = true;
-        syncVideoPlayback();
-        scheduleRender();
-      }, { once: true });
-      cypherVideo.load();
+      ["/projects/cypherlab/market-demo.mp4", "/projects/mediconcen/workflow-demo.mp4"].forEach((source, cardIndex) => {
+        const element = document.createElement("video");
+        element.src = withBasePath(source);
+        element.muted = true;
+        element.defaultMuted = true;
+        element.loop = true;
+        element.playsInline = true;
+        element.preload = "auto";
+        projectVideos.push({ cardIndex, element });
+        element.addEventListener("canplay", () => {
+          if (disposed) return;
+          const texture = new THREE.VideoTexture(element);
+          texture.colorSpace = THREE.SRGBColorSpace;
+          cards[cardIndex].image.material.map?.dispose();
+          cards[cardIndex].image.material.map = texture;
+          cards[cardIndex].image.material.needsUpdate = true;
+          syncVideoPlayback();
+          scheduleRender();
+        }, { once: true });
+        element.load();
+      });
       onReady();
       scheduleRender();
     });
@@ -254,9 +258,11 @@ export function ThreeDeck({ scrollerRef, onActiveChange, onReady }: {
         card.border.geometry.dispose();
         card.border.material.dispose();
       });
-      cypherVideo?.pause();
-      cypherVideo?.removeAttribute("src");
-      cypherVideo?.load();
+      projectVideos.forEach(({ element }) => {
+        element.pause();
+        element.removeAttribute("src");
+        element.load();
+      });
       renderer.dispose();
       renderer.domElement.remove();
     };

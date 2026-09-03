@@ -274,7 +274,7 @@ html[lang="zh-Hant"] .about-bio { letter-spacing: 0; line-height: 1.42; }
 .care-heading strong, .care-architecture > h2, .care-system-footer { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
 .care-heading strong { color: var(--care); font-size: 13px; letter-spacing: .09em; }
 .care-heading span { color: #515854; font-size: 16px; line-height: 1.45; text-align: right; }
-.care-stages { min-width: 0; display: grid; grid-template-columns: minmax(0, .65fr) minmax(0, 1.7fr) minmax(0, .58fr); gap: clamp(70px, 6vw, 96px); margin: 20px 0 0; padding: 0; list-style: none; }
+.care-stages { min-width: 0; display: grid; grid-template-columns: minmax(0, .7fr) minmax(0, 1.35fr) minmax(0, .8fr) minmax(0, .65fr); gap: clamp(38px, 3vw, 54px); margin: 20px 0 0; padding: 0; list-style: none; }
 .care-stages > li { position: relative; min-width: 0; display: grid; grid-template-rows: auto 1fr; }
 .care-stage-heading { min-height: 72px; display: grid; grid-template-columns: 24px minmax(0, 1fr); align-items: start; gap: 8px; }
 .care-stage-heading > span { padding-top: 3px; color: var(--care); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; letter-spacing: .06em; }
@@ -289,6 +289,27 @@ html[lang="zh-Hant"] .about-bio { letter-spacing: 0; line-height: 1.42; }
 .care-ui-field { min-height: 42px; display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 9px 11px; background: #e9e8e2; color: #202521; font-size: 12px; }
 .care-ui-field span { color: var(--care); font-size: 11px; font-weight: 700; }
 .care-ui-button { min-height: 32px; display: inline-flex; align-items: center; justify-content: center; margin-top: 16px; padding: 0 17px; background: var(--care); color: white; font-size: 12px; font-weight: 700; }
+.care-routing { padding: 13px 15px 10px; }
+.care-route-request { min-height: 39px; display: flex; align-items: center; gap: 9px; padding: 8px 10px; background: #e9e8e2; font-size: 11px; }
+.care-route-request small { color: var(--care); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 9px; }
+.care-route-entry { position: relative; height: 24px; color: var(--care); font-size: 9px; text-align: center; }
+.care-route-entry span { position: relative; z-index: 1; padding: 0 6px; background: #f8f7f3; line-height: 24px; }
+.care-route-entry i { position: absolute; top: 0; bottom: 0; left: 50%; width: 1px; background: var(--care); }
+.care-route-entry i::after { content: ""; position: absolute; right: -4px; bottom: 0; border-width: 6px 4px 0; border-style: solid; border-color: var(--care) transparent transparent; }
+.care-route-network { display: grid; grid-template-columns: minmax(58px, .48fr) minmax(0, 1fr); align-items: center; gap: 22px; }
+.care-route-router { position: relative; min-height: 44px; display: grid; place-items: center; padding: 6px; border: 1px solid #171c19; background: #171c19; color: white; font-size: 10px; text-align: center; }
+.care-route-router::after { content: ""; position: absolute; top: 50%; left: 100%; width: 11px; height: 1px; background: var(--care); }
+.care-route-network ul { position: relative; display: grid; gap: 7px; margin: 0; padding: 0; list-style: none; }
+.care-route-network ul::before { content: ""; position: absolute; top: 16px; bottom: 16px; left: -11px; width: 1px; background: #a7aca8; }
+.care-route-network li { position: relative; min-height: 32px; display: flex; align-items: center; justify-content: space-between; gap: 5px; padding: 5px 7px; border: 1px solid #c8cbc6; background: #eeede8; color: #343a36; font-size: 9px; }
+.care-route-network li::before { content: ""; position: absolute; top: 50%; right: 100%; width: 11px; height: 1px; background: #a7aca8; }
+.care-route-network li.is-selected { border-color: var(--care); box-shadow: inset 3px 0 var(--care); background: #e8f1ec; color: #171c19; }
+.care-route-network li.is-selected::before { background: var(--care); }
+.care-route-network li b { color: var(--care); font-size: 8px; }
+.care-route-return { position: relative; height: 29px; display: flex; align-items: center; }
+.care-route-return i { position: absolute; right: 0; left: 0; height: 1px; background: var(--care); }
+.care-route-return i::before { content: ""; position: absolute; top: -4px; left: -1px; border-width: 4px 8px 4px 0; border-style: solid; border-color: transparent var(--care) transparent transparent; }
+.care-route-return span { position: relative; margin-left: auto; padding-left: 7px; background: #f8f7f3; color: var(--care); font-size: 9px; }
 .care-workspace { height: 300px; display: grid; grid-template-rows: 36px minmax(0, 1fr); margin: 0; }
 .care-workspace img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center 46%; }
 .care-record-body { min-height: calc(100% - 36px); display: flex; flex-direction: column; padding: 24px 22px 20px; }
@@ -297,7 +318,7 @@ html[lang="zh-Hant"] .about-bio { letter-spacing: 0; line-height: 1.42; }
 .care-record-body ul { margin: 0; padding: 0; border-top: 1px solid #d0d2cc; list-style: none; }
 .care-record-body li { padding: 9px 0; border-bottom: 1px solid #d0d2cc; color: #555c58; font-size: 12px; }
 .care-record-body p { margin: auto 0 0; color: #5d6560; font-size: 12px; line-height: 1.4; }
-.care-transition { position: absolute; z-index: 2; top: 58%; left: 100%; width: clamp(70px, 6vw, 96px); height: 28px; color: var(--care); }
+.care-transition { position: absolute; z-index: 2; top: 58%; left: 100%; width: clamp(38px, 3vw, 54px); height: 28px; color: var(--care); }
 .care-transition em { position: absolute; right: 0; bottom: 17px; left: 0; font-size: 11px; font-style: normal; text-align: center; white-space: nowrap; }
 .care-transition i { position: absolute; top: 16px; right: 10px; left: 0; height: 1px; background: var(--care); }
 .care-transition i::after { content: ""; position: absolute; top: -4px; right: -1px; border-width: 4px 0 4px 8px; border-style: solid; border-color: transparent transparent transparent var(--care); }
@@ -345,6 +366,13 @@ html[lang="zh-Hant"] .about-bio { letter-spacing: 0; line-height: 1.42; }
 .not-found p { color: var(--muted); font-family: monospace; }.not-found h1 { font-size: 48px; }.not-found a { text-decoration: underline; }
 
 @media (max-width: 1180px) {
+  .care-stages { grid-template-columns: 1fr; gap: 50px; margin-top: 24px; }
+  .care-stage-heading { min-height: 0; margin-bottom: 13px; }
+  .care-transition { top: 100%; left: 24px; width: calc(100% - 48px); height: 50px; }
+  .care-transition em { top: 16px; right: auto; bottom: auto; left: 18px; text-align: left; }
+  .care-transition i { top: 0; right: auto; bottom: 0; left: 0; width: 1px; height: 100%; }
+  .care-transition i::after { top: auto; right: auto; bottom: -1px; left: -4px; border-width: 8px 4px 0; border-color: var(--care) transparent transparent; }
+  .care-system { grid-template-columns: 1fr; gap: 14px; }
   .cypher-product-layout { grid-template-columns: minmax(110px,.28fr) minmax(0,1.72fr); }
   .cypher-operator { grid-column: 1 / -1; min-height: 390px; }
   .harness-frame { padding-inline: 18px; }
@@ -506,16 +534,10 @@ html[lang="zh-Hant"] .about-bio { letter-spacing: 0; line-height: 1.42; }
   .mediconcen-case .case-title p { font-size: 16px; }
   .care-heading { grid-template-columns: 1fr; gap: 6px; }
   .care-heading span { text-align: left; }
-  .care-stages { grid-template-columns: 1fr; gap: 50px; margin-top: 24px; }
-  .care-stage-heading { min-height: 0; margin-bottom: 13px; }
   .care-stage-heading h2 { font-size: 22px; }
   .care-stage-heading p { font-size: 16px; line-height: 1.45; }
   .care-stage-panel { min-height: 270px; }
   .care-workspace { height: 300px; }
-  .care-transition { top: 100%; left: 24px; width: calc(100% - 48px); height: 50px; }
-  .care-transition em { top: 16px; right: auto; bottom: auto; left: 18px; text-align: left; }
-  .care-transition i { top: 0; right: auto; bottom: 0; left: 0; width: 1px; height: 100%; }
-  .care-transition i::after { top: auto; right: auto; bottom: -1px; left: -4px; border-width: 8px 4px 0; border-color: var(--care) transparent transparent; }
   .care-outcome { display: grid; gap: 4px; padding-block: 18px; }
   .care-system { grid-template-columns: 1fr; gap: 14px; }
   .care-system-main { display: flex; flex-direction: column; }
