@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useRef, useState } from "react";
+import { useReducedMotion } from "motion/react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { about, homeIntro, homeSlides, links, projects, type Project } from "@/data/projects";
 import { CaseStudy } from "./case-study";
 import { useLanguage } from "./language";
@@ -24,7 +25,7 @@ function FallbackDeck({ active, ready }: { active: number; ready: boolean }) {
   );
 }
 
-function FocusRail({ active, onOpen, onSelect }: { active: number; onOpen: () => void; onSelect: (index: number) => void }) {
+function FocusRail({ active, autoPlay, autoPlayDisabled, onAutoPlayToggle, onOpen, onSelect }: { active: number; autoPlay: boolean; autoPlayDisabled: boolean; onAutoPlayToggle: () => void; onOpen: () => void; onSelect: (index: number) => void }) {
   const { lang } = useLanguage();
   const project = active > 0 ? projects[active - 1] : undefined;
   const slideNames = [homeIntro.name[lang], ...projects.map((item) => item.name)];
@@ -68,7 +69,9 @@ function FocusRail({ active, onOpen, onSelect }: { active: number; onOpen: () =>
             />
           ))}
         </div>
-        <span>{lang === "en" ? "SCROLL TO ADVANCE" : "向下捲動切換"}</span>
+        <button className="focus-autoplay" type="button" aria-pressed={autoPlay} disabled={autoPlayDisabled} onClick={onAutoPlayToggle}>
+          {lang === "en" ? `AUTO ROTATE · ${autoPlay ? "ON" : "OFF"}` : `自動輪播 · ${autoPlay ? "開" : "關"}`}
+        </button>
       </nav>
     </aside>
   );
@@ -88,7 +91,7 @@ function About() {
             <a href={links.linkedin} target="_blank" rel="noreferrer">LinkedIn ↗</a>
             <a href={links.github} target="_blank" rel="noreferrer">GitHub ↗</a>
             <a href={links.email}>Email ↗</a>
-            <Link href="/resume" target="_blank">{lang === "en" ? "Resume ↗" : "履歷 ↗"}</Link>
+            <a href={links.resume} download>{lang === "en" ? "Resume ↓" : "履歷 ↓"}</a>
           </div>
         </div>
       </div>
@@ -143,18 +146,47 @@ function IntroStage({ hidden }: { hidden: boolean }) {
 
 export function CoverFlow() {
   const { lang } = useLanguage();
+  const reduceMotion = useReducedMotion();
   const scroller = useRef<HTMLElement>(null);
   const dialog = useRef<HTMLDialogElement>(null);
   const sections = useRef<(HTMLElement | null)[]>([]);
   const [active, setActive] = useState(0);
+  const [autoPlay, setAutoPlay] = useState(true);
   const [modalProject, setModalProject] = useState<Project>();
   const [webglReady, setWebglReady] = useState(false);
   const markReady = useCallback(() => setWebglReady(true), []);
 
-  const select = (index: number) => sections.current[Math.max(0, Math.min(homeSlides.length, index))]?.scrollIntoView({
+  const select = useCallback((index: number) => sections.current[Math.max(0, Math.min(homeSlides.length, index))]?.scrollIntoView({
     behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
-  });
+  }), []);
+  useEffect(() => {
+    const pause = (event: Event) => {
+      if (!(event.target instanceof Element && event.target.closest(".focus-autoplay"))) setAutoPlay(false);
+    };
+    window.addEventListener("pointerdown", pause);
+    window.addEventListener("wheel", pause, { passive: true });
+    window.addEventListener("touchstart", pause, { passive: true });
+    window.addEventListener("keydown", pause);
+    return () => {
+      window.removeEventListener("pointerdown", pause);
+      window.removeEventListener("wheel", pause);
+      window.removeEventListener("touchstart", pause);
+      window.removeEventListener("keydown", pause);
+    };
+  }, []);
+  useEffect(() => {
+    if (!autoPlay || reduceMotion || !webglReady || modalProject || active > projects.length) return;
+    let timer = 0;
+    const queue = () => { timer = window.setTimeout(() => document.hidden ? queue() : select(active === projects.length ? 1 : active + 1), 12_000); };
+    queue();
+    return () => window.clearTimeout(timer);
+  }, [active, autoPlay, modalProject, reduceMotion, select, webglReady]);
+  const selectManually = (index: number) => {
+    setAutoPlay(false);
+    select(index);
+  };
   const openProject = (project: Project) => {
+    setAutoPlay(false);
     setModalProject(project);
     dialog.current?.showModal();
   };
@@ -165,7 +197,7 @@ export function CoverFlow() {
       <FallbackDeck active={active} ready={webglReady} />
       <ThreeDeck scrollerRef={scroller} onActiveChange={setActive} onReady={markReady} />
       <IntroStage hidden={active > 0} />
-      {active < homeSlides.length && <FocusRail active={active} onOpen={() => active > 0 && openProject(projects[active - 1])} onSelect={select} />}
+      {active < homeSlides.length && <FocusRail active={active} autoPlay={autoPlay && !reduceMotion} autoPlayDisabled={Boolean(reduceMotion)} onAutoPlayToggle={() => setAutoPlay((playing) => !playing)} onOpen={() => active > 0 && openProject(projects[active - 1])} onSelect={selectManually} />}
 
       <main id="main" ref={scroller} className="coverflow-scroll">
         {active > 0 && active < homeSlides.length && <div className="active-hit-anchor">

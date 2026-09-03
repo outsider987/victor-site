@@ -14,12 +14,11 @@ export type Project = {
   category: Localized<string>;
   focus: Localized<string[]>;
   stack: string[];
-  fullStack: string[];
   visual: string;
   visualAlt: Localized<string>;
   summary: Localized<string>;
   product: Localized<string>;
-  users: Localized<string>;
+  outcome: Localized<string>;
   workflows: Localized<string[]>;
   decisions: Decision[];
   boundary: Localized<string>;
@@ -36,7 +35,6 @@ export const projects: Project[] = [
     category: { en: "Sportsbook Operations", zh: "體育博彩營運" },
     focus: { en: ["Live Odds", "Market State", "Audit"], zh: ["即時賠率", "市場狀態", "稽核"] },
     stack: ["React", "TypeScript", "Go", "WebSocket", "NATS", "Redis"],
-    fullStack: ["React", "TypeScript", "Vite", "TanStack Query", "Go", "WebSocket", "NATS", "Redis", "PostgreSQL", "ClickHouse", "gRPC", "Kubernetes", "Helm", "Argo CD"],
     visual: withBasePath("/projects/cypherlab/hero.webp"),
     visualAlt: {
       en: "Recreated CypherLab e-sports operations board with fictional event data",
@@ -50,9 +48,9 @@ export const projects: Project[] = [
       en: "A React and Go sportsbook back office for operating e-sports matches in real time. NATS snapshots and market diffs are projected into live odds, open/suspended states, alerts, audit history, and service health.",
       zh: "以 React 與 Go 建構、聚焦電競賽事的體育博彩營運後台。NATS 的賽事快照與市場差異會投影成即時賠率、開放／暫停狀態、警示、稽核紀錄與服務健康資訊。",
     },
-    users: {
-      en: "Operators, traders, supervisors, duty managers, and platform administrators.",
-      zh: "營運人員、操盤手、主管、值班經理與平台管理員。",
+    outcome: {
+      en: "Operators can distinguish requested, pending-approval, and applied changes while every guarded command leaves an audit trail.",
+      zh: "營運人員能明確區分已送出、待核准與已套用的變更，高風險命令也都留下稽核軌跡。",
     },
     workflows: {
       en: [
@@ -101,7 +99,6 @@ export const projects: Project[] = [
     category: { en: "Clinic Care Operations", zh: "診所就診營運" },
     focus: { en: ["Eligibility", "Care Flow", "Records"], zh: ["資格驗證", "就診流程", "營運紀錄"] },
     stack: ["Next.js", "TypeScript", "NestJS", "MySQL", "Redis"],
-    fullStack: ["Next.js", "React", "TypeScript", "MUI", "SWR", "NestJS", "TypeORM", "MySQL", "Redis", "Socket.IO", "AWS SDK", "Docker", "Helm"],
     visual: withBasePath("/projects/mediconcen/hero.webp"),
     visualAlt: {
       en: "Fictional clinic visit work queue reconstructed from repository workflows",
@@ -115,9 +112,9 @@ export const projects: Project[] = [
       en: "A Next.js clinic portal backed by NestJS services for eligibility checks, verified work queues, consultation inputs, insurer transaction validation, and operational records.",
       zh: "以 Next.js 診所端搭配 NestJS 服務，處理資格查核、已驗證待辦、診療輸入、保險交易驗證與營運紀錄。",
     },
-    users: {
-      en: "Clinic staff, doctors, and operations administrators.",
-      zh: "診所人員、醫師與營運管理員。",
+    outcome: {
+      en: "Only visits validated by the configured insurer become operational records available to reporting.",
+      zh: "只有通過指定保險公司交易驗證的就診，才會成為可供報表查閱的營運紀錄。",
     },
     workflows: {
       en: [
@@ -166,7 +163,6 @@ export const projects: Project[] = [
     category: { en: "Web3 Escrow Prototype", zh: "Web3 託管交易原型" },
     focus: { en: ["Wallet", "Transaction", "State"], zh: ["錢包", "交易", "狀態"] },
     stack: ["React", "TypeScript", "Wagmi", "Viem", "Solidity"],
-    fullStack: ["React", "TypeScript", "Vite", "Wagmi", "Viem", "RainbowKit", "TanStack Query", "Solidity", "Hardhat", "OpenZeppelin", "Polygon Amoy"],
     visual: withBasePath("/projects/carharbor/hero.webp"),
     visualAlt: {
       en: "Recreated CarHarbor escrow interface without wallet addresses",
@@ -180,9 +176,9 @@ export const projects: Project[] = [
       en: "CarHarbor demonstrates a tokenized vehicle purchase on Polygon Amoy. A seller creates an escrow, a buyer funds it with demo tokens, a verifier marks delivery, and buyer confirmation atomically releases payment and the vehicle NFT.",
       zh: "CarHarbor 在 Polygon Amoy 示範代幣化車輛交易：賣方建立託管、買方以測試代幣入金、驗證方確認交付，最後由買方確認並原子化釋放款項與車輛 NFT。",
     },
-    users: {
-      en: "Demo buyer, seller, and delivery verifier roles.",
-      zh: "示範用的買方、賣方與交付驗證者。",
+    outcome: {
+      en: "The interface keeps signature, receipt, synchronization, and final contract state separate, so a transaction hash is never mistaken for completion.",
+      zh: "介面將簽名、收據、同步與最終合約狀態分開呈現，不會把取得交易 hash 誤認為完成。",
     },
     workflows: {
       en: [
@@ -231,7 +227,6 @@ export const projects: Project[] = [
     category: { en: "Tender Discovery", zh: "標案探索平台" },
     focus: { en: ["Search", "Data", "Operations"], zh: ["搜尋", "資料", "營運"] },
     stack: ["Vue", "TypeScript", "Go", "PostgreSQL", "Python", "R2"],
-    fullStack: ["Vue 3", "TypeScript", "Vite", "Element Plus", "Go", "PostgreSQL", "Python", "Playwright", "Cloudflare R2-compatible storage", "pgvector (experimental)"],
     visual: withBasePath("/projects/chengguang/hero.webp"),
     visualAlt: {
       en: "Fictional Chengguang tender discovery interface with an experimental search label",
@@ -245,9 +240,9 @@ export const projects: Project[] = [
       en: "Chengguang combines member-facing tender discovery, saved keyword groups, profiles and health checks with an admin console for tenders, members, search activity, downloads, and system operations.",
       zh: "Chengguang 將會員端標案探索、關鍵字群組、會員資料與健檢，連接到管理端的標案、會員、搜尋行為、下載與系統營運。",
     },
-    users: {
-      en: "Members discovering tenders and administrators operating the data platform.",
-      zh: "搜尋標案的會員，以及維運資料平台的管理員。",
+    outcome: {
+      en: "Search behavior, replayable imports, and data-health signals share one operating model, making discovery quality traceable back to its source data.",
+      zh: "搜尋行為、可重播匯入與資料健康訊號共用同一套營運模型，讓探索品質能回溯到來源資料。",
     },
     workflows: {
       en: [
@@ -323,6 +318,7 @@ export const about = {
 };
 
 export const links = {
+  resume: withBasePath("/Victor_Chang_Go_TypeScript_Resume_v3.pdf"),
   email: "mailto:t790219520@gmail.com",
   github: "https://github.com/outsider987",
   linkedin: "https://linkedin.com/in/yao-hsien-chang",

@@ -18,7 +18,7 @@ export default function ResumePage() {
         {projects.map((project) => (
           <article key={project.slug}>
             <p>{project.number}</p>
-            <div><h3>{project.name}</h3><strong>{project.category[lang]}</strong><p>{project.summary[lang]}</p><small>{project.fullStack.join(" · ")}</small></div>
+            <div><h3>{project.name}</h3><strong>{project.category[lang]}</strong><p>{project.summary[lang]}</p><small>{project.stack.join(" · ")}</small></div>
           </article>
         ))}
       </section>

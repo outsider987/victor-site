@@ -17,21 +17,13 @@ function TechIcon({ kind }: { kind: string }) {
   return <i className="cypher-tech-icon" data-kind={kind} aria-hidden="true"><svg viewBox="0 0 32 32"><ellipse cx="16" cy="7" rx="10" ry="4" /><path d="M6 7v16c0 2 4.5 4 10 4s10-2 10-4V7M6 15c0 2 4.5 4 10 4s10-2 10-4" /></svg></i>;
 }
 
-function CypherArchitecture({ lang }: { lang: "en" | "zh" }) {
+function CypherArchitecture({ lang, view = "product" }: { lang: "en" | "zh"; view?: "product" | "process" }) {
   const reduceMotion = useReducedMotion();
   const copy = lang === "en" ? {
     product: {
       eyebrow: "01 / PRODUCT ARCHITECTURE",
       title: "Real-time market operations across React, Go, and NATS",
       lede: "Versioned projections keep reads current; audited command loops keep writes verifiable.",
-      layers: [
-        ["react", "React 18 / TypeScript", "Operator workspace"],
-        ["query", "TanStack Query", "Scoped client cache"],
-        ["go", "Go BFF", "Projection + command gate"],
-        ["nats", "NATS / JetStream", "Full + diff events"],
-        ["ws", "WebSocket", "Realtime signal"],
-        ["postgres", "PostgreSQL", "Audit + command state"],
-      ],
       callouts: [["01", "Frontend realtime", "WS signal → scoped query refresh"], ["02", "Go projection", "Full / diff merge → ComputeSeq guard"], ["03", "Controlled command", "Reason → idempotency → approval → audit"]],
       visualAlt: "Fictional e-sports market board used to explain CypherLab's realtime read and control paths",
       fictional: "Generated product demo · fictional data",
@@ -81,14 +73,6 @@ function CypherArchitecture({ lang }: { lang: "en" | "zh" }) {
       eyebrow: "01 / 產品架構",
       title: "橫跨 React、Go 與 NATS 的即時市場營運",
       lede: "版本化 projection 維持讀取正確；受稽核的命令閉環讓寫入可以被驗證。",
-      layers: [
-        ["react", "React 18 / TypeScript", "操作員工作區"],
-        ["query", "TanStack Query", "指定範圍前端快取"],
-        ["go", "Go BFF", "Projection＋命令關卡"],
-        ["nats", "NATS / JetStream", "完整＋差異事件"],
-        ["ws", "WebSocket", "即時訊號"],
-        ["postgres", "PostgreSQL", "稽核＋命令狀態"],
-      ],
       callouts: [["01", "前端即時更新", "WS 訊號 → 指定範圍 query 更新"], ["02", "Go 資料投影", "完整／差異合併 → ComputeSeq 保護"], ["03", "受控命令", "原因 → 冪等 → 核准 → 稽核"]],
       visualAlt: "以虛構資料重建的電競市場操作台，用來說明 CypherLab 的即時讀取與控制路徑",
       fictional: "生成操作示意 · 虛構資料",
@@ -138,7 +122,7 @@ function CypherArchitecture({ lang }: { lang: "en" | "zh" }) {
 
   return (
     <div className="cypher-story">
-      <motion.section
+      {view === "product" && <motion.section
         className="cypher-product-section"
         aria-labelledby="cypher-product-title"
         initial={reduceMotion ? false : { opacity: 0, y: 18 }}
@@ -150,10 +134,6 @@ function CypherArchitecture({ lang }: { lang: "en" | "zh" }) {
           <span>{copy.product.eyebrow}</span>
           <div><h2 id="cypher-product-title">{copy.product.title}</h2><p>{copy.product.lede}</p></div>
         </header>
-
-        <ul className="cypher-stack-rail" aria-label={lang === "en" ? "Product technology stack" : "產品技術棧"}>
-          {copy.product.layers.map(([kind, title]) => <li key={title}><TechIcon kind={kind} /><strong>{title}</strong></li>)}
-        </ul>
 
         <div className="cypher-product-layout">
           <ol className="cypher-callouts">
@@ -187,9 +167,14 @@ function CypherArchitecture({ lang }: { lang: "en" | "zh" }) {
           </div>)}
         </div>
         <p className="cypher-boundary">{copy.product.boundary}</p>
-      </motion.section>
+        <Link className="process-teaser" href="/process">
+          <span>{lang === "en" ? "My delivery process" : "我的交付流程"}</span>
+          <strong>{lang === "en" ? "See how AI-assisted changes move from a clear brief to verified code." : "了解 AI 輔助變更如何從明確需求走到通過驗證的程式碼。"}</strong>
+          <b aria-hidden="true">→</b>
+        </Link>
+      </motion.section>}
 
-      <motion.section
+      {view === "process" && <motion.section
         className="cypher-delivery-section"
         aria-labelledby="cypher-delivery-title"
         initial={reduceMotion ? false : { opacity: 0, y: 22 }}
@@ -254,7 +239,7 @@ function CypherArchitecture({ lang }: { lang: "en" | "zh" }) {
           </div>
         </div>
         <footer className="delivery-note">{copy.delivery.note}</footer>
-      </motion.section>
+      </motion.section>}
     </div>
   );
 }
@@ -302,7 +287,6 @@ function MediconcenJourney({ lang }: { lang: "en" | "zh" }) {
       external: ["Insurer validation / payment APIs", "Payer-specific integrations"],
     },
     links: ["uses", "requests", "persists", "validates transaction"],
-    stack: "NEXT.JS · TYPESCRIPT · NESTJS · MYSQL · REDIS",
     boundary: "SIMPLIFIED ARCHITECTURE · FICTIONAL DATA · PARTNER RULES OMITTED",
   } : {
     label: "一次已驗證就診",
@@ -345,7 +329,6 @@ function MediconcenJourney({ lang }: { lang: "en" | "zh" }) {
       external: ["保險驗證／付款 API", "依保險方設定整合"],
     },
     links: ["使用", "送出請求", "寫入", "驗證交易"],
-    stack: "NEXT.JS · TYPESCRIPT · NESTJS · MYSQL · REDIS",
     boundary: "簡化架構 · 全部為虛構資料 · 合作方規則不公開",
   };
 
@@ -431,9 +414,95 @@ function MediconcenJourney({ lang }: { lang: "en" | "zh" }) {
             </div>)}
           </div>
         </div>
-        <footer className="care-system-footer"><span>{copy.stack}</span><span>{copy.boundary}</span></footer>
+        <footer className="care-system-footer"><span>{copy.boundary}</span></footer>
       </motion.section>
     </div>
+  );
+}
+
+function CaseProof({ project, lang }: { project: Project; lang: "en" | "zh" }) {
+  const decision = project.decisions[0];
+  const labels = lang === "en"
+    ? ["Problem", "Key decision", "Result evidence"]
+    : ["問題", "關鍵決定", "結果證據"];
+
+  return (
+    <section className="case-proof" aria-label={lang === "en" ? "Case study summary" : "案例摘要"}>
+      <article><h2>{labels[0]}</h2><p>{project.product[lang]}</p></article>
+      <article><h2>{labels[1]}</h2><strong>{decision.title[lang]}</strong><p>{decision.body[lang]}</p></article>
+      <article><h2>{labels[2]}</h2><p>{project.outcome[lang]}</p></article>
+    </section>
+  );
+}
+
+function CarHarborStory({ project, lang }: { project: Project; lang: "en" | "zh" }) {
+  return (
+    <section className="carharbor-story" aria-label={lang === "en" ? "Escrow transaction story" : "託管交易故事"}>
+      <figure className="case-visual carharbor-visual">
+        <Image src={project.visual} alt={project.visualAlt[lang]} width={1440} height={900} priority sizes="(max-width: 900px) 100vw, 72vw" />
+        <figcaption>{lang === "en" ? "Recreated testnet interface using fictional data" : "使用虛構資料重建的測試網介面"}</figcaption>
+      </figure>
+
+      <p className="prototype-warning"><strong>{lang === "en" ? "Prototype boundary" : "原型界線"}</strong>{project.boundary[lang]}</p>
+
+      <div className="transaction-story">
+        <header>
+          <h2>{lang === "en" ? "A transaction is a sequence, not a hash" : "交易是一段狀態序列，不只是一個 hash"}</h2>
+          <p>{lang === "en" ? "Each checkpoint answers a different question before the interface can claim completion." : "介面必須在每個檢查點回答不同問題，才能宣告交易完成。"}</p>
+        </header>
+        <ol>{project.workflows[lang].map((step, index) => <li key={step}><span>0{index + 1}</span><p>{step}</p></li>)}</ol>
+      </div>
+
+      <dl className="transaction-evidence">
+        {project.decisions.map((decision) => <div key={decision.title.en}><dt>{decision.title[lang]}</dt><dd>{decision.body[lang]}</dd></div>)}
+      </dl>
+    </section>
+  );
+}
+
+function ChengguangStory({ project, lang }: { project: Project; lang: "en" | "zh" }) {
+  return (
+    <section className="chengguang-story" aria-label={lang === "en" ? "Tender discovery and data operations loop" : "標案探索與資料營運循環"}>
+      <figure className="case-visual chengguang-visual">
+        <Image src={project.visual} alt={project.visualAlt[lang]} width={1440} height={900} priority sizes="(max-width: 900px) 100vw, 72vw" />
+        <figcaption>{lang === "en" ? "Recreated discovery interface using fictional tenders" : "使用虛構標案重建的探索介面"}</figcaption>
+      </figure>
+
+      <div className="data-loop">
+        <article>
+          <span>{lang === "en" ? "Discover" : "探索"}</span>
+          <h2>{lang === "en" ? "Members shape the search signal" : "會員行為形成搜尋訊號"}</h2>
+          <ul>{project.workflows[lang].slice(0, 2).map((step) => <li key={step}>{step}</li>)}</ul>
+        </article>
+        <div className="data-loop-link" aria-hidden="true"><span>→</span><small>{lang === "en" ? "shared model" : "共用模型"}</small><b>←</b></div>
+        <article>
+          <span>{lang === "en" ? "Operate" : "營運"}</span>
+          <h2>{lang === "en" ? "Data health improves what members find" : "資料健康度回頭改善探索品質"}</h2>
+          <p>{project.workflows[lang][2]}</p>
+        </article>
+      </div>
+
+      <ol className="data-evidence">
+        {project.decisions.map((decision, index) => <li key={decision.title.en}><span>0{index + 1}</span><div><strong>{decision.title[lang]}</strong><p>{decision.body[lang]}</p></div></li>)}
+      </ol>
+      <p className="case-boundary">{project.boundary[lang]}</p>
+    </section>
+  );
+}
+
+export function AgentProcess() {
+  const { lang } = useLanguage();
+  return (
+    <main id="main" className="process-page">
+      <section className="process-sheet">
+        <Link className="back-link" href="/work/cypherlab">← {lang === "en" ? "Back to CypherLab" : "返回 CypherLab"}</Link>
+        <header className="process-title">
+          <h1>{lang === "en" ? "A VERIFIABLE AI DELIVERY PROCESS" : "可驗證的 AI 交付流程"}</h1>
+          <p>{lang === "en" ? "Human intent sets the boundary. Automated evidence decides whether the change can move forward." : "由人定義意圖與邊界，再以自動化證據決定變更能否繼續前進。"}</p>
+        </header>
+        <CypherArchitecture lang={lang} view="process" />
+      </section>
+    </main>
   );
 }
 
@@ -455,40 +524,12 @@ export function CaseStudy({ project, modal = false, onClose }: { project: Projec
           <p>{project.summary[lang]}</p>
         </div>
 
-        {project.slug === "cypherlab" ? <CypherArchitecture lang={lang} /> : project.slug === "mediconcen" ? <MediconcenJourney lang={lang} /> : <div className="case-body">
-          <figure className="case-visual">
-            <Image src={project.visual} alt={project.visualAlt[lang]} width={1440} height={900} priority sizes="(max-width: 900px) 100vw, 68vw" />
-            <figcaption>{lang === "en" ? "Recreated interface · fictional data" : "重建介面 · 虛構資料"}</figcaption>
-          </figure>
+        <CaseProof project={project} lang={lang} />
 
-          <aside className="case-notes">
-            <div className="brief-block">
-              <h2>{lang === "en" ? "Product" : "產品"}</h2>
-              <p>{project.product[lang]}</p>
-              <small>{lang === "en" ? "For" : "使用者"} — {project.users[lang]}</small>
-            </div>
-
-            <div className="brief-block">
-              <h2>{lang === "en" ? "Core flow" : "核心流程"}</h2>
-              <ol>{project.workflows[lang].map((workflow) => <li key={workflow}>{workflow}</li>)}</ol>
-            </div>
-
-            <div className="brief-block engineering-brief">
-              <h2>{lang === "en" ? "Engineering" : "工程重點"}</h2>
-              <dl>{project.decisions.map((decision) => <div key={decision.title.en}><dt>{decision.title[lang]}</dt><dd>{decision.body[lang]}</dd></div>)}</dl>
-            </div>
-
-            <div className="brief-block stack-brief">
-              <h2>{lang === "en" ? "Stack" : "技術"}</h2>
-              <p>{project.fullStack.join(" · ")}</p>
-            </div>
-
-            <details className="public-boundary">
-              <summary>{lang === "en" ? "Public boundary" : "公開邊界"}</summary>
-              <p>{project.boundary[lang]}</p>
-            </details>
-          </aside>
-        </div>}
+        {project.slug === "cypherlab" ? <CypherArchitecture lang={lang} />
+          : project.slug === "mediconcen" ? <MediconcenJourney lang={lang} />
+          : project.slug === "carharbor" ? <CarHarborStory project={project} lang={lang} />
+          : <ChengguangStory project={project} lang={lang} />}
 
         {!modal && <footer className="case-footer">
           <Link href="/">{lang === "en" ? "Back to cover flow" : "返回 Cover Flow"}</Link>

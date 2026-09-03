@@ -17,7 +17,7 @@ export function Header() {
   if (isHome) return (
     <nav className="home-language home-tools" aria-label={lang === "en" ? "Homepage utilities" : "首頁工具列"}>
       <a href="#about">{lang === "en" ? "About" : "關於"}</a>
-      <Link href="/resume" target="_blank">{lang === "en" ? "Resume ↗" : "履歷 ↗"}</Link>
+      <a className="mobile-primary" href={links.resume} download>{lang === "en" ? "Resume ↓" : "履歷 ↓"}</a>
       <a href={links.linkedin} target="_blank" rel="noreferrer">LinkedIn ↗</a>
       <a href={links.email}>Email ↗</a>
       <a href={links.github} target="_blank" rel="noreferrer">GitHub ↗</a>
@@ -33,7 +33,7 @@ export function Header() {
       </Link>
       <nav aria-label={lang === "en" ? "Primary navigation" : "主要導覽"}>
         <Link href={isHome ? "#about" : "/#about"}>{lang === "en" ? "About" : "關於"}</Link>
-        <Link href="/resume" target="_blank">{lang === "en" ? "Resume ↗" : "履歷 ↗"}</Link>
+        <a href={links.resume} download>{lang === "en" ? "Resume ↓" : "履歷 ↓"}</a>
         {languageSwitch}
       </nav>
     </header>
