@@ -291,20 +291,18 @@ export const experience = {
     { year: '2018', when: '2018.01 – 2021.07', org: 'ULIC TEK', role: { en: 'Software Engineer', zh: '軟體工程師' } as L, what: { en: 'Image processing in C++ and OpenCV, and desktop-web hybrid apps.', zh: 'C++ 與 OpenCV 影像處理，以及桌面與網頁混合應用。' } as L },
   ],
   education: { en: 'BSc Chemistry, Chia Nan University of Pharmacy and Science, 2017', zh: '嘉南藥理大學 化學系學士，2017' } as L,
-  languages: { en: 'English · Mandarin · basic Japanese', zh: '英文 · 中文 · 基礎日文' } as L,
+  languages: { en: 'English · Mandarin', zh: '英文 · 中文' } as L,
 };
 
 export const contact = {
   title: { en: "Let's build the next one", zh: '一起做下一個作品' } as L,
   lede: { en: "That's a wrap on the tour. The next scene is yours.", zh: '這趟旅程殺青了，下一幕交給你。' } as L,
   hiring: { en: 'Hiring for a remote role?', zh: '正在招募遠端工程師？' } as L,
-  hiringLine: { en: 'Pick the résumé that fits the role, or write to me directly.', zh: '挑一份符合職缺的履歷，或直接寫信給我。' } as L,
+  hiringLine: { en: 'Download my backend résumé, or email me directly.', zh: '下載後端履歷，或直接寫信給我。' } as L,
   project: { en: 'Need a site or system built?', zh: '需要網站或系統？' } as L,
   projectLine: { en: 'Tell me what it has to do. I reply within a day.', zh: '告訴我它要做到什麼，我一天內回覆。' } as L,
   email: { en: 'Email me', zh: '寄信給我' } as L,
   resumes: [
-    { label: { en: 'Full-stack résumé', zh: '全端履歷' } as L, file: 'resume/Victor_Chang_FullStack.pdf' },
-    { label: { en: 'Frontend résumé', zh: '前端履歷' } as L, file: 'resume/Victor_Chang_Frontend.pdf' },
     { label: { en: 'Backend résumé', zh: '後端履歷' } as L, file: 'resume/Victor_Chang_Backend.pdf' },
   ],
 };
