@@ -85,7 +85,7 @@ export const works: Work[] = [
   {
     id: 'cypherlab',
     name: 'CypherLab',
-    sub: { en: 'Live odds operators can trust', zh: '讓營運人員信得過的即時賠率' },
+    sub: { en: 'A real-time back office that keeps pace with the match', zh: '掌握賽事變化的即時營運後台' },
     meta: { en: 'Real-time sportsbook back office · 2026', zh: '即時體育博彩營運後台 · 2026' },
     story: {
       en: "Sports and e-sports markets move every second. I helped rebuild the operators' back office from scratch: a modular Go BFF behind a React console, fed by a real-time pipeline that never shows a stale price.",
