@@ -940,7 +940,8 @@ main {
     display: flex;
     flex-direction: column;
   }
-  .tag--hero .tag__story {
+  .tag--hero .tag__story,
+  .tag--hero .tag__note {
     order: 1;
   }
   .tag__shots {

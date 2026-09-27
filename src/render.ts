@@ -31,6 +31,7 @@ function introSection() {
       <p class="tag__role">${t(hero.role)}</p>
       <p class="tag__promise">${t(hero.promise)}</p>
       <p class="tag__story">${t(hero.sub)}</p>
+      <p class="tag__note">${t(hero.note)}</p>
       <div class="tag__actions">
         <a class="btn btn--primary" href="#${works[0].id}">${t(hero.ctaWork)}${icon.arrow}</a>
         <a class="btn btn--secondary" href="#contact">${t(hero.ctaContact)}</a>

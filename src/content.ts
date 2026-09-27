@@ -33,7 +33,7 @@ export const person = {
 };
 
 export const hero = {
-  role: { en: 'Senior full-stack engineer in Taiwan', zh: '台灣的資深全端工程師' } as L,
+  role: { en: 'Senior full-stack engineer', zh: '資深全端工程師' } as L,
   promise: {
     en: 'I build real-time platforms, client sites and games, end to end.',
     zh: '即時系統、客戶網站、遊戲，從設計到上線我一手完成。',
@@ -42,6 +42,7 @@ export const hero = {
     en: '7+ years across React, TypeScript, Go and the cloud. Open to remote roles, and to building your next product.',
     zh: '7 年以上 React、TypeScript、Go 與雲端經驗。開放遠端職缺，也接網站與系統開發。',
   } as L,
+  note: { en: 'And I work out, too 😳', zh: '而且我有在健身 😳' } as L,
   ctaWork: { en: 'See the works', zh: '看作品' } as L,
   ctaContact: { en: 'Get in touch', zh: '聯絡我' } as L,
   ctaResume: { en: 'Résumé (PDF)', zh: '履歷 PDF' } as L,
