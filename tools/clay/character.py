@@ -67,17 +67,17 @@ def fuse(objs, name, mat, voxel=0.011, smooth=8, lump=0.004, ratio=0.35):
 # ---------------------------------------------------------------- head
 HEAD = Vector((0, 0, 1.42))
 head = fuse([
-    sphere('skull', HEAD, (0.37, 0.345, 0.385)),
-    sphere('cheeks', HEAD + Vector((0, -0.07, -0.1)), (0.315, 0.27, 0.23)),
+    sphere('skull', HEAD, (0.345, 0.325, 0.385)),
+    sphere('cheeks', HEAD + Vector((0, -0.06, -0.1)), (0.275, 0.235, 0.23)),
     sphere('nose', HEAD + Vector((0, -0.345, -0.05)), (0.062, 0.07, 0.07)),
-    sphere('ear_l', HEAD + Vector((0.355, 0.0, -0.02)), (0.05, 0.075, 0.1)),
-    sphere('ear_r', HEAD + Vector((-0.355, 0.0, -0.02)), (0.05, 0.075, 0.1)),
+    sphere('ear_l', HEAD + Vector((0.335, 0.0, -0.02)), (0.05, 0.075, 0.1)),
+    sphere('ear_r', HEAD + Vector((-0.335, 0.0, -0.02)), (0.05, 0.075, 0.1)),
     capsule('neck', (0, 0.01, 1.0), (0, 0.01, 1.12), 0.1),
 ], 'head', M['skin'], voxel=0.009, ratio=0.09)
 
 # Bowl cut: a shell over the skull, rim high at the front, low at the nape.
 hair = lib.prim('sphere', 'hair', loc=HEAD + Vector((0, 0.012, 0.04)), segments=60, ring_count=40, radius=1)
-hair.scale = (0.398, 0.374, 0.412)
+hair.scale = (0.375, 0.354, 0.412)
 lib.apply_transform(hair)
 bm = bmesh.new()
 bm.from_mesh(hair.data)
@@ -109,16 +109,16 @@ for s in (1, -1):
     face.append(lib.assign(lib.shade_smooth(rim), M['glasses']))
     lens = sphere(f'lens_{"l" if s > 0 else "r"}', HEAD + Vector((0.145 * s, -0.378, 0.005)), (0.118, 0.018, 0.118), 40, 24)
     face.append(lib.assign(lib.shade_smooth(lens), M['lens']))
-    temple = capsule(f'temple_{"l" if s > 0 else "r"}', HEAD + Vector((0.268 * s, -0.36, 0.02)), HEAD + Vector((0.36 * s, 0.02, 0.0)), 0.011, 10)
+    temple = capsule(f'temple_{"l" if s > 0 else "r"}', HEAD + Vector((0.268 * s, -0.36, 0.02)), HEAD + Vector((0.335 * s, 0.02, 0.0)), 0.011, 10)
     face.append(lib.assign(lib.shade_smooth(temple), M['glasses']))
 for s in (1, -1):
-    blush = sphere(f'blush_{"l" if s > 0 else "r"}', HEAD + Vector((0.222 * s, -0.262, -0.118)), (0.05, 0.02, 0.031), 24, 12)
+    blush = sphere(f'blush_{"l" if s > 0 else "r"}', HEAD + Vector((0.222 * s, -0.234, -0.118)), (0.05, 0.02, 0.031), 24, 12)
     face.append(lib.assign(lib.shade_smooth(blush), lib.material('clay_blush', '#e3a092', rough=0.6)))
 bridge = capsule('bridge', HEAD + Vector((0.04, -0.385, 0.025)), HEAD + Vector((-0.04, -0.385, 0.025)), 0.011, 10)
 face.append(lib.assign(lib.shade_smooth(bridge), M['glasses']))
 
 for s in (1, -1):
-    smile = capsule(f'smile_{s}', HEAD + Vector((0, -0.336, -0.185)), HEAD + Vector((0.055 * s, -0.327, -0.176)), 0.008, 12)
+    smile = capsule(f'smile_{s}', HEAD + Vector((0, -0.293, -0.185)), HEAD + Vector((0.055 * s, -0.286, -0.176)), 0.008, 12)
     face.append(lib.assign(lib.shade_smooth(smile), M['mouth']))
 
 # A more restrained head proportion, keeping the existing neck joint.
@@ -128,15 +128,15 @@ for o in [head, hair, *face]:
 
 # ---------------------------------------------------------------- body
 tee = fuse([
-    sphere('chest', (0, 0.0, 0.87), (0.29, 0.215, 0.25)),
-    sphere('belly', (0, -0.012, 0.69), (0.275, 0.21, 0.17)),
-    capsule('shoulders', (-0.21, 0.0, 0.985), (0.21, 0.0, 0.985), 0.1),
+    sphere('chest', (0, 0.0, 0.87), (0.245, 0.175, 0.25)),
+    sphere('belly', (0, -0.006, 0.69), (0.205, 0.145, 0.17)),
+    capsule('shoulders', (-0.21, 0.0, 0.985), (0.21, 0.0, 0.985), 0.09),
 ], 'tee', M['tee'], voxel=0.011, ratio=0.17)
 
 sleeves = []
 for s in (1, -1):
     side = 'l' if s > 0 else 'r'
-    sleeves.append(fuse([sphere(f'shoulder_{side}', (0.29 * s, 0.0, 0.98), (0.108, 0.105, 0.108)), capsule(f'sleeve_{side}', (0.29 * s, 0.0, 0.98), (0.375 * s, 0.0, 0.845), 0.094)], f'sleeve_{side}', M['tee'], voxel=0.01, ratio=0.24))
+    sleeves.append(fuse([sphere(f'shoulder_{side}', (0.29 * s, 0.0, 0.98), (0.1, 0.085, 0.1)), capsule(f'sleeve_{side}', (0.29 * s, 0.0, 0.98), (0.375 * s, 0.0, 0.845), 0.079)], f'sleeve_{side}', M['tee'], voxel=0.01, ratio=0.24))
 
 arms = []
 # In the resting pose fingers point down. The thumb sits outside, so raising the palm toward
@@ -146,18 +146,18 @@ THUMB = Vector((0.554, -0.058, 0.56))
 FINGERS = ((0.504, 0.519, 0.476), (0.480, 0.485, 0.458), (0.456, 0.450, 0.470), (0.432, 0.418, 0.492))
 for s in (1, -1):
     side = 'l' if s > 0 else 'r'
-    fore = capsule(f'fore_{side}', (0.385 * s, 0.0, 0.84), (0.455 * s, -0.02, 0.62), 0.062)
+    fore = capsule(f'fore_{side}', (0.385 * s, 0.0, 0.84), (0.455 * s, -0.02, 0.62), 0.054)
     hand = sphere(f'hand_{side}', (PALM.x * s, PALM.y, PALM.z), (0.062, 0.038, 0.057))
     fingers = [capsule(f'finger_{side}_{i}', (base * s, -0.03, 0.532), (tip * s, -0.033, z), 0.014 if i < 3 else 0.012, 16) for i, (base, tip, z) in enumerate(FINGERS)]
     thumb = capsule(f'thumb_{side}', (0.515 * s, -0.043, 0.584), (THUMB.x * s, THUMB.y, THUMB.z), 0.019, 16)
     arms.append(fuse([fore, hand, *fingers, thumb], f'arm_{side}', M['skin'], voxel=0.005, smooth=4, lump=0.0015, ratio=0.28))
 
 jeans = fuse([
-    sphere('pelvis', (0, 0.0, 0.57), (0.265, 0.2, 0.13)),
-    capsule('leg_l', (0.12, 0.0, 0.56), (0.13, 0.0, 0.16), 0.1),
-    capsule('leg_r', (-0.12, 0.0, 0.56), (-0.13, 0.0, 0.16), 0.1),
-    sphere('cuff_l', (0.13, -0.005, 0.15), (0.108, 0.108, 0.04)),
-    sphere('cuff_r', (-0.13, -0.005, 0.15), (0.108, 0.108, 0.04)),
+    sphere('pelvis', (0, 0.0, 0.57), (0.21, 0.145, 0.105)),
+    capsule('leg_l', (0.12, 0.0, 0.56), (0.13, 0.0, 0.16), 0.085),
+    capsule('leg_r', (-0.12, 0.0, 0.56), (-0.13, 0.0, 0.16), 0.085),
+    sphere('cuff_l', (0.13, -0.005, 0.15), (0.092, 0.092, 0.035)),
+    sphere('cuff_r', (-0.13, -0.005, 0.15), (0.092, 0.092, 0.035)),
 ], 'jeans', M['jeans'], voxel=0.011, ratio=0.22)
 
 shoes = []
@@ -168,19 +168,19 @@ for s in (1, -1):
     shoes.append((side, upper, lib.assign(lib.shade_smooth(sole), M['sole'])))
 
 pack = fuse([
-    sphere('pack_body', (0, 0.255, 0.84), (0.19, 0.1, 0.23)),
-    sphere('pack_flap', (0, 0.28, 1.0), (0.17, 0.085, 0.07)),
-    sphere('pack_pocket', (0, 0.345, 0.76), (0.12, 0.05, 0.09)),
+    sphere('pack_body', (0, 0.225, 0.84), (0.175, 0.085, 0.23)),
+    sphere('pack_flap', (0, 0.247, 1.0), (0.155, 0.075, 0.07)),
+    sphere('pack_pocket', (0, 0.305, 0.76), (0.11, 0.04, 0.09)),
 ], 'pack', M['pack'], voxel=0.01, ratio=0.22)
 
 straps = []
 for s in (1, -1):
     cu = bpy.data.curves.new(f'strap_{s}', 'CURVE')
     cu.dimensions = '3D'
-    cu.bevel_depth = 0.022
+    cu.bevel_depth = 0.018
     cu.bevel_resolution = 3
     sp = cu.splines.new('NURBS')
-    pts = [(0.13 * s, 0.2, 1.0), (0.15 * s, 0.06, 1.085), (0.16 * s, -0.12, 1.03), (0.165 * s, -0.215, 0.9), (0.18 * s, -0.215, 0.74), (0.21 * s, 0.05, 0.66), (0.15 * s, 0.2, 0.66)]
+    pts = [(0.13 * s, 0.17, 1.0), (0.15 * s, 0.06, 1.085), (0.15 * s, -0.1, 1.03), (0.14 * s, -0.17, 0.9), (0.15 * s, -0.155, 0.74), (0.185 * s, 0.035, 0.66), (0.13 * s, 0.17, 0.66)]
     sp.points.add(len(pts) - 1)
     for p, c in zip(sp.points, pts):
         p.co = (*c, 1)
