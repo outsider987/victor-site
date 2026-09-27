@@ -119,10 +119,10 @@ export const works: Work[] = [
     ],
     stack: ['TypeScript', 'React', 'Next.js', 'NestJS', 'Go', 'PostgreSQL', 'Redis', 'AWS', 'Kubernetes'],
     shots: [
-      { src: 'works/mediconcen/ocr.webp', alt: { en: 'OCR claims workbench: a hospital statement beside extracted line items and benefit categories', zh: 'OCR 理賠工作台：醫院收據旁列出擷取的明細與給付類別' } },
-      { src: 'works/mediconcen/clinic.webp', alt: { en: 'MediConCen Clinic app on iOS and Android', zh: 'MediConCen 診所版 App（iOS 與 Android）' } },
+      { src: 'works/mediconcen/portal.webp', alt: { en: 'Clinic Portal home: member verification, consultation records and booking tools', zh: 'Clinic Portal 首頁：會員驗證、就診紀錄與預約等操作入口' } },
+      { src: 'works/mediconcen/records.webp', alt: { en: 'Clinic Portal consultation records with demo entries', zh: 'Clinic Portal 就診紀錄，使用示範資料' } },
     ],
-    note: { en: 'The claims workbench uses a sanitised staging fixture. No patient, clinic or policy data is published.', zh: '理賠工作台使用去識別化的測試資料；不公開任何病患、診所或保單資料。' },
+    note: { en: 'Clinic Portal shown with demo data; no real patient records are displayed.', zh: 'Clinic Portal 畫面使用示範資料，不含真實病患紀錄。' },
   },
   {
     id: '3ccash',

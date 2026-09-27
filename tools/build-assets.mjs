@@ -45,8 +45,8 @@ const R = (p) => join(HOME, p);
 const SHOTS = [
   ['cypherlab/markets', R('github/victor_resume/public/projects/cypherlab/hero.png'), '1760x1100+0+0', 1760],
   ['cypherlab/audit', join(CAP, 'cypherlab-audit-redacted.png'), null, 1600],
-  ['mediconcen/ocr', R('github/victor_resume/public/projects/mediconcen/hero.png'), null, 2048],
-  ['mediconcen/clinic', R('github/victor_resume/public/projects/mediconcen/clinic.png'), null, 1600],
+  ['mediconcen/portal', join(CAP, 'mediconcen-portal-d.png'), null, 2048],
+  ['mediconcen/records', join(CAP, 'mediconcen-records-d.png'), null, 2048],
   ['3ccash/home', join(CAP, '3ccash-d.png'), null, 2048],
   ['3ccash/quote', join(CAP, '3ccash-quote-d.png'), null, 2048],
   ['temple/shop', join(CAP, 'temple-d.png'), null, 2048],
