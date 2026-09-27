@@ -27,16 +27,12 @@ M = {
     'jeans': lib.material('clay_jeans', '#3d5288', rough=0.7),
     'shoe': lib.material('clay_shoe', '#f2ede3', rough=0.55),
     'sole': lib.material('clay_sole', '#c8bfb0', rough=0.6),
-    'eye': lib.material('clay_eye', '#f8f4ec', rough=0.35),
-    'pupil': lib.material('clay_pupil', '#141216', rough=0.25),
     'glasses': lib.material('clay_glasses', '#141318', rough=0.22),
-    'lens': lib.material('glass_lens', '#dbeaff', rough=0.055, metal=0.1),
+    'lens': lib.material('glass_lens', '#bbd2ee', rough=0.075, metal=0.85),
     'mouth': lib.material('clay_mouth', '#6a2a30', rough=0.5),
-    'brow': lib.material('clay_brow', '#1c1a20', rough=0.55),
     'pack': lib.material('clay_pack', '#a06d45', rough=0.65),
     'strap': lib.material('clay_strap', '#6d4930', rough=0.6),
 }
-next(n for n in M['lens'].node_tree.nodes if n.type == 'BSDF_PRINCIPLED').inputs['Alpha'].default_value = 0.24
 
 
 def sphere(name, loc, radii, seg=48, rings=32):
@@ -105,24 +101,9 @@ lib.modifier(hair, 'SOLIDIFY', thickness=0.04, offset=-1)
 lib.shade_smooth(hair)
 lib.assign(hair, M['hair'])
 
-# Round glasses with a gentle reflective tint and a quiet expression.
+# Opaque reflective round glasses, with no eyes or eyelids behind them.
 face = []
 for s in (1, -1):
-    ec = HEAD + Vector((0.128 * s, -0.302, 0.012))
-    eye = sphere(f'eye_{"l" if s > 0 else "r"}', ec, (0.055, 0.035, 0.042), 32, 20)
-    face.append(lib.assign(eye, M['eye']))
-    pupil = sphere(f'pupil_{"l" if s > 0 else "r"}', HEAD + Vector((0.128 * s, -0.337, 0.0)), (0.023, 0.014, 0.026), 24, 14)
-    face.append(lib.assign(pupil, M['pupil']))
-    lid = sphere(f'lid_{"l" if s > 0 else "r"}', ec + Vector((0, -0.002, 0.004)), (0.060, 0.041, 0.048), 32, 20)
-    lbm = bmesh.new()
-    lbm.from_mesh(lid.data)
-    bmesh.ops.delete(lbm, geom=[v for v in lbm.verts if v.co.z < ec.z + 0.016], context='VERTS')
-    lbm.to_mesh(lid.data)
-    lbm.free()
-    lib.modifier(lid, 'SOLIDIFY', thickness=0.008, offset=1)
-    face.append(lib.assign(lib.shade_smooth(lid), M['skin']))
-    brow = capsule(f'brow_{"l" if s > 0 else "r"}', HEAD + Vector((0.07 * s, -0.33, 0.1)), HEAD + Vector((0.19 * s, -0.305, 0.09)), 0.018, 12)
-    face.append(lib.assign(lib.shade_smooth(brow), M['brow']))
     rim = lib.prim('torus', f'rim_{"l" if s > 0 else "r"}', loc=HEAD + Vector((0.145 * s, -0.372, 0.005)), rot=(math.radians(90), 0, 0), major_radius=0.125, minor_radius=0.011, major_segments=48, minor_segments=12)
     lib.apply_transform(rim)
     face.append(lib.assign(lib.shade_smooth(rim), M['glasses']))
@@ -417,11 +398,11 @@ keyframes('hop', [
 bpy.context.scene.frame_set(0)
 parts = [head, hair, *face, tee, *sleeves, *arms, jeans, *[o for _, u, so in shoes for o in (u, so)], pack, *straps]
 print('TRIS', sum(lib.tris(o) for o in parts), {o.name: lib.tris(o) for o in parts if lib.tris(o) > 2000})
-# One skinned mesh: matte clay in vertex colours, glossy eyes and glasses, hair on its own.
+# One skinned mesh: matte clay in vertex colours, glossy glasses, hair on its own.
 body = lib.join(parts, 'VictorBody')
 glossy = lib.material('clay_glossvc', '#ffffff', rough=0.2)
 matte = lib.material('clay_vc', '#ffffff', rough=0.62)
-lib.bake_vertex_colors(body, keep={'clay_hair', 'glass_lens'}, groups={'*': matte, 'clay_glasses': glossy, 'clay_eye': glossy, 'clay_pupil': glossy})
+lib.bake_vertex_colors(body, keep={'clay_hair', 'glass_lens'}, groups={'*': matte, 'clay_glasses': glossy})
 assert any(m.name == 'glass_lens' for m in body.data.materials), 'Spectacles must keep their reflective material'
 parts = [body]
 print('BODY slots', [m.name for m in body.data.materials], 'tris', lib.tris(body))
