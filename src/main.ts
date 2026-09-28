@@ -100,10 +100,6 @@ async function boot() {
     root.classList.add('no-gl');
     return;
   }
-  // Behind the loader, draw every tag once at full strength (see .is-warm in the styles), then
-  // give the browser two frames to paint them before the GPU gets busy with WebGL.
-  root.classList.add('is-warm');
-  await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
   try {
     const { createWorld } = await gl;
     const world = await createWorld(document.getElementById('world') as HTMLCanvasElement, {
@@ -115,18 +111,12 @@ async function boot() {
     reducedMotion.addEventListener('change', (e) => world.setReducedMotion(e.matches));
     scroll.onChange(({ p }) => world.setProgress(p));
     world.setProgress(scroll.p);
-    reveal();
+    loader.classList.add('is-done');
   } catch (err) {
     console.warn('3D scene unavailable, showing the flat version:', err);
     root.classList.add('no-gl');
-    reveal();
+    loader.classList.add('is-done');
   }
-}
-
-// The warm-up pose comes off one frame before the loader starts to fade, so it's never seen.
-function reveal() {
-  root.classList.remove('is-warm');
-  requestAnimationFrame(() => requestAnimationFrame(() => loader.classList.add('is-done')));
 }
 // Start the world once the page has reached the screen. Creating a WebGL context can hold the
 // GPU process for up to a second, and before first paint that would keep the page blank.

@@ -51,7 +51,8 @@ export async function createWorld(canvas: HTMLCanvasElement, opts: Opts): Promis
       bytes[name] = [e.loaded, e.total || 2e6];
       report();
     });
-  const assets = Promise.all([load('victor'), load('props'), fontsReady()]);
+  const fonts = fontsReady();
+  const assets = Promise.all([load('victor'), load('props')]);
   assets.catch(() => {}); // awaited below; this only keeps an early failure from going unhandled
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, powerPreference: 'high-performance', stencil: false });
   let tier: Tier = detectTier(renderer);
@@ -70,10 +71,7 @@ export async function createWorld(canvas: HTMLCanvasElement, opts: Opts): Promis
   let layout: Layout = matchMedia('(max-width: 760px)').matches ? 'phone' : 'desktop';
   const post = new Post(renderer, scene, camera, tier);
 
-  // While the models download, one pass of the empty scene compiles the post chain's shaders.
-  await new Promise((r) => requestAnimationFrame(r));
-  post.render(0);
-  const [victorGltf, propsGltf] = (await assets) as [GLTF, GLTF, void];
+  const [victorGltf, propsGltf] = (await assets) as [GLTF, GLTF];
 
   const protos = new Map<string, THREE.Object3D>();
   for (const child of [...propsGltf.scene.children]) {
@@ -132,31 +130,6 @@ export async function createWorld(canvas: HTMLCanvasElement, opts: Opts): Promis
   const lampSpots = stations.flatMap((s) => s.lamps);
 
   const rig = new Rig(camera);
-  stations.forEach((s) => (s.group.visible = true));
-  // Warm every shader before the loader lifts. Programs are keyed on the render target, so compile
-  // against the one the scene really draws into: the composer's float buffer, or the canvas on low.
-  try {
-    const target = post.composer?.inputBuffer ?? null;
-    renderer.setRenderTarget(target);
-    const ready = renderer.compileAsync(scene, camera);
-    renderer.setRenderTarget(null);
-    await ready;
-    // Then draw everything once, unculled and fully built: every geometry, label and shadow
-    // program reaches the GPU now rather than mid-scroll.
-    const culled: THREE.Object3D[] = [];
-    const hidden: THREE.Object3D[] = [];
-    scene.traverse((o) => {
-      if (!o.visible && !(o as THREE.Light).isLight) (o.visible = true), hidden.push(o);
-      if (o.frustumCulled) (o.frustumCulled = false), culled.push(o);
-    });
-    renderer.setRenderTarget(target);
-    renderer.render(scene, camera);
-    renderer.setRenderTarget(null);
-    hidden.forEach((o) => (o.visible = false));
-    culled.forEach((o) => (o.frustumCulled = true));
-  } catch {
-    /* compile lazily instead */
-  }
   let restShots: Shot[] = [];
   // Each station frames its subject beside its own paper tag, measured from the page.
   const tags = [...document.querySelectorAll<HTMLElement>('.station .tag')];
@@ -173,18 +146,6 @@ export async function createWorld(canvas: HTMLCanvasElement, opts: Opts): Promis
     });
   };
   computeShots();
-
-  // Film one real frame at every stop while the loader is up: drivers put textures and buffers
-  // into video memory the first time something samples them on screen, and that first time
-  // would otherwise land mid-scroll.
-  stations.forEach((_, j) => {
-    stations.forEach((o, k) => (o.group.visible = Math.abs(k - j) < 1.75));
-    camera.position.copy(restShots[j].pos);
-    camera.lookAt(restShots[j].look);
-    env.update(j, 0, stations[j].focus.center, camera.position.x);
-    post.render(0);
-  });
-  stations.forEach((s) => (s.group.visible = true));
 
   const resize = () => {
     layout = matchMedia('(max-width: 760px)').matches ? 'phone' : 'desktop';
@@ -206,6 +167,12 @@ export async function createWorld(canvas: HTMLCanvasElement, opts: Opts): Promis
   let lastTick = -1;
   let yawView = 0;
   let kick = 60; // frames to render unconditionally (first frames, resizes)
+  let currentLang = opts.lang;
+  // Font downloads can finish after the scene starts; refresh the clay signs when they do.
+  void fonts.then(() => {
+    stations.forEach((s) => s.setLang(currentLang));
+    kick = Math.max(kick, 2);
+  });
   // Opening shot: waits for the first progress (the loader lifting), plays once. Its clock sums
   // capped frame deltas, so a hitch slows it down instead of skipping it.
   let intro: 'pending' | 'running' | 'done' = 'pending';
@@ -376,6 +343,7 @@ export async function createWorld(canvas: HTMLCanvasElement, opts: Opts): Promis
       started = true;
     },
     setLang(l: Lang) {
+      currentLang = l;
       stations.forEach((s) => s.setLang(l));
       kick = Math.max(kick, 2);
     },

@@ -211,6 +211,8 @@ export function renderHead(base: string) {
     <meta property="og:type" content="website">
     <meta property="og:title" content="${esc(site.title.en)}">
     <meta property="og:description" content="${esc(site.description.en)}">
+    <link rel="preload" as="image" href="${base}ui/first-scene-desktop.jpg" media="(min-width: 761px)" fetchpriority="high">
+    <link rel="preload" as="image" href="${base}ui/first-scene-mobile.jpg" media="(max-width: 760px)" fetchpriority="high">
     <script>
       // Start the clay models downloading now, but only where they can be drawn.
       if ('WebGL2RenderingContext' in window) ['props', 'victor'].forEach(function (m) {
