@@ -179,7 +179,13 @@ export function renderBody() {
   </div>
 </header>
 <canvas class="world" id="world" aria-hidden="true"></canvas>
-<div class="loader" id="loader" role="status"><span class="loader__ball" aria-hidden="true"></span><span class="loader__text">${t(site.loading)}<span class="loader__pct" id="loader-pct"></span></span></div>
+<div class="loader" id="loader" role="status">
+  <div class="loader__card">
+    <span class="tag__pin loader__pin" aria-hidden="true"></span>
+    <span class="loader__spinner" aria-hidden="true"><span class="loader__ball"></span><span class="loader__ball"></span><span class="loader__ball"></span><span class="loader__ball"></span></span>
+    <span class="loader__text">${t(site.loading)}</span>
+  </div>
+</div>
 <main id="content">
 ${sections}
 </main>

@@ -88,7 +88,6 @@ lb.addEventListener('keydown', (e) => {
 
 // ---------------------------------------------------------------- the clay world
 const loader = document.getElementById('loader')!;
-const pct = document.getElementById('loader-pct')!;
 // Fetch the 3D chunk now; build the world once the page has painted (creating a WebGL context
 // can hold the main thread for most of a second). If the context can't be made, createWorld
 // throws and the page stays flat.
@@ -105,7 +104,6 @@ async function boot() {
     const world = await createWorld(document.getElementById('world') as HTMLCanvasElement, {
       lang,
       reducedMotion: reducedMotion.matches,
-      onProgress: (v) => (pct.textContent = `${Math.round(v * 100)}%`),
     });
     langListeners.push((l) => world.setLang(l));
     reducedMotion.addEventListener('change', (e) => world.setReducedMotion(e.matches));

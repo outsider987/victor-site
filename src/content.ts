@@ -10,7 +10,7 @@ export const site = {
   } as L,
   ogAlt: 'A clay figure of Victor Chang stands in a clay village beside a paper tag with his name and role.',
   skip: { en: 'Skip to content', zh: '跳到內容' } as L,
-  loading: { en: 'Setting up the set', zh: '正在搭布景' } as L,
+  loading: { en: 'Loading the clay world…', zh: '黏土世界載入中…' } as L,
   scroll: { en: 'Scroll to walk', zh: '往下滾，一起走' } as L,
   nav: {
     work: { en: 'Work', zh: '作品' } as L,

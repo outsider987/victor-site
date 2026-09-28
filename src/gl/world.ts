@@ -18,7 +18,7 @@ export type World = {
   setReducedMotion(v: boolean): void;
 };
 
-type Opts = { lang: Lang; reducedMotion: boolean; onProgress: (v: number) => void };
+type Opts = { lang: Lang; reducedMotion: boolean };
 
 const UP = new THREE.Vector3(0, 1, 0);
 const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
@@ -36,21 +36,11 @@ function lerpShot(out: Shot, from: Shot, to: Shot, w: number) {
 }
 
 export async function createWorld(canvas: HTMLCanvasElement, opts: Opts): Promise<World> {
-  // Models first: they're the longest wait (the page preloads them too). Progress is byte-level.
+  // Models first: they're the longest wait (the page preloads them too).
   const loader = new GLTFLoader();
   loader.setMeshoptDecoder(MeshoptDecoder);
   const base = import.meta.env.BASE_URL;
-  const bytes: Record<string, [number, number]> = {};
-  const report = () => {
-    const v = Object.values(bytes);
-    const total = v.reduce((a, [, t]) => a + t, 0) || 1;
-    opts.onProgress(Math.min(0.97, v.reduce((a, [l]) => a + l, 0) / total));
-  };
-  const load = (name: string) =>
-    loader.loadAsync(`${base}models/${name}.glb`, (e) => {
-      bytes[name] = [e.loaded, e.total || 2e6];
-      report();
-    });
+  const load = (name: string) => loader.loadAsync(`${base}models/${name}.glb`);
   const fonts = fontsReady();
   const assets = Promise.all([load('victor'), load('props')]);
   assets.catch(() => {}); // awaited below; this only keeps an early failure from going unhandled
