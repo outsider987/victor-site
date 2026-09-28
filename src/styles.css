@@ -311,6 +311,25 @@ main {
   letter-spacing: -0.035em;
   font-variation-settings: 'wdth' 84;
 }
+.tag__identity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.tag__identity .tag__title {
+  flex: 1;
+  min-width: 0;
+}
+.tag__portrait {
+  flex: none;
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border: 4px solid var(--paper-2);
+  border-radius: 10px;
+  box-shadow: 0 6px 12px -5px rgba(43, 31, 44, 0.5);
+  transform: rotate(4deg);
+}
 .tag__alias {
   font-family: var(--font-zh-display);
   font-weight: 700;

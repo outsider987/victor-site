@@ -27,7 +27,10 @@ function introSection() {
   return `${stationOpen('hello', 'intro', 0, 'hello-title')}
     <article class="tag tag--hero">
       <span class="tag__pin" aria-hidden="true"></span>
-      <h1 class="tag__title tag__title--hero" id="hello-title">${esc(person.name)}</h1>
+      <div class="tag__identity">
+        <h1 class="tag__title tag__title--hero" id="hello-title">${esc(person.name)}</h1>
+        <img class="tag__portrait" src="ui/victor-portrait.webp" ${attr('alt', { en: 'Headshot of Victor Chang', zh: 'Victor Chang 的大頭照' })} width="80" height="80" fetchpriority="high" decoding="async">
+      </div>
       <p class="tag__role">${t(hero.role)}</p>
       <p class="tag__promise">${t(hero.promise)}</p>
       <p class="tag__story">${t(hero.sub)}</p>
@@ -217,6 +220,7 @@ export function renderHead(base: string) {
     <meta property="og:type" content="website">
     <meta property="og:title" content="${esc(site.title.en)}">
     <meta property="og:description" content="${esc(site.description.en)}">
+    <link rel="preload" as="image" href="${base}ui/victor-portrait.webp" fetchpriority="high">
     <link rel="preload" as="image" href="${base}ui/first-scene-desktop.jpg" media="(min-width: 761px)" fetchpriority="high">
     <link rel="preload" as="image" href="${base}ui/first-scene-mobile.jpg" media="(max-width: 760px)" fetchpriority="high">
     <script>
