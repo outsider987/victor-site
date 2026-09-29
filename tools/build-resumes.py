@@ -1,4 +1,4 @@
-"""Build the two English one-page resumes with a local Chromium installation."""
+"""Build the three English one-page resumes with a local Chromium installation."""
 
 from html import escape
 from pathlib import Path
@@ -38,7 +38,7 @@ li { margin: 0 0 .55mm; padding-left: .2mm; }
 
 RESUMES = {
     "Victor_Chang_Backend.pdf": {
-        "headline": "",
+        "headline": "SENIOR BACKEND ENGINEER | GO · DISTRIBUTED SYSTEMS · REAL-TIME PLATFORMS",
         "profile": (
             "Backend-focused Software Engineer with 7+ years of experience building production platforms, "
             "distributed services, real-time systems, and partner integrations. Experienced with Go, "
@@ -96,7 +96,8 @@ RESUMES = {
             ("Backend", "Go, Node.js, NestJS, gRPC, REST APIs, WebSocket, NATS JetStream"),
             ("Data", "PostgreSQL, MySQL, Redis, ClickHouse, MongoDB"),
             ("Cloud & Architecture", "AWS, Docker, Kubernetes, Microservices, Event-Driven Architecture, CI/CD, Linux, Nginx"),
-            ("Frontend & Tools", "React, Vue, Next.js, Nuxt, TypeScript, Git, Jira, Postman | English, Mandarin"),
+            ("Frontend & Tools", "React, Vue, Next.js, Nuxt, TypeScript, Git, Jira, Postman"),
+            ("Languages", "English, Mandarin"),
         ],
     },
     "Victor_Chang_FullStack.pdf": {
@@ -114,10 +115,10 @@ RESUMES = {
                 "company": "Cypherlab Sdn. Bhd.", "date": "Feb 2026 – Aug 2026",
                 "role": "Senior Full-Stack Engineer",
                 "context": "Real-time sports and e-sports betting backoffice platform",
-                "stack": "TypeScript, React, Go, gRPC, NATS JetStream, WebSocket, PostgreSQL, Redis, ClickHouse, Docker, Kubernetes",
+                "stack": "TypeScript, React, TanStack Query, Go, gRPC, NATS JetStream, WebSocket, PostgreSQL, Redis, ClickHouse, Docker, Kubernetes",
                 "bullets": [
                     "Built <strong>React and TypeScript backoffice workflows</strong> for live sports and e-sports operations while contributing to a <strong>domain-oriented modular BFF in Go</strong>, integrating sports-manager HTTP APIs with order-book, wallet, and user-service via gRPC.",
-                    "Modularized WebSocket message handling and built a <strong>NATS JetStream → in-memory projections → WebSocket</strong> pipeline, handling event ordering and stale updates to maintain consistent real-time market and odds state.",
+                    "Connected a <strong>NATS JetStream → in-memory projections → WebSocket</strong> pipeline to HTTP market snapshots cached with <strong>TanStack Query</strong>; patched known updates and refetched structural changes while guarding against stale events.",
                     "Delivered operator controls for <strong>market closure and odds overrides</strong> and implemented a shared <strong>Command Gate</strong> for high-risk actions with operation reasons, idempotency, maker-checker validation, and audit trails.",
                     "Separated API serving, ClickHouse ingestion, and settlement processing into independent Go binaries deployed as Kubernetes workloads, isolating synchronous API traffic from asynchronous processing.",
                 ],
@@ -155,10 +156,70 @@ RESUMES = {
             },
         ],
         "skills": [
-            ("Frontend", "React, TypeScript, JavaScript, Next.js, Vue, Nuxt, SSR, SEO, WebSocket, Component Architecture"),
+            ("Frontend", "React, TypeScript, TanStack Query, Next.js, Vue, Nuxt, SSR, SEO, WebSocket"),
             ("Backend", "Go, Node.js, NestJS, Express, gRPC, REST APIs, WebSocket, NATS JetStream"),
             ("Data", "PostgreSQL, MySQL, Redis, ClickHouse, MongoDB"),
             ("Cloud & Architecture", "AWS, Docker, Kubernetes, Microservices, Event-Driven Architecture, CI/CD, Linux, Nginx"),
+            ("Languages", "English, Mandarin"),
+        ],
+    },
+    "Victor_Chang_Frontend.pdf": {
+        "headline": "SENIOR FRONTEND ENGINEER | REACT · TYPESCRIPT · REAL-TIME WEB APPLICATIONS",
+        "profile": (
+            "Senior Frontend Engineer with 7+ years of experience building React/TypeScript and Vue/Nuxt "
+            "web applications. Focused on real-time operator interfaces, server-state caching, SSR/SEO, "
+            "and modernizing data-heavy workflows. Backend experience with Go and NestJS connects "
+            "interface decisions to APIs and production operations."
+        ),
+        "jobs": [
+            {
+                "company": "Cypherlab Sdn. Bhd.", "date": "Feb 2026 – Aug 2026",
+                "role": "Senior Full-Stack Engineer",
+                "context": "Real-time sports and e-sports betting backoffice platform",
+                "stack": "React, TypeScript, TanStack Query, WebSocket, Go",
+                "bullets": [
+                    "Built <strong>React and TypeScript</strong> workflows for live sports and e-sports operators, including market closure and odds overrides.",
+                    "Used <strong>TanStack Query</strong> to cache HTTP market snapshots, patch matching WebSocket updates, and refetch when market structure changed; kept filters and dialogs in local React state.",
+                    "Modularized WebSocket handling by feature and guarded live updates by sequence to prevent older market data from replacing newer values.",
+                ],
+            },
+            {
+                "company": "Mediconcen", "date": "Feb 2022 – Jan 2026",
+                "role": "Senior Full-Stack Engineer",
+                "context": "Hong Kong-based InsurTech delivering digital health insurance solutions",
+                "stack": "TypeScript, React, NestJS, Go, PostgreSQL, Redis, AWS, Docker, Kubernetes",
+                "bullets": [
+                    "Modernized a legacy <strong>React</strong> codebase from class components to Hooks, improving maintainability of clinic and insurer workflows.",
+                    "Implemented <strong>infinite scrolling and list virtualization</strong> for large, data-heavy views, loading paginated results on demand while rendering only visible rows.",
+                    "Built clinic-to-insurer workflows for eligibility checks, copayment calculation, claim submission, and third-party insurer APIs.",
+                    "Owned onboarding for new clinic and insurer partners, from requirements and task breakdown through development, release, and production support.",
+                    "Worked with Product Managers to turn business workflows and technical constraints into scoped engineering tasks.",
+                ],
+            },
+            {
+                "company": "Paradromix", "date": "Jul 2021 – Feb 2022",
+                "role": "Frontend Engineer",
+                "context": "Government-grade crypto management systems and enterprise web platforms",
+                "stack": "TypeScript, Vue, Nuxt (SSR), AWS, Nginx, Docker",
+                "bullets": [
+                    "Led frontend delivery for <strong>Nuxt SSR</strong> platforms and built a custom CMS for non-technical teams, with focus on SEO and maintainable UI architecture.",
+                ],
+            },
+            {
+                "company": "ULIC TEK", "date": "Jan 2018 – Jul 2021",
+                "role": "Software Engineer",
+                "context": "Image processing systems and industrial desktop-web hybrid solutions",
+                "stack": "Vue, TypeScript, Angular, C++, MFC, OpenCV",
+                "bullets": [
+                    "Modernized legacy desktop applications with web-based UI layers and built image-processing functionality in <strong>C++/OpenCV</strong>.",
+                ],
+            },
+        ],
+        "skills": [
+            ("Frontend", "React, TypeScript, JavaScript, TanStack Query, Next.js, Vue, Nuxt, HTML, CSS"),
+            ("Frontend Engineering", "React Hooks, SSR, SEO, WebSocket, REST APIs, Component Architecture"),
+            ("Backend & Data", "Go, Node.js, NestJS, PostgreSQL, Redis, NATS JetStream"),
+            ("Cloud & Tools", "AWS, Docker, CI/CD, Linux, Nginx, Git"),
             ("Languages", "English, Mandarin"),
         ],
     },
@@ -185,7 +246,8 @@ def render_resume(resume):
     <style>{STYLE}</style></head><body><main class="page">
       <header><h1>CHANG YAO HSIEN (VICTOR)</h1>{headline}
         <p class="contacts"><a href="mailto:t790219520@gmail.com">t790219520@gmail.com</a> &nbsp;◇&nbsp;
-          <a href="https://linkedin.com/in/yao-hsien-chang">linkedin.com/in/yao-hsien-chang</a></p></header>
+          <a href="https://linkedin.com/in/yao-hsien-chang">linkedin.com/in/yao-hsien-chang</a> &nbsp;◇&nbsp;
+          <a href="https://outsider987.github.io/victor-site/">outsider987.github.io/victor-site/</a></p></header>
       <section><h2>PROFILE</h2><p>{escape(resume['profile'])}</p></section>
       <section><h2>EXPERIENCE</h2>{jobs}</section>
       <section><h2>TECHNICAL SKILLS</h2>{skills}</section>

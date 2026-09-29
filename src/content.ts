@@ -93,10 +93,12 @@ export const works: Work[] = [
     },
     beats: [
       { en: 'NATS JetStream → in-memory projections → WebSocket, with per-match sequence guards that drop stale updates.', zh: 'NATS JetStream → 記憶體投影 → WebSocket，每場比賽以序號把關，過期更新直接丟棄。' },
+      { en: 'TanStack Query caches the HTTP markets snapshot; WebSocket patches matching rows and refetches when the market structure changes.', zh: 'TanStack Query 快取 HTTP 盤口快照；WebSocket 直接更新可對應的資料，盤口結構變動時重新抓取。' },
+      { en: 'Filters and dialogs stay in React state. RTK Query would add Redux Toolkit to this Redux-free app; Zustand alone would need its own server-cache policy. Event ordering and resync still need explicit handling.', zh: '篩選與對話框留在 React 本地狀態。這個專案未使用 Redux；改用 RTK Query 需引入 Redux Toolkit，單用 Zustand 得自行處理伺服器快取。事件順序與重新同步仍須自行維護。' },
       { en: 'A shared Command Gate: closing a market or overriding odds requires a reason, idempotency, maker-checker approval and an audit trail.', zh: '共用 Command Gate：關盤、改賠率都必須附理由、具冪等性、經雙人覆核並留下稽核紀錄。' },
       { en: 'API serving, ClickHouse ingestion and settlement run as separate Go binaries on Kubernetes from one distroless image.', zh: 'API、ClickHouse 寫入與結算拆成獨立 Go 執行檔，共用同一個 distroless 映像跑在 Kubernetes。' },
     ],
-    stack: ['Go', 'gRPC', 'NATS JetStream', 'WebSocket', 'React', 'TypeScript', 'PostgreSQL', 'Redis', 'ClickHouse', 'Kubernetes'],
+    stack: ['Go', 'gRPC', 'NATS JetStream', 'WebSocket', 'React', 'TypeScript', 'TanStack Query', 'PostgreSQL', 'Redis', 'ClickHouse', 'Kubernetes'],
     shots: [
       { src: 'works/cypherlab/markets.webp', alt: { en: 'CypherLab match markets board with per-market status and actions', zh: 'CypherLab 賽事盤口面板，含各盤口狀態與操作' } },
       { src: 'works/cypherlab/audit.webp', alt: { en: 'Audit log with an action reason and before/after change, operator names blurred', zh: '稽核紀錄與操作理由、變更前後對照，操作者已模糊處理' } },
