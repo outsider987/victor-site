@@ -6,7 +6,8 @@ import type { Lang } from '../content';
 import { claymate } from './clay';
 import { createEnvironment, roadZ } from './environment';
 import { fontsReady } from './labels';
-import { detectTier, Post, type Tier } from './post';
+import { detectTier, Post } from './post';
+import { lowerTier, pixelRatio, type Tier } from './quality';
 import { followShot, frameRect, PHONE_REGION, Rig, type Layout, type Region, type Shot } from './rig';
 import { setMaxAnisotropy, setSmallScreens, uploads } from './screens';
 import { buildStations, GAP } from './stations';
@@ -46,17 +47,22 @@ export async function createWorld(canvas: HTMLCanvasElement, opts: Opts): Promis
   assets.catch(() => {}); // awaited below; this only keeps an early failure from going unhandled
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, powerPreference: 'high-performance', stencil: false });
   let tier: Tier = detectTier(renderer);
-  const dpr = (t: Tier) => Math.min(devicePixelRatio, t === 'high' ? 2 : t === 'medium' ? 1.5 : 1.25);
+  const forcedTier = ['high', 'medium', 'low'].includes(new URLSearchParams(location.search).get('tier') ?? '');
+  const dpr = (t: Tier) => pixelRatio(t, innerWidth, innerHeight, devicePixelRatio);
   renderer.setPixelRatio(dpr(tier));
   renderer.setSize(innerWidth, innerHeight, false);
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFShadowMap;
+  renderer.shadowMap.autoUpdate = false;
+  renderer.shadowMap.needsUpdate = true;
   renderer.info.autoReset = false;
   // Shader logs are for development; in production the check only costs a sync readback per program.
   renderer.debug.checkShaderErrors = import.meta.env.DEV;
   setMaxAnisotropy(renderer.capabilities.getMaxAnisotropy());
 
   const scene = new THREE.Scene();
+  // Update visible branches once before rendering, rather than every postprocessing pass.
+  scene.matrixWorldAutoUpdate = false;
   const camera = new THREE.PerspectiveCamera(35, innerWidth / innerHeight, 0.4, 900);
   let layout: Layout = matchMedia('(max-width: 760px)').matches ? 'phone' : 'desktop';
   const post = new Post(renderer, scene, camera, tier);
@@ -139,6 +145,7 @@ export async function createWorld(canvas: HTMLCanvasElement, opts: Opts): Promis
 
   const resize = () => {
     layout = matchMedia('(max-width: 760px)').matches ? 'phone' : 'desktop';
+    renderer.setPixelRatio(dpr(tier));
     renderer.setSize(innerWidth, innerHeight, false);
     post.setSize(innerWidth, innerHeight);
     camera.aspect = innerWidth / innerHeight;
@@ -172,7 +179,7 @@ export async function createWorld(canvas: HTMLCanvasElement, opts: Opts): Promis
   let firstFrame: (() => void) | null = null;
   const warmed = new Promise<void>((resolve) => (firstFrame = resolve));
   const perfSamples: number[] = [];
-  let perfDone = false;
+  let wasBusy = false;
   let renderMs = 0;
   const timer = new THREE.Timer();
   timer.connect(document);
@@ -180,7 +187,9 @@ export async function createWorld(canvas: HTMLCanvasElement, opts: Opts): Promis
 
   renderer.setAnimationLoop((ts) => {
     timer.update(ts);
-    const dt = Math.min(0.05, timer.getDelta());
+    if (document.hidden) return;
+    const frameSeconds = timer.getDelta();
+    const dt = Math.min(0.05, frameSeconds);
     const time = timer.getElapsed();
     const tickIndex = Math.floor(time * 12);
     const tick = tickIndex !== lastTick;
@@ -220,8 +229,6 @@ export async function createWorld(canvas: HTMLCanvasElement, opts: Opts): Promis
     stations.forEach((s, j) => {
       const dist = Math.abs(pView - j);
       s.group.visible = dist < 1.75;
-      // Hidden stations keep their matrices; skipping them spares a scene-wide update every pass.
-      s.group.matrixWorldAutoUpdate = s.group.visible;
       if (!s.group.visible) return;
       const since = intro === 'pending' ? 0 : intro === 'running' ? introT : 99;
       const build = reduced ? 1 : j === 0 ? clamp01((since - 0.1) / 1.7) : clamp01((pView - (j - 0.62)) / 0.56);
@@ -292,28 +299,38 @@ export async function createWorld(canvas: HTMLCanvasElement, opts: Opts): Promis
       }
     }
     if (busy || tick) {
+      scene.children.forEach((child) => {
+        if (child.visible) child.updateMatrixWorld();
+      });
+      // Pointer-only camera movement doesn't change the light or the held clay poses.
+      renderer.shadowMap.needsUpdate ||= tick || pView !== prev || kick > 0;
       renderer.info.reset();
       const r0 = performance.now();
       post.render(dt);
       renderMs = renderMs * 0.9 + (performance.now() - r0) * 0.1;
       firstFrame?.();
       firstFrame = null;
-      if (!perfDone && time > 4 && busy) {
-        perfSamples.push(dt);
-        if (perfSamples.length >= 90) {
-          perfDone = true;
-          const med = perfSamples.sort((a, b) => a - b)[45];
-          const next: Tier = med > 1 / 20 ? 'low' : med > 1 / 32 && tier === 'high' ? 'medium' : tier;
+      if (!forcedTier && tier !== 'low' && time > 4 && busy && wasBusy && frameSeconds > 0) {
+        // Measure real frame time, not the capped animation delta. Recheck after each downgrade.
+        perfSamples.push(frameSeconds);
+        if (perfSamples.length >= 45) {
+          const med = perfSamples.sort((a, b) => a - b)[22];
+          perfSamples.length = 0;
+          const next = lowerTier(tier, med);
           if (next !== tier) {
             tier = next;
             renderer.setPixelRatio(dpr(tier));
             post.setTier(tier);
             post.setSize(innerWidth, innerHeight);
             if (tier === 'low') env.setShadowSize(1024);
+            setSmallScreens(tier === 'low' || layout === 'phone');
+            kick = Math.max(kick, 2);
           }
         }
       }
     }
+    if (!busy) perfSamples.length = 0;
+    wasBusy = busy;
     if (kick > 0) kick--;
   });
 

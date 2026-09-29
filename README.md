@@ -42,6 +42,7 @@ npm run dev        # http://127.0.0.1:5173
 npm run build      # typecheck + production build into dist/ (served from /victor-site/)
 npm run preview    # serve dist/ at http://127.0.0.1:4173/victor-site/
 npm run assets     # rebuild public/ from sources (see below)
+node tools/check-quality.mjs  # pixel budgets and quality downgrade checks (Node 22.18+)
 ```
 
 Useful while developing: `?tier=high|medium|low` forces a GPU tier, and in dev `window.__world.state` reports draw calls, triangles and camera state.
@@ -57,10 +58,11 @@ Everything in `public/` is generated and committed, so CI needs neither Blender 
 ## Performance notes
 
 - The 3D chunk downloads at once but starts only after first paint; the models are preloaded from the head.
-- Shaders compile against the real render target, the post chain compiles during the model download, and one frame per stop is rendered behind the loader, so nothing compiles or uploads mid-scroll for the first time.
+- The first frame renders behind the loader. Visible scene branches update once per rendered frame; hidden stations skip matrix updates.
 - Work screens decode off the main thread (ImageBitmap) and go to the GPU one per frame while the camera rests; the video buffers early.
 - Paper tags sit on their own compositor layers and are painted once behind the loader.
-- Three tiers (high, medium, low) set pixel ratio, AO, depth of field and shadow resolution. A frame-time check can step the tier down once after start-up.
+- Three tiers (high, medium, low) cap the 3D canvas at 1920×1080, 1280×720 and 960×540 pixels respectively, preserving its aspect ratio. DOM text stays at native resolution. AO runs at half resolution; shadows update when the clay poses or light move.
+- Sustained slow frames can lower quality throughout the visit, using uncapped frame timings. `?tier=` overrides automatic changes for comparison.
 
 ## Deploy
 

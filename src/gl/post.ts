@@ -1,8 +1,7 @@
 import * as THREE from 'three';
 import { BlendFunction, BloomEffect, DepthOfFieldEffect, EffectComposer, EffectPass, NoiseEffect, RenderPass, SMAAEffect, ToneMappingEffect, ToneMappingMode, VignetteEffect } from 'postprocessing';
 import { N8AOPostPass } from 'n8ao';
-
-export type Tier = 'high' | 'medium' | 'low';
+import type { Tier } from './quality';
 
 export function detectTier(renderer: THREE.WebGLRenderer): Tier {
   const forced = new URLSearchParams(location.search).get('tier');
@@ -45,7 +44,7 @@ export class Post {
     ao.configuration.distanceFalloff = 0.9;
     ao.configuration.intensity = 2.4;
     ao.configuration.color = new THREE.Color('#1b0f22');
-    ao.configuration.halfRes = this.tier !== 'high';
+    ao.configuration.halfRes = true;
     ao.configuration.depthAwareUpsampling = true;
     ao.setQualityMode(this.tier === 'high' ? 'Medium' : 'Performance');
     // Screen glass and glows are the only see-through things; AO-aware compositing for them
