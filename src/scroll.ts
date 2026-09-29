@@ -53,10 +53,8 @@ export function createScroll({ count }: { count: number }) {
       if (phone.matches) return 1;
       const fadeIn = i === 0 ? 1 : smooth(a.top - vh * 0.34, a.top - vh * 0.02, y);
       const fadeOut = Number.isFinite(a.dwellEnd) ? 1 - smooth(a.dwellEnd, a.dwellEnd + vh * 0.2, y) : 1;
-      // Hidden tags rest at 0.001, never 0: the browser skips painting fully transparent layers, so a
-      // tag at 0 would be painted on its first visible frame, mid-scroll. This way all are painted
-      // once behind the loader (0.001 of a pixel's colour rounds to nothing on screen).
-      return Math.max(0.001, Math.min(fadeIn, fadeOut));
+      // Fully transparent cards can be culled by the compositor.
+      return Math.min(fadeIn, fadeOut);
     });
     state.show.forEach((v, i) => tags[i].style.setProperty('--show', v.toFixed(3)));
     cue?.style.setProperty('--show', (1 - smooth(0.02, 0.25, state.p)).toFixed(3));

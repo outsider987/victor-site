@@ -237,7 +237,7 @@ function scenery(i: number, def: Def, dense: boolean): Place[] {
   return out;
 }
 
-type Item = { obj: THREE.Object3D; order: number; base: THREE.Vector3; baseScale: number; baseRot: number; bob: number; wag: boolean; jit: THREE.Vector3; set: boolean };
+type Item = { obj: THREE.Object3D; order: number; base: THREE.Vector3; baseScale: number; baseRot: number; bob: number; wag: boolean; set: boolean };
 
 // A held pose's scale on its way in: overshoots a little, then settles.
 function popScale(q: number) {
@@ -366,7 +366,7 @@ export class StationRuntime {
       }
       if (anchors.light) this.lamps.push(new THREE.Vector3(anchors.light[0] * s, anchors.light[1] * s, anchors.light[2] * s).applyEuler(obj.rotation).add(obj.position).add(this.group.position));
       this.group.add(obj);
-      this.items.push({ obj, order: p.set ? k : 0, base: obj.position.clone(), baseScale: s, baseRot: obj.rotation.y, bob: p.bob ?? 0, wag: !!p.wag, jit: new THREE.Vector3(), set: p.set });
+      this.items.push({ obj, order: p.set ? k : 0, base: obj.position.clone(), baseScale: s, baseRot: obj.rotation.y, bob: p.bob ?? 0, wag: !!p.wag, set: p.set });
     });
     // Scenery pops first, then the set piece by piece.
     const setItems = this.items.filter((it) => it.set);
@@ -410,10 +410,8 @@ export class StationRuntime {
         const s = it.baseScale * popScale(q);
         it.obj.scale.set(s, s * (q > 0 && q < 1 ? 1.12 : 1), s);
         it.obj.visible = q > 0;
-        // A breath of boil: every frame each set piece shifts a hair.
-        if (it.set && q >= 1) it.jit.set((Math.random() - 0.5) * 0.012, 0, (Math.random() - 0.5) * 0.012);
         const bob = it.bob ? Math.sin(Math.round(time * 12) / 12 * 2.4 + it.order) * it.bob : 0;
-        it.obj.position.set(it.base.x + it.jit.x, it.base.y + bob, it.base.z + it.jit.z);
+        it.obj.position.set(it.base.x, it.base.y + bob, it.base.z);
         if (it.wag) it.obj.rotation.y = it.baseRot + Math.sin(Math.round(time * 12) * 0.9) * 0.08;
       }
     }

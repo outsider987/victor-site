@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { BlendFunction, BloomEffect, DepthOfFieldEffect, EffectComposer, EffectPass, NoiseEffect, RenderPass, SMAAEffect, ToneMappingEffect, ToneMappingMode, VignetteEffect } from 'postprocessing';
+import { BlendFunction, BloomEffect, DepthOfFieldEffect, EffectComposer, EffectPass, FXAAEffect, NoiseEffect, RenderPass, SMAAEffect, ToneMappingEffect, ToneMappingMode, VignetteEffect } from 'postprocessing';
 import { N8AOPostPass } from 'n8ao';
 import type { Tier } from './quality';
 
@@ -30,15 +30,19 @@ export class Post {
     this.composer = null;
     this.dof = null;
     const r = this.renderer;
-    if (this.tier === 'low') {
-      r.toneMapping = THREE.NeutralToneMapping;
-      r.toneMappingExposure = 1.02;
-      return;
-    }
+    // Keep scene shaders identical across tiers; switching to renderer tone mapping
+    // would recompile every clay material in the middle of a slow frame.
     r.toneMapping = THREE.NoToneMapping;
+    r.toneMappingExposure = this.tier === 'low' ? 1.02 : 1;
     const size = r.getSize(new THREE.Vector2());
     const composer = new EffectComposer(r, { frameBufferType: THREE.HalfFloatType });
     composer.addPass(new RenderPass(this.scene, this.camera));
+    this.composer = composer;
+    const tone = new ToneMappingEffect({ mode: ToneMappingMode.NEUTRAL });
+    if (this.tier === 'low') {
+      composer.addPass(new EffectPass(this.camera, new FXAAEffect(), tone));
+      return;
+    }
     const ao = new N8AOPostPass(this.scene, this.camera, size.x, size.y);
     ao.configuration.aoRadius = 1.1;
     ao.configuration.distanceFalloff = 0.9;
@@ -61,12 +65,10 @@ export class Post {
     const vignette = new VignetteEffect({ offset: 0.34, darkness: 0.48 });
     const noise = new NoiseEffect({ blendFunction: BlendFunction.SOFT_LIGHT, premultiply: false });
     noise.blendMode.opacity.value = 0.18;
-    const tone = new ToneMappingEffect({ mode: ToneMappingMode.NEUTRAL });
     // Tone map before the grain and vignette: soft-light grain on HDR highlights (lamp glass,
     // lit windows) breaks into coloured speckle.
     composer.addPass(new EffectPass(this.camera, bloom, tone, vignette, noise));
     composer.addPass(new EffectPass(this.camera, new SMAAEffect()));
-    this.composer = composer;
   }
 
   setTier(t: Tier) {

@@ -46,12 +46,13 @@ export class Victor {
   }
 
   update(tick: boolean, pos: THREE.Vector3, yaw: number, anim: string, walkRate: number, still: boolean) {
-    if (!tick) return;
     this.root.position.copy(pos);
     this.root.rotation.y = yaw;
+    this.shadow.position.set(pos.x, 0.07, pos.z);
+    // Travel follows the camera every frame; only the puppet's pose is stop-motion.
+    if (!tick) return;
     this.play(anim);
     if (this.actions.walk) this.actions.walk.timeScale = walkRate;
     if (!still) this.mixer.update(1 / 12);
-    this.shadow.position.set(pos.x, 0.07, pos.z);
   }
 }

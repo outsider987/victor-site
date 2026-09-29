@@ -125,6 +125,12 @@ export async function createWorld(canvas: HTMLCanvasElement, opts: Opts): Promis
   });
   const lampSpots = stations.flatMap((s) => s.lamps);
 
+  // Compile all stations against the same target used by the main scene pass.
+  // Waiting asynchronously here avoids compiling new clay materials during a scroll.
+  renderer.setRenderTarget(post.composer?.inputBuffer ?? null);
+  await renderer.compileAsync(scene, camera);
+  renderer.setRenderTarget(null);
+
   const rig = new Rig(camera);
   let restShots: Shot[] = [];
   // Each station frames its subject beside its own paper tag, measured from the page.
@@ -216,11 +222,9 @@ export async function createWorld(canvas: HTMLCanvasElement, opts: Opts): Promis
     const dir = pv >= 0 ? 1 : -1;
     const midway = !atEnd && t > 0.08 && t < 0.92;
     const wantYaw = moving ? Math.atan2(tan.x * dir, tan.z * dir) : midway ? Math.atan2(tan.x, tan.z) * 0.55 : rest.yaw;
-    if (tick || reduced) {
-      let d = wantYaw - yawView;
-      d = Math.atan2(Math.sin(d), Math.cos(d));
-      yawView += reduced ? d : d * 0.55;
-    }
+    let yawDelta = wantYaw - yawView;
+    yawDelta = Math.atan2(Math.sin(yawDelta), Math.cos(yawDelta));
+    yawView += reduced ? yawDelta : yawDelta * (1 - Math.exp(-dt * 9.6));
     victor.update(tick || reduced, pos, yawView, moving ? 'walk' : midway ? 'idle' : rest.anim, THREE.MathUtils.clamp(speed / Victor.STRIDE, 0.55, 2.4), reduced);
 
     // Screens start loading three stops ahead.
@@ -228,6 +232,7 @@ export async function createWorld(canvas: HTMLCanvasElement, opts: Opts): Promis
 
     stations.forEach((s, j) => {
       const dist = Math.abs(pView - j);
+      if (s.group.visible && dist >= 1.75) s.screens.forEach((screen) => screen.update(0, false, false));
       s.group.visible = dist < 1.75;
       if (!s.group.visible) return;
       const since = intro === 'pending' ? 0 : intro === 'running' ? introT : 99;
@@ -302,8 +307,9 @@ export async function createWorld(canvas: HTMLCanvasElement, opts: Opts): Promis
       scene.children.forEach((child) => {
         if (child.visible) child.updateMatrixWorld();
       });
-      // Pointer-only camera movement doesn't change the light or the held clay poses.
-      renderer.shadowMap.needsUpdate ||= tick || pView !== prev || kick > 0;
+      // The directional light keeps its angle. Reuse its map between 12 fps pose updates,
+      // even while the camera travels; the saved shadow matrix still covers the nearby set.
+      renderer.shadowMap.needsUpdate ||= tick || kick > 0;
       renderer.info.reset();
       const r0 = performance.now();
       post.render(dt);
