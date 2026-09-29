@@ -115,7 +115,7 @@ export const works: Work[] = [
     beats: [
       { en: 'Modernised a legacy React codebase (classes → hooks) and made data-heavy lists fast with infinite scroll and virtualisation.', zh: '把舊 React 程式從 class 改寫為 Hooks，並以無限捲動與虛擬列表讓大量資料的畫面變快。' },
       { en: 'Moved backend services from PHP to NestJS with ORM data access, DTO validation and Redis caching.', zh: '將後端從 PHP 遷移到 NestJS，導入 ORM、DTO 驗證與 Redis 快取。' },
-      { en: 'Migrated production workloads from AWS ECS to Kubernetes.', zh: '把正式環境從 AWS ECS 遷移到 Kubernetes。' },
+      { en: 'As microservices grew, aligning deployment settings across ECS environments and coordinating releases became harder. Migrating to Kubernetes standardised deployment, but added cluster maintenance.', zh: '微服務增加後，原有 ECS 部署流程的環境設定與跨服務版本越來越難協調；遷至 Kubernetes 統一部署規範，也增加了叢集維運成本。' },
     ],
     stack: ['TypeScript', 'React', 'Next.js', 'NestJS', 'Go', 'PostgreSQL', 'Redis', 'AWS', 'Kubernetes'],
     shots: [
