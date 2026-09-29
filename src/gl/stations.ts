@@ -130,12 +130,11 @@ const LAYOUT: Record<string, Def> = {
     { prop: 'dice', at: [3.85, 0, 1.4], s: 1.1, rot: 1.1 },
     { prop: 'bench', at: [5.6, 0, -1.6], rot: -0.4 },
   ], '#e8903f'),
-  ironvale: workStation('ironvale', [
-    { prop: 'timber_house', at: [-5.4, 0, -4.4], rot: 0.3 },
-    { prop: 'fountain', at: [-3.7, 0, -1.2] },
-    { prop: 'sword_stone', at: [3.5, 0, 0.8], s: 1.1, rot: -0.3 },
-    { prop: 'lamp_post', at: [5.9, 0, -1.8] },
-  ], '#7d6bd1'),
+  vote: workStation('vote', [
+    { prop: 'storyboard', at: [-5.1, 0, -3.4], rot: 0.32, s: 1.45, label: { anchor: 'board', text: { en: 'COUNTING\n正 正 正', zh: '開票中\n正 正 正' }, style: { bg: '#f8f4e9', fg: '#1b2226', font: 'zh', weight: 700 } } },
+    { prop: 'clipboard', at: [3.4, 0, 0.9], rot: -0.35, s: 1.5, label: { anchor: 'paper', text: { en: '22 COUNTIES', zh: '22 縣市' }, style: { bg: '#f8f4e9', fg: '#1b2226', weight: 700 } } },
+    { prop: 'lamp_post', at: [-3.3, 0, -0.1] },
+  ], '#c7cfcb'),
   ai: {
     props: [
       { prop: 'director_chair', at: [-2.4, 0, 0.5], rot: 0.45, label: { anchor: 'back', text: 'VICTOR', style: { bg: '#e8553a', fg: '#fff4e6', weight: 800, engrave: false } } },
@@ -352,13 +351,10 @@ export class StationRuntime {
         const a = anchors.screen;
         if (a) {
           let urls: string[];
-          let video: string | undefined;
-          if (p.screen === 'main') {
-            urls = work.shots.filter((sh) => !sh.src.includes('sprites')).map((sh) => sh.src);
-            video = work.video?.src;
-          } else if (p.screen === 'phone') urls = work.phone ? [work.phone.src] : [work.shots[0].src];
+          if (p.screen === 'main') urls = work.shots.map((sh) => sh.src);
+          else if (p.screen === 'phone') urls = work.phone ? [work.phone.src] : [work.shots[0].src];
           else urls = [work.shots[work.shots.length - 1].src];
-          const screen = new Screen(urls, a[3], a[4], index, p.screen === 'main' ? video : undefined);
+          const screen = new Screen(urls, a[3], a[4], index);
           screen.mesh.position.set(a[0], a[1], a[2] + 0.004);
           obj.add(screen.mesh);
           this.screens.push(screen);
@@ -379,13 +375,6 @@ export class StationRuntime {
 
   prefetch() {
     this.screens.forEach((sc) => sc.ensure());
-  }
-
-  // Start one waiting video, if any; returns whether it did.
-  loadVideo() {
-    const sc = this.screens.find((s) => s.wantsVideo);
-    sc?.loadVideo();
-    return !!sc;
   }
 
   // build: 0..1 how much of the set stands; stepped on 12 fps ticks by the caller.

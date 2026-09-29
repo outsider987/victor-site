@@ -293,8 +293,6 @@ export async function createWorld(canvas: HTMLCanvasElement, opts: Opts): Promis
     // camera rests or barely drifts, where the copy costs no visible frame. A screen about to power
     // on takes its shots at once.
     const calm = moved < 3e-3 && Math.abs(pv) < 0.01;
-    if (!tick && (!busy || calm)) stations.some((s, j) => j < pTarget + 3.2 && j > pTarget - 1.5 && s.loadVideo());
-    else if (!tick) stations.some((s, j) => Math.abs(j - pView) < 0.5 && s.loadVideo());
     if (uploads.length) {
       uploads.sort((a, b) => Math.abs(a.station - pView) - Math.abs(b.station - pView));
       if ((!tick && (!busy || calm)) || Math.abs(uploads[0].station - pView) < 0.8) {

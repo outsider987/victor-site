@@ -1,6 +1,6 @@
-// Builds every shipped asset from its source: optimized clay models, work screens, video, résumés.
-// Sources: Blender exports in tools/clay/out, live-site captures in tools/capture/out (tools/capture/*.mjs),
-// project repos under ~/github and ~/mygame, and the résumé PDFs. Outputs land in public/ and are committed.
+// Builds every shipped asset from its source: optimized clay models, work screens, résumés.
+// Sources: Blender exports in tools/clay/out, site captures in tools/capture/out (tools/capture/),
+// project repos under ~/github, and the résumé PDFs. Outputs land in public/ and are committed.
 import { execFileSync } from 'node:child_process';
 import { copyFileSync, existsSync, mkdirSync, statSync } from 'node:fs';
 import { homedir } from 'node:os';
@@ -57,11 +57,9 @@ const SHOTS = [
   ['betcorgi/crash', join(CAP, 'casino-crashGame.png'), null, 2048],
   ['betcorgi/lobby', join(CAP, 'casino-d.png'), null, 2048],
   ['betcorgi/plinko', join(CAP, 'casino-plinkoGame.png'), null, 2048],
-  ['ironvale/courtyard', R('github/mygame/builds/male_hero/captures/environment_hero.png'), null, 1280],
-  ['ironvale/sprites', R('github/mygame/art/characters/male_hero/packed/hero_pose_review.png'), null, 1344],
+  ['vote/mayor', join(CAP, 'vote-mayor.png'), null, 2048],
+  ['vote/council', join(CAP, 'vote-council.png'), null, 2048],
 ];
-// Shown only in the lightbox, never on a clay screen, so they need no small cut.
-const LIGHTBOX_ONLY = new Set(['ironvale/sprites']);
 // Phone screens: 0.49 aspect to match the clay phone stand.
 const PHONES = [
   ['3ccash/mobile', join(CAP, '3ccash-m.png')],
@@ -90,10 +88,9 @@ function screens() {
     // Full size for the lightbox and desktop screens, a 1024px cut for phones and weak GPUs.
     args.push('-resize', `${width}x>`, '-strip', '-quality', '86', '-define', 'webp:method=6');
     const small = dst.replace(/\.webp$/, '@1k.webp');
-    if (LIGHTBOX_ONLY.has(name)) args.push(dst);
-    else args.push('-write', dst, '-resize', '1024x>', '-quality', '84', small);
+    args.push('-write', dst, '-resize', '1024x>', '-quality', '84', small);
     run('convert', args);
-    console.log('screen', name, kb(dst), LIGHTBOX_ONLY.has(name) ? '' : kb(small));
+    console.log('screen', name, kb(dst), kb(small));
   }
   for (const [name, src] of PHONES) {
     const dst = join(OUT, 'works', `${name}.webp`);
@@ -101,13 +98,6 @@ function screens() {
     run('convert', [src, '-gravity', 'north', '-crop', '1170x2388+0+0', '+repage', '-resize', '620x', '-strip', '-quality', '86', dst]);
     console.log('phone', name, kb(dst));
   }
-}
-
-function video() {
-  const src = R('github/mygame/builds/male_hero/mistpine_attack.mp4');
-  const dst = join(OUT, 'works/ironvale/attack.mp4');
-  run('ffmpeg', ['-y', '-v', 'error', '-i', src, '-an', '-vf', 'scale=1280:-2,fps=30', '-c:v', 'libx264', '-profile:v', 'main', '-pix_fmt', 'yuv420p', '-crf', '25', '-movflags', '+faststart', dst]);
-  console.log('video', 'ironvale/attack', kb(dst));
 }
 
 function resumes() {
@@ -137,7 +127,7 @@ function ui() {
   console.log('ui paper', kb(join(OUT, 'ui/paper.webp')));
 }
 
-const jobs = { models, screens, video, resumes, ui };
+const jobs = { models, screens, resumes, ui };
 for (const [name, job] of Object.entries(jobs)) {
   if (!only || only === name) await job();
 }

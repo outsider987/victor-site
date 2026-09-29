@@ -25,13 +25,13 @@ src/gl/world.ts       renderer, loading and warm-up, the frame loop
 src/gl/stations.ts    the twelve stop layouts and their stop-motion runtime
 src/gl/rig.ts         camera: follow while walking, frame the set beside its tag on arrival
 src/gl/environment.ts sky, hills, terrain, road, lights; palette from dusk to dawn
-src/gl/screens.ts     work screens: shot wipes, video, texture streaming
+src/gl/screens.ts     work screens: shot wipes and texture streaming
 src/gl/victor.ts      the clay figure on 12 fps animation steps
 src/gl/clay.ts        clay materials (fingerprint bump, sheen, hair strands)
 src/gl/post.ts        GPU tiers and the post chain
 tools/clay/           Blender scripts: character.py, props.py, lib.py
 tools/capture/        Playwright scripts that shot the live works
-tools/build-assets.mjs  models, screens, video and résumés → public/
+tools/build-assets.mjs  models, screens and résumés → public/
 ```
 
 ## Commands
@@ -53,15 +53,15 @@ Useful while developing: `?tier=high|medium|low` forces a GPU tier, and in dev `
 Everything in `public/` is generated and committed, so CI needs neither Blender nor the sources.
 
 1. **Models.** `blender --background --factory-startup --python tools/clay/character.py -- tools/clay/out` (and `props.py` the same way; add `--preview` for EEVEE stills).
-2. **Screens.** The capture scripts in `tools/capture/` need Playwright installed (it isn't a project dependency) and write to `tools/capture/out/`.
-3. **Build.** `npm run assets` (or `npm run assets -- models|screens|video|resumes`) optimizes the models, cuts every screen to 16:10 at full size plus a 1024px copy for phones, redacts operator identities in the CypherLab audit shot, encodes the Ironvale clip and copies the three résumés.
+2. **Screens.** The capture scripts in `tools/capture/` need Playwright installed (it isn't a project dependency) and write to `tools/capture/out/`. For 開票所, run `npm run dev -w @vote/web -- --host 127.0.0.1 --port 5188` in `~/github/vote`, then `python3 tools/capture/vote.py` here.
+3. **Build.** `npm run assets` (or `npm run assets -- models|screens|resumes`) optimizes the models, cuts every screen to 16:10 at full size plus a 1024px copy for phones, redacts operator identities in the CypherLab audit shot and copies the three résumés.
 
 ## Performance notes
 
 - The 3D chunk downloads at once but starts only after first paint; the models are preloaded from the head.
 - Station shaders compile asynchronously before the loader lifts. Visible scene branches update once per rendered frame; hidden stations skip matrix updates.
 - Victor's travel and turns follow every frame; his pose retains the 12 fps clay animation. Static scenery stays still.
-- Work screens decode off the main thread (ImageBitmap) and go to the GPU one per frame while the camera rests; videos pause when their station leaves view, including navigation jumps.
+- Work screens decode off the main thread (ImageBitmap) and go to the GPU one per frame while the camera rests.
 - Hidden paper tags become fully transparent so Chrome can skip compositing them.
 - Three tiers (high, medium, low) cap the 3D canvas at 1920×1080, 1280×720 and 960×540 pixels respectively, preserving its aspect ratio. DOM text stays at native resolution. AO runs at half resolution; shadow maps update on pose ticks and resizes.
 - All tiers share the scene's shader configuration to avoid recompiling clay materials when lowering quality. Low uses only FXAA and tone mapping.

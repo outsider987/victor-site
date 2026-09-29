@@ -52,10 +52,7 @@ export class Screen {
   private index = 0;
   private hold = 0;
   private wipe = -1;
-  private video: HTMLVideoElement | null = null;
-  private videoTex: THREE.VideoTexture | null = null;
-
-  constructor(private urls: string[], width: number, height: number, private station: number, videoUrl?: string) {
+  constructor(private urls: string[], width: number, height: number, private station: number) {
     const glassTex = (() => {
       const c = document.createElement('canvas');
       c.width = 256;
@@ -91,16 +88,6 @@ export class Screen {
     const glass = new THREE.Mesh(new THREE.PlaneGeometry(width, height), new THREE.MeshBasicMaterial({ map: glassTex, transparent: true, opacity: 0.07, depthWrite: false, blending: THREE.AdditiveBlending }));
     glass.position.z = 0.012;
     this.mesh.add(glass);
-    if (videoUrl) {
-      const v = document.createElement('video');
-      v.src = videoUrl;
-      v.muted = true;
-      v.loop = true;
-      v.playsInline = true;
-      v.preload = 'none';
-      v.crossOrigin = 'anonymous';
-      this.video = v;
-    }
   }
 
   // Start loading when the station is a couple of stops away.
@@ -113,23 +100,6 @@ export class Screen {
         if (this.wipe < 0) this.show();
       }),
     );
-    if (this.video) {
-      this.videoTex = new THREE.VideoTexture(this.video);
-      this.videoTex.colorSpace = THREE.SRGBColorSpace;
-    }
-  }
-
-  // Buffer the clip and put its first frame on the GPU ahead of arrival. Starting a video decoder
-  // stalls the GPU for a few frames, so the world calls this only while the camera rests.
-  get wantsVideo() {
-    return !!this.videoTex && this.video!.preload === 'none';
-  }
-  loadVideo() {
-    const video = this.video!;
-    const tex = this.videoTex!;
-    video.preload = 'auto';
-    video.addEventListener('loadeddata', () => ((tex.needsUpdate = true), uploads.push({ tex, station: this.station, done: () => {} })), { once: true });
-    video.load();
   }
 
   private show() {
@@ -142,16 +112,6 @@ export class Screen {
   // on: 0..1 power; active: the camera is resting here; tick: a 12 fps frame elapsed.
   update(on: number, active: boolean, tick: boolean) {
     this.uniforms.uOn.value = on;
-    if (this.video && this.videoTex) {
-      if (active && this.video.paused) this.video.play().catch(() => {});
-      if (!active && !this.video.paused) this.video.pause();
-      const live = active && this.video.readyState >= 2 && !this.video.paused;
-      if (this.wipe < 0) {
-        if (live) this.uniforms.uA.value = this.videoTex;
-        else this.show();
-      }
-      if (live) return;
-    }
     if (!tick || this.textures.length < 2) return;
     if (this.wipe >= 0) {
       this.wipe += 1 / 5;

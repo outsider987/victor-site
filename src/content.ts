@@ -76,7 +76,6 @@ export type Work = {
   stack: string[];
   shots: Shot[];
   phone?: Shot;
-  video?: { src: string; poster: string; alt: L };
   link?: { href: string; label: L };
   note?: L;
 };
@@ -218,25 +217,26 @@ export const works: Work[] = [
     note: { en: 'The public demo runs in browser mock mode. Virtual points only, no real money.', zh: '公開展示版以瀏覽器模擬模式運行；僅虛擬點數，不涉及真實金錢。' },
   },
   {
-    id: 'ironvale',
-    name: 'Ironvale',
-    sub: { en: 'From Blender bones to an HD-2D battlefield', zh: '從 Blender 骨架到 HD-2D 戰場' },
-    meta: { en: 'HD-2D character pipeline · game tech', zh: 'HD-2D 角色管線 · 遊戲技術' },
+    id: 'vote',
+    name: '開票所',
+    sub: { en: 'Election night, seen from the counting room', zh: '把開票現場搬到你的螢幕' },
+    meta: { en: '3D election results · Taiwan · 2026', zh: '3D 地方選舉開票網站 · 台灣 · 2026' },
     story: {
-      en: 'A character pipeline for HD-2D tactics games: Blender renders eight directions, pixel processing and hand retouching build the atlases, and Unity imports them into a lit 3D map. The hero is me.',
-      zh: '我用 Blender 渲染八方向角色動畫，經像素化與人工修圖做成圖集，再匯入 Unity 的 3D 戰棋場景。主角就是我。',
+      en: "I built a 3D results site for Taiwan's 2026 local elections. Each county rises as a stack of counted ballots; the board adds 正 strokes as votes come in, and a red stamp marks a decided race.",
+      zh: '我為 2026 台灣地方選舉打造 3D 開票網站。各縣市的紙堆隨開票數升高，計票板一筆筆畫出「正」字，確定當選時再蓋上紅章。',
     },
     beats: [
-      { en: "Hand-cleaned frames always win: re-renders never overwrite an artist's fixes.", zh: '重新渲染時會保留人工修過的影格，不會蓋掉已完成的美術修正。' },
-      { en: 'Unity URP scene with shadows, fog, bloom and depth of field that follows the character.', zh: 'Unity URP 場景：陰影、霧、Bloom，景深跟著角色走。' },
-      { en: 'One command builds, runs EditMode and PlayMode tests, makes a Windows player and smoke-tests all eight directions.', zh: '一個指令完成建置、EditMode/PlayMode 測試、輸出 Windows 版並自動驗證八個方向。' },
+      { en: 'The public replay uses official 2022 final results. Its intermediate counts are simulated and labelled as such.', zh: '公開重播使用中選會的 2022 最終結果；中途票數是模擬資料，畫面也清楚標示。' },
+      { en: 'For election night, one poller turns Central Election Commission updates into JSON. Browsers read a static Cloudflare feed instead of contacting the source site.', zh: '選舉夜由單一程式整理中選會更新，再發布成 JSON；瀏覽器只讀 Cloudflare 的靜態資料，不直接連中選會。' },
+      { en: 'The same results drive ballot stacks, the tally board, close-race alerts and a text view across mayor and council races.', zh: '縣市長與議員結果共用同一份狀態，帶動選票紙堆、計票板、拉鋸戰提醒與文字版結果。' },
     ],
-    stack: ['Blender', 'Python', 'Unity 6 URP', 'C#', 'Pillow'],
+    stack: ['TypeScript', 'three.js', 'Vite', 'Node.js', 'Cloudflare Workers', 'TopoJSON'],
     shots: [
-      { src: 'works/ironvale/courtyard.webp', alt: { en: 'Ironvale courtyard in Unity with the pixel hero under a lamp', zh: 'Ironvale 在 Unity 中的庭院，像素主角站在路燈下' } },
-      { src: 'works/ironvale/sprites.webp', alt: { en: 'Eight-direction sprite sheet: idle, walk, attack and guard', zh: '八方向動作圖：待機、走路、攻擊、格擋' } },
+      { src: 'works/vote/mayor.webp', alt: { en: '2022 mayor election replay with 3D ballot stacks, close races and Taipei vote board', zh: '2022 縣市長開票重播：3D 選票紙堆、拉鋸戰與臺北市計票板' } },
+      { src: 'works/vote/council.webp', alt: { en: '2022 council election replay with decided seat totals and Taipei district vote board', zh: '2022 議員開票重播：全國席次與臺北市選區計票板' } },
     ],
-    video: { src: 'works/ironvale/attack.mp4', poster: 'works/ironvale/courtyard.webp', alt: { en: 'The pixel hero attacking in the Unity player', zh: '像素主角在 Unity 中攻擊' } },
+    link: { href: 'https://vote.courage-mazu.workers.dev/?source=replay', label: { en: 'View the replay', zh: '觀看重播' } },
+    note: { en: 'Independent site, not affiliated with the CEC. Screens show the 2022 replay: official final results with simulated in-progress votes.', zh: '本站不是中選會官方網站。畫面為 2022 重播：最終結果取自中選會，中途票數為模擬資料。' },
   },
 ];
 
@@ -314,7 +314,7 @@ export type StationKind = 'intro' | 'skills' | 'work' | 'ai' | 'experience' | 'c
 export const stations: { id: string; kind: StationKind; bead: string; label: L }[] = [
   { id: 'hello', kind: 'intro', bead: '#f3c35a', label: { en: 'Hello', zh: '開場' } },
   { id: 'skills', kind: 'skills', bead: '#6e9f4f', label: { en: 'Toolbox', zh: '工具箱' } },
-  ...works.map((w, i) => ({ id: w.id, kind: 'work' as StationKind, bead: ['#e0533a', '#2d7f86', '#2fbf71', '#c9332b', '#e0a02a', '#e8903f', '#7d6bd1'][i], label: { en: w.name, zh: w.nameZh ?? w.name } })),
+  ...works.map((w, i) => ({ id: w.id, kind: 'work' as StationKind, bead: ['#e0533a', '#2d7f86', '#2fbf71', '#c9332b', '#e0a02a', '#e8903f', '#73958b'][i], label: { en: w.name, zh: w.nameZh ?? w.name } })),
   { id: 'ai', kind: 'ai', bead: '#b9a6e8', label: { en: 'AI crew', zh: 'AI 劇組' } },
   { id: 'experience', kind: 'experience', bead: '#9a918a', label: { en: 'Road so far', zh: '一路走來' } },
   { id: 'contact', kind: 'contact', bead: '#f19aa0', label: { en: "That's a wrap", zh: '殺青' } },

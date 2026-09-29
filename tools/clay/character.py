@@ -1,6 +1,6 @@
 """Clay Victor: modelled, rigged and animated procedurally, exported as victor.glb.
 
-Ironvale's approved_fr_native.png informs facial proportions, black fringe and round glasses.
+The male_hero/packed/walk_video_input/approved_fr_native.png reference informs facial proportions, black fringe and round glasses.
 Victor wears his everyday T-shirt, jeans, sneakers and backpack.
 
     blender --background --factory-startup --python character.py -- <out_dir> [--preview]

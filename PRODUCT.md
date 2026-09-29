@@ -34,7 +34,7 @@ A senior full-stack engineer (7+ years, since 2018) whose work spans real-time o
 ## Capabilities and Constraints
 
 - **Language:** English primary with a Traditional Chinese toggle.
-- **Featured works (user-selected):** CypherLab, Mediconcen, 3C換金所 (3ccash.com), 天鳳宮 / 勇氣媽祖 (courage-mazu.com), 沙暴之神 Sandstorm God, BetCorgi, Ironvale HD-2D pipeline.
+- **Featured works (user-selected):** CypherLab, Mediconcen, 3C換金所 (3ccash.com), 天鳳宮 / 勇氣媽祖 (courage-mazu.com), 沙暴之神 Sandstorm God, BetCorgi, 開票所 (vote).
 - **Not featured:** the comics site (scrapes copyrighted content). Matchbook and HoldBook were offered and not selected this round.
 - **Story structure (user's explicit request):** each work is a story chapter; scrolling moves to the next story through an animated three.js transition.
 - **AI collaboration section (user's explicit request):** how Victor runs projects with AI agents must be written into the site.
@@ -51,7 +51,7 @@ A senior full-stack engineer (7+ years, since 2018) whose work spans real-time o
 - **Resumes:** `C:\Users\outsider\Documents\Victor_Chang_{FE_Resume_v11,FullStack_Resume,Backed}.pdf`. Roles: CypherLab (Feb–Aug 2026), Mediconcen (Feb 2022–Jan 2026), Paradromix (Jul 2021–Feb 2022), ULIC TEK (Jan 2018–Jul 2021); BSc Chemistry, Chia Nan University (2017).
 - **Live sites:** `3ccash.com`, `admin.3ccash.com`, `courage-mazu.com`, `sandstorm-god.courage-mazu.workers.dev`, `casino-ail.pages.dev`.
 - **Screens and video:** prior portfolio assets in `~/github/victor_resume/public/projects/` (CypherLab markets board and audit, Mediconcen OCR claims workbench and clinic portal) and `public/projects/*/*.mp4` in the old site (CypherLab market and odds demos, Mediconcen workflow demo); fresh captures of the live sites.
-- **Personal art:** `~/github/mygame` (Ironvale) pixel hero modeled on Victor (bowl cut, round glasses), eight directions with idle, walk, attack, guard; Mistpine courtyard textures and scene export; Unity player captures. Offered by the user for use on the site.
+- **Election project:** `~/github/vote` contains the 3D results site, 2022 replay data, the poller and Cloudflare publishing scripts; `vote.courage-mazu.workers.dev/?source=replay` is the public replay. The 2026 count has not happened yet.
 - **Project facts:** Sandstorm God README (RTP 96.89%, max 81,000×, Monte Carlo simulation, PixiJS + GSAP, synthesized audio); BetCorgi README (Nuxt + Go Socket.IO, 20 games, server-authoritative settlement, virtual points only); 3ccash AGENTS.md (Nuxt SSR in Durable Objects, D1, Pages admin, LINE webhook); temple AGENTS.md (Nuxt 4 on Workers, D1, R2, LINE Login, shop, fund, calendar, admin).
 - **AI method evidence:** `~/cypherlab/sportsbook-skills` (one skill set installable into Claude, Codex, or any agent), `~/cypherlab/backoffice-e2e-agent-harness` (Claude Code + MCP Playwright against a live environment, human-gated tickets), `~/cypherlab/backoffice-specs` (spec → plan → tasks gates), workspace `CLAUDE.md` operating rules, `AGENTS.md` project maps in client repos.
 - **Absent, never fabricate:** testimonials, client quotes, traffic or revenue figures, user counts, performance claims beyond what READMEs state.
