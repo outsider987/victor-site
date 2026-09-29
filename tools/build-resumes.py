@@ -49,15 +49,15 @@ RESUMES = {
         ),
         "jobs": [
             {
-                "company": "Cypherlab Sdn. Bhd.", "date": "Feb 2026 – Aug 2026",
+                "company": "CypherLab Sdn. Bhd.", "date": "Feb 2026 – Aug 2026",
                 "role": "Senior Full-Stack Engineer",
-                "context": "Real-time sports and e-sports betting backoffice platform",
+                "context": "Real-time sports and e-sports betting back-office platform",
                 "stack": "Go, gRPC, NATS JetStream, WebSocket, PostgreSQL, Redis, ClickHouse, Docker, Kubernetes",
                 "bullets": [
-                    "Contributed to the greenfield rebuild of <strong>Backoffice V2</strong>, restructuring the legacy system into a domain-oriented modular BFF in Go and integrating sports-manager HTTP APIs with order-book, wallet, and user-service via gRPC.",
-                    "Built a real-time event pipeline using <strong>NATS JetStream → in-memory projections → WebSocket</strong>, handling event ordering and stale updates to maintain consistent market and odds state for operator dashboards.",
+                    "Contributed to the Backoffice V2 rebuild with a <strong>Go BFF organized by business domain</strong>, integrating downstream services through HTTP and gRPC.",
+                    "Built a <strong>NATS JetStream → in-memory projections → WebSocket</strong> pipeline with per-match sequence checks to stop older market updates from replacing newer ones.",
                     "Separated API serving, ClickHouse ingestion, and settlement processing into independent <strong>statically linked Go binaries</strong> deployed as Kubernetes workloads using a shared distroless Docker image, isolating synchronous API traffic from asynchronous workloads.",
-                    "Implemented a shared <strong>Command Gate</strong> for high-risk operator actions, centralizing operation reasons, idempotency, maker-checker validation, and audit trails for consistent and traceable workflows.",
+                    "Implemented a shared <strong>Command Gate</strong> for market closure and odds changes, requiring a reason, idempotency, second-person approval, and an audit trail.",
                 ],
             },
             {
@@ -67,9 +67,9 @@ RESUMES = {
                 "stack": "TypeScript, NestJS, Go, PostgreSQL, Redis, AWS, Docker, Kubernetes",
                 "bullets": [
                     "Owned end-to-end backend integrations for clinic and insurer partners, covering <strong>eligibility verification, copayment calculation, claims processing, and third-party insurer APIs</strong> from requirement clarification through production support.",
-                    "Moved legacy PHP services to <strong>NestJS</strong> while separating frontend and backend, keeping both sides on TypeScript; introduced ORM data access and DTO validation.",
+                    "Split a legacy PHP application into a frontend and <strong>NestJS APIs</strong>, using TypeScript on both sides; introduced ORM data access and DTO validation.",
                     "Introduced <strong>Redis caching</strong> for frequently accessed data, reducing repeated database reads and query load on backend services.",
-                    "Migrated <strong>AWS ECS workloads to Kubernetes</strong>, replacing per-service deployment scripts with a shared release process to keep environments consistent; accepted added cluster maintenance.",
+                    "Migrated <strong>AWS ECS workloads to Kubernetes</strong>, replacing per-service deployment scripts with shared release configuration across services.",
                     "Troubleshot production issues across backend services, databases, and third-party APIs, collaborating with Product Managers and cross-country engineering teams to identify root causes and deliver fixes.",
                 ],
             },
@@ -112,14 +112,14 @@ RESUMES = {
         ),
         "jobs": [
             {
-                "company": "Cypherlab Sdn. Bhd.", "date": "Feb 2026 – Aug 2026",
+                "company": "CypherLab Sdn. Bhd.", "date": "Feb 2026 – Aug 2026",
                 "role": "Senior Full-Stack Engineer",
-                "context": "Real-time sports and e-sports betting backoffice platform",
+                "context": "Real-time sports and e-sports betting back-office platform",
                 "stack": "TypeScript, React, TanStack Query, Go, gRPC, NATS JetStream, WebSocket, PostgreSQL, Redis, ClickHouse, Docker, Kubernetes",
                 "bullets": [
-                    "Built <strong>React and TypeScript backoffice workflows</strong> for live sports and e-sports operations while contributing to a <strong>domain-oriented modular BFF in Go</strong>, integrating sports-manager HTTP APIs with order-book, wallet, and user-service via gRPC.",
-                    "Connected a <strong>NATS JetStream → in-memory projections → WebSocket</strong> pipeline to HTTP market snapshots cached with <strong>TanStack Query</strong>; patched known updates and refetched structural changes while guarding against stale events.",
-                    "Delivered operator controls for <strong>market closure and odds overrides</strong> and implemented a shared <strong>Command Gate</strong> for high-risk actions with operation reasons, idempotency, maker-checker validation, and audit trails.",
+                    "Built a <strong>React/TypeScript operator console</strong> and contributed to a <strong>Go BFF organized by business domain</strong>, integrating downstream HTTP and gRPC services.",
+                    "Used <strong>TanStack Query</strong> to cache HTTP market data and WebSocket to apply live updates; refetched when markets changed and checked event order to keep older values from replacing newer ones.",
+                    "Built controls for <strong>market closure and odds changes</strong> with reasons, idempotency, second-person approval, and audit trails.",
                     "Separated API serving, ClickHouse ingestion, and settlement processing into independent Go binaries deployed as Kubernetes workloads, isolating synchronous API traffic from asynchronous processing.",
                 ],
             },
@@ -131,8 +131,8 @@ RESUMES = {
                 "bullets": [
                     "Modernized a legacy <strong>React</strong> codebase from class components to functional components with Hooks and implemented <strong>infinite scrolling and list virtualization</strong> for large data-heavy views.",
                     "Owned end-to-end clinic and insurer workflows covering <strong>eligibility verification, copayment calculation, claims processing, and third-party insurer APIs</strong>, from requirement clarification through production support.",
-                    "Moved legacy PHP services to <strong>NestJS</strong> while separating frontend and backend, keeping both sides on TypeScript; added ORM data access, DTO validation, and <strong>Redis caching</strong> to reduce repeated database reads.",
-                    "Migrated production workloads from <strong>AWS ECS to Kubernetes</strong>, replacing per-service deployment scripts with a shared release process to keep environments consistent; accepted added cluster maintenance.",
+                    "Split a legacy PHP application into a React frontend and <strong>NestJS APIs</strong>, using TypeScript on both sides; added ORM data access, DTO validation, and <strong>Redis caching</strong>.",
+                    "Migrated production workloads from <strong>AWS ECS to Kubernetes</strong>, replacing per-service scripts with shared deployment configuration across services.",
                     "Troubleshot production issues across frontend, backend services, databases, and third-party APIs with Product Managers and cross-country engineering teams.",
                 ],
             },
@@ -173,13 +173,13 @@ RESUMES = {
         ),
         "jobs": [
             {
-                "company": "Cypherlab Sdn. Bhd.", "date": "Feb 2026 – Aug 2026",
+                "company": "CypherLab Sdn. Bhd.", "date": "Feb 2026 – Aug 2026",
                 "role": "Senior Full-Stack Engineer",
-                "context": "Real-time sports and e-sports betting backoffice platform",
+                "context": "Real-time sports and e-sports betting back-office platform",
                 "stack": "React, TypeScript, TanStack Query, WebSocket, Go",
                 "bullets": [
                     "Built <strong>React and TypeScript</strong> workflows for live sports and e-sports operators, including market closure and odds overrides.",
-                    "Used <strong>TanStack Query</strong> to cache HTTP market snapshots, patch matching WebSocket updates, and refetch when market structure changed; kept filters and dialogs in local React state.",
+                    "Used <strong>TanStack Query</strong> to cache HTTP market data, apply matching WebSocket updates, and refetch when markets were added or removed.",
                     "Modularized WebSocket handling by feature and guarded live updates by sequence to prevent older market data from replacing newer values.",
                 ],
             },

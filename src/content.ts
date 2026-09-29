@@ -88,15 +88,15 @@ export const works: Work[] = [
     sub: { en: 'A real-time back office that keeps pace with the match', zh: '掌握賽事變化的即時營運後台' },
     meta: { en: 'Real-time sportsbook back office · 2026', zh: '即時體育博彩營運後台 · 2026' },
     story: {
-      en: "Sports and e-sports markets move every second. I helped rebuild the operators' back office from scratch: a modular Go BFF behind a React console, fed by a real-time pipeline that never shows a stale price.",
-      zh: '體育與電競盤口每秒都在變。我參與從零重建營運後台：React 主控台背後是模組化的 Go BFF，由一條絕不顯示過期價格的即時管線供應資料。',
+      en: 'I helped rebuild a sports and e-sports back office. Operators need to follow changing markets and odds, and trace every market closure or odds adjustment.',
+      zh: '我參與重建體育與電競營運後台。賠率和盤口會隨比賽變動，營運人員要即時掌握，也要能追查每次關盤和調整賠率的操作。',
     },
     beats: [
-      { en: 'NATS JetStream → in-memory projections → WebSocket, with per-match sequence guards that drop stale updates.', zh: 'NATS JetStream → 記憶體投影 → WebSocket，每場比賽以序號把關，過期更新直接丟棄。' },
-      { en: 'TanStack Query caches the HTTP markets snapshot; WebSocket patches matching rows and refetches when the market structure changes.', zh: 'TanStack Query 快取 HTTP 盤口快照；WebSocket 直接更新可對應的資料，盤口結構變動時重新抓取。' },
-      { en: 'Filters and dialogs stay in React state. RTK Query would add Redux Toolkit to this Redux-free app; Zustand alone would need its own server-cache policy. Event ordering and resync still need explicit handling.', zh: '篩選與對話框留在 React 本地狀態。這個專案未使用 Redux；改用 RTK Query 需引入 Redux Toolkit，單用 Zustand 得自行處理伺服器快取。事件順序與重新同步仍須自行維護。' },
-      { en: 'A shared Command Gate: closing a market or overriding odds requires a reason, idempotency, maker-checker approval and an audit trail.', zh: '共用 Command Gate：關盤、改賠率都必須附理由、具冪等性、經雙人覆核並留下稽核紀錄。' },
-      { en: 'API serving, ClickHouse ingestion and settlement run as separate Go binaries on Kubernetes from one distroless image.', zh: 'API、ClickHouse 寫入與結算拆成獨立 Go 執行檔，共用同一個 distroless 映像跑在 Kubernetes。' },
+      { en: 'The team already knew Go, so we kept a shared backend language. The BFF groups code by business domain and combines data from downstream services.', zh: '團隊原本就熟悉 Go，因此新後台也沿用 Go；BFF 按業務功能拆分模組，再整合其他服務的資料給前端。' },
+      { en: 'NATS JetStream feeds in-memory market state and WebSocket updates. Per-match sequence checks stop older events from overwriting newer ones.', zh: 'NATS JetStream 接收賽事更新，整理盤口狀態後透過 WebSocket 推到畫面；每場比賽都檢查更新順序，避免舊資料蓋掉新資料。' },
+      { en: 'TanStack Query loads and caches the initial market data; WebSocket applies live updates. Added or removed markets trigger a refetch. This avoids a custom cache, but resync timing still needs explicit handling.', zh: '盤口先透過 TanStack Query 載入並快取，之後由 WebSocket 即時更新。遇到盤口新增或移除，就重新抓取資料。這省下自行管理快取的工作，但何時重新同步仍得自己判斷。' },
+      { en: 'Closing a market or changing odds requires a reason, a second approval and an audit trail. Idempotency prevents duplicate commands.', zh: '關盤或調整賠率要附上原因、經雙人覆核並留下操作紀錄；重複送出也不會執行兩次。' },
+      { en: 'API serving, ClickHouse ingestion and settlement run separately on Kubernetes, keeping background work apart from operator requests.', zh: 'API、資料寫入和結算分開部署，避免背景工作影響營運後台的操作。' },
     ],
     stack: ['Go', 'gRPC', 'NATS JetStream', 'WebSocket', 'React', 'TypeScript', 'TanStack Query', 'PostgreSQL', 'Redis', 'ClickHouse', 'Kubernetes'],
     shots: [
@@ -108,16 +108,16 @@ export const works: Work[] = [
   {
     id: 'mediconcen',
     name: 'Mediconcen',
-    sub: { en: 'Claims that flow from clinic to insurer', zh: '從診所櫃台一路順到保險公司的理賠' },
+    sub: { en: 'Connecting clinics and insurers through claims', zh: '串起診所與保險公司的理賠流程' },
     meta: { en: 'InsurTech · Hong Kong · 2022–2026', zh: '保險科技 · 香港 · 2022–2026' },
     story: {
-      en: 'Four years owning clinic-to-insurer workflows end to end: eligibility checks, co-payment calculation, claim submission and insurer APIs, plus onboarding every new clinic and insurer partner.',
-      zh: '四年間負責診所到保險公司的完整流程：資格驗證、自付額計算、理賠送件與保險公司 API 串接，並主導每一家新診所與保險夥伴的導入。',
+      en: 'I owned clinic-to-insurer workflows covering eligibility checks, co-payment calculation, claim submission and insurer APIs, and helped onboard new partners.',
+      zh: '我負責診所到保險公司的理賠流程，包括資格驗證、自付額計算、理賠送件與保險公司 API 串接，也參與新合作夥伴的導入。',
     },
     beats: [
-      { en: 'Modernised a legacy React codebase (classes → hooks) and made data-heavy lists fast with infinite scroll and virtualisation.', zh: '把舊 React 程式從 class 改寫為 Hooks，並以無限捲動與虛擬列表讓大量資料的畫面變快。' },
-      { en: 'The old PHP system handled frontend and backend work together. We split them and chose NestJS so both sides used TypeScript, adding ORM access, DTO validation and Redis caching.', zh: '原有 PHP 系統同時處理前後端；拆分後選 NestJS，讓兩端都使用 TypeScript，再導入 ORM、DTO 驗證與 Redis 快取。' },
-      { en: 'Each service maintained its own deployment script, making environment settings and releases inconsistent. Moving from ECS to Kubernetes unified deployment, at the cost of cluster maintenance.', zh: '各服務原本各自維護部署腳本，讓環境設定與發布步驟難以一致；遷至 Kubernetes 統一部署配置與流程，代價是叢集維運成本提高。' },
+      { en: 'Moved legacy React pages from classes to Hooks, then added infinite scroll and virtualized lists to keep data-heavy views responsive.', zh: '把舊 React 頁面從 class 改成 Hooks，並用無限捲動和虛擬列表改善大量資料的顯示。' },
+      { en: 'The PHP application coupled web pages and backend logic. We split them and built NestJS APIs so both sides could use TypeScript.', zh: '原本的 PHP 系統把網頁和後端綁在一起。拆分後，我們用 NestJS 建立 API，讓前後端都用 TypeScript 開發。' },
+      { en: 'Each service had its own deployment script, so releases and environment settings varied. Moving from ECS to Kubernetes standardized deployment, with more cluster maintenance in return.', zh: '各服務以前各有部署腳本，發布步驟和環境設定不一致。從 ECS 遷到 Kubernetes 後，改用同一套流程管理部署；代價是叢集維運負擔增加。' },
     ],
     stack: ['TypeScript', 'React', 'Next.js', 'NestJS', 'Go', 'PostgreSQL', 'Redis', 'AWS', 'Kubernetes'],
     shots: [
@@ -133,11 +133,11 @@ export const works: Work[] = [
     meta: { en: 'Client site · Taipei · live', zh: '客戶網站 · 台北 · 已上線' },
     story: {
       en: "A second-hand Mac, camera and 3C buyback store. I built the whole stack on Cloudflare's edge: an SEO-first storefront, an admin console, and a LINE bot that walks customers through a quote.",
-      zh: '二手 Mac、相機與 3C 收購門市。我在 Cloudflare 邊緣網路上打造整套系統：重視 SEO 的官網、管理後台，以及一步步引導顧客估價的 LINE 機器人。',
+      zh: '我替二手 Mac、相機與 3C 收購門市建置官網、管理後台和 LINE 估價機器人，整套系統部署在 Cloudflare。',
     },
     beats: [
-      { en: 'Nuxt SSR runs inside a Durable Object behind a 60-second edge HTML cache; static assets never touch Worker CPU.', zh: 'Nuxt SSR 在 Durable Object 內執行，前面有 60 秒邊緣 HTML 快取；靜態資源完全不耗 Worker CPU。' },
-      { en: "A LINE valuation state machine: HMAC-verified webhook → quick-reply steps → a summary card pushed to the owner's phone.", zh: 'LINE 估價狀態機：HMAC 驗證 webhook → 快速回覆逐步收集 → 彙整卡片直接推播到店長手機。' },
+      { en: 'Nuxt SSR runs inside a Durable Object behind a 60-second edge HTML cache; static assets never touch Worker CPU.', zh: 'Nuxt 頁面由 Durable Object 產生，並在邊緣快取 60 秒；靜態檔案則由 Cloudflare 直接提供。' },
+      { en: "A LINE valuation state machine: HMAC-verified webhook → quick-reply steps → a summary card pushed to the owner's phone.", zh: 'LINE 機器人逐步詢問機況，再把整理好的資料推送給店長；Webhook 會先驗證來源。' },
       { en: 'Migrated from Go + Railway + Postgres to serverless Cloudflare: Workers, D1, Durable Objects and Pages.', zh: '從 Go + Railway + Postgres 全面遷移到 Cloudflare 無伺服器架構：Workers、D1、Durable Objects 與 Pages。' },
     ],
     stack: ['Nuxt 3', 'Vue', 'Cloudflare Workers', 'Durable Objects', 'D1', 'Pages', 'LINE Messaging API'],
@@ -155,7 +155,7 @@ export const works: Work[] = [
     meta: { en: 'Client site · live', zh: '客戶網站 · 已上線' },
     story: {
       en: 'A temple community needed more than a brochure: an online shop, a building fund with a public donor list, an events calendar with sign-ups and a member centre, all tied to LINE Login.',
-      zh: '宮廟需要的不只是形象網站：線上商城、公開芳名的建廟基金、可報名的活動行事曆與會員中心，全部串接 LINE 登入。',
+      zh: '宮廟需要的不只是形象網站：線上商城、公開捐款芳名的建廟基金、可報名的活動行事曆與會員中心，全部串接 LINE 登入。',
     },
     beats: [
       { en: 'Nuxt 4 on Cloudflare Workers with D1 and R2; the same code runs on Node and SQLite for local demos.', zh: 'Nuxt 4 跑在 Cloudflare Workers，搭配 D1 與 R2；同一份程式也能在 Node 與 SQLite 上做本機展示。' },
@@ -178,11 +178,11 @@ export const works: Work[] = [
     sub: { en: "Slot math that's proven, not promised", zh: '數學經得起驗證的老虎機' },
     meta: { en: 'HTML5 slot game · playable', zh: 'HTML5 老虎機 · 可試玩' },
     story: {
-      en: 'A full HTML5 slot: 6×5 cluster pays, multiplier orbs, free games, an awakening mode, buy-feature and jackpots. The engine is pure TypeScript with a replayable RNG, so every spin can be simulated, replayed and checked.',
-      zh: '完整的 HTML5 老虎機：6×5 群集消除、倍數球、免費遊戲、覺醒模式、購買特色與 JP。引擎是純 TypeScript、亂數可重播，每一轉都能模擬、重播與驗證。',
+      en: 'I built an HTML5 slot with a 6×5 cluster-pays board, multiplier orbs, free games, an awakening mode and jackpots. Its TypeScript engine uses replayable randomness, so spins can be simulated and checked.',
+      zh: '我做了一款 HTML5 老虎機，包含 6×5 消除玩法、倍數球、免費遊戲、覺醒模式和彩金。遊戲邏輯用 TypeScript 撰寫，每次轉動的結果都能重現並驗證。',
     },
     beats: [
-      { en: 'Monte Carlo simulation on every CPU core confirms the 96.89% RTP target; maximum win 81,000×.', zh: '用所有 CPU 核心跑蒙地卡羅模擬，確認 RTP 96.89%；最高 81,000 倍。' },
+      { en: 'Monte Carlo simulations check the 96.89% RTP target; maximum win is 81,000×.', zh: '透過蒙地卡羅模擬檢查 96.89% 的 RTP 目標；最高獎金為 81,000 倍。' },
       { en: 'The engine emits an event sequence; the PixiJS and GSAP layer only plays it back.', zh: '引擎只輸出事件序列，PixiJS 與 GSAP 表現層負責播放。' },
       { en: 'All sound is synthesised live with Web Audio. Art is original, generated with Codex and cleaned by script.', zh: '所有音效以 Web Audio 即時合成；美術全部原創，由 Codex 生成再以腳本清理。' },
     ],
@@ -197,14 +197,14 @@ export const works: Work[] = [
   {
     id: 'betcorgi',
     name: 'BetCorgi',
-    sub: { en: 'Twenty games, one server-authoritative ledger', zh: '二十款遊戲，一本由伺服器說了算的帳' },
+    sub: { en: 'Twenty games, one server-authoritative ledger', zh: '二十款遊戲，點數由伺服器統一管理' },
     meta: { en: 'Virtual-points game platform · demo', zh: '虛擬點數遊戲平台 · 展示版' },
     story: {
       en: "Crash, Plinko, Mines, Blackjack and sixteen more. The Go server generates every result and settles it; the browser can't set a balance or a payout, and points can't be bought or cashed out.",
       zh: 'Crash、Plinko、Mines、21 點等二十款遊戲。每個結果都由 Go 伺服器產生並結算；瀏覽器無法指定餘額或獎金，點數不能儲值也不能兌現。',
     },
     beats: [
-      { en: 'Each bet, settlement, idempotency key and wallet entry commits in one SQLite transaction; balances are integer cents.', zh: '每筆下注、結算、冪等鍵與錢包流水都在同一個 SQLite 交易中提交；金額以整數分儲存。' },
+      { en: 'Bets, settlements and wallet entries commit in one SQLite transaction, with idempotency keys to prevent duplicate processing.', zh: '下注、結算與錢包紀錄在同一筆 SQLite 交易中完成，也會檢查是否重複處理，避免點數只更新一半或重複入帳。' },
       { en: 'Socket.IO with reconnect recovery for in-progress games; shared rounds refund on restart instead of paying twice.', zh: 'Socket.IO 斷線重連可恢復進行中的遊戲；共用回合在重啟時退點，不會重複派彩。' },
       { en: 'Rate limits and trusted-proxy parsing stop spoofed client IPs.', zh: '限速與可信代理解析，防止偽造來源 IP。' },
     ],
@@ -224,10 +224,10 @@ export const works: Work[] = [
     meta: { en: 'HD-2D character pipeline · game tech', zh: 'HD-2D 角色管線 · 遊戲技術' },
     story: {
       en: 'A character pipeline for HD-2D tactics games: Blender renders eight directions, pixel processing and hand retouching build the atlases, and Unity imports them into a lit 3D map. The hero is me.',
-      zh: 'HD-2D 戰棋遊戲的角色管線：Blender 算出八方向動作，經像素化與人工修圖做成圖集，Unity 自動匯入到有光影的 3D 地圖。主角就是我。',
+      zh: '我用 Blender 渲染八方向角色動畫，經像素化與人工修圖做成圖集，再匯入 Unity 的 3D 戰棋場景。主角就是我。',
     },
     beats: [
-      { en: "Hand-cleaned frames always win: re-renders never overwrite an artist's fixes.", zh: '人工修過的影格永遠優先：重新算圖絕不覆蓋美術的修正。' },
+      { en: "Hand-cleaned frames always win: re-renders never overwrite an artist's fixes.", zh: '重新渲染時會保留人工修過的影格，不會蓋掉已完成的美術修正。' },
       { en: 'Unity URP scene with shadows, fog, bloom and depth of field that follows the character.', zh: 'Unity URP 場景：陰影、霧、Bloom，景深跟著角色走。' },
       { en: 'One command builds, runs EditMode and PlayMode tests, makes a Windows player and smoke-tests all eight directions.', zh: '一個指令完成建置、EditMode/PlayMode 測試、輸出 Windows 版並自動驗證八個方向。' },
     ],
@@ -288,7 +288,7 @@ export const experience = {
   title: { en: 'The road so far', zh: '一路走來' } as L,
   items: [
     { year: '2026', when: '2026.02 – 2026.08', org: 'CypherLab Sdn. Bhd.', role: { en: 'Senior Full-Stack Engineer', zh: '資深全端工程師' } as L, what: { en: 'Real-time sports and e-sports betting back office.', zh: '即時體育與電競博彩營運後台。' } as L },
-    { year: '2022', when: '2022.02 – 2026.01', org: 'Mediconcen', role: { en: 'Senior Full-Stack Engineer', zh: '資深全端工程師' } as L, what: { en: 'Hong Kong InsurTech: clinic and insurer workflows.', zh: '香港保險科技：診所與保險公司流程。' } as L },
+    { year: '2022', when: '2022.02 – 2026.01', org: 'Mediconcen', role: { en: 'Senior Full-Stack Engineer', zh: '資深全端工程師' } as L, what: { en: 'Hong Kong InsurTech: clinic and insurer workflows.', zh: '串接診所與保險公司的理賠流程。' } as L },
     { year: '2021', when: '2021.07 – 2022.02', org: 'Paradromix', role: { en: 'Frontend Engineer', zh: '前端工程師' } as L, what: { en: 'SSR web platforms with Nuxt and a custom CMS for non-technical teams.', zh: '以 Nuxt 打造 SSR 平台，並為非技術團隊建置自訂 CMS。' } as L },
     { year: '2018', when: '2018.01 – 2021.07', org: 'ULIC TEK', role: { en: 'Software Engineer', zh: '軟體工程師' } as L, what: { en: 'Image processing in C++ and OpenCV, and desktop-web hybrid apps.', zh: 'C++ 與 OpenCV 影像處理，以及桌面與網頁混合應用。' } as L },
   ],
