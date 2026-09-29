@@ -114,8 +114,8 @@ export const works: Work[] = [
     },
     beats: [
       { en: 'Modernised a legacy React codebase (classes → hooks) and made data-heavy lists fast with infinite scroll and virtualisation.', zh: '把舊 React 程式從 class 改寫為 Hooks，並以無限捲動與虛擬列表讓大量資料的畫面變快。' },
-      { en: 'Moved backend services from PHP to NestJS with ORM data access, DTO validation and Redis caching.', zh: '將後端從 PHP 遷移到 NestJS，導入 ORM、DTO 驗證與 Redis 快取。' },
-      { en: 'As microservices grew, aligning deployment settings across ECS environments and coordinating releases became harder. Migrating to Kubernetes standardised deployment, but added cluster maintenance.', zh: '微服務增加後，原有 ECS 部署流程的環境設定與跨服務版本越來越難協調；遷至 Kubernetes 統一部署規範，也增加了叢集維運成本。' },
+      { en: 'The old PHP system handled frontend and backend work together. We split them and chose NestJS so both sides used TypeScript, adding ORM access, DTO validation and Redis caching.', zh: '原有 PHP 系統同時處理前後端；拆分後選 NestJS，讓兩端都使用 TypeScript，再導入 ORM、DTO 驗證與 Redis 快取。' },
+      { en: 'Each service maintained its own deployment script, making environment settings and releases inconsistent. Moving from ECS to Kubernetes unified deployment, at the cost of cluster maintenance.', zh: '各服務原本各自維護部署腳本，讓環境設定與發布步驟難以一致；遷至 Kubernetes 統一部署配置與流程，代價是叢集維運成本提高。' },
     ],
     stack: ['TypeScript', 'React', 'Next.js', 'NestJS', 'Go', 'PostgreSQL', 'Redis', 'AWS', 'Kubernetes'],
     shots: [
