@@ -34,7 +34,7 @@ A senior full-stack engineer (7+ years, since 2018) whose work spans real-time o
 ## Capabilities and Constraints
 
 - **Language:** English primary with a Traditional Chinese toggle.
-- **Featured works (user-selected):** CypherLab, Mediconcen, 3C換金所 (3ccash.com), 天鳳宮 / 勇氣媽祖 (courage-mazu.com), 沙暴之神 Sandstorm God, BetCorgi, 開票所 (vote).
+- **Featured works (user-selected):** CypherLab, Mediconcen, 開票所 (vote), 3C換金所 (3ccash.com), 天鳳宮 / 勇氣媽祖 (courage-mazu.com), 沙暴之神 Sandstorm God, BetCorgi.
 - **Not featured:** the comics site (scrapes copyrighted content). Matchbook and HoldBook were offered and not selected this round.
 - **Story structure (user's explicit request):** each work is a story chapter; scrolling moves to the next story through an animated three.js transition.
 - **AI collaboration section (user's explicit request):** how Victor runs projects with AI agents must be written into the site.

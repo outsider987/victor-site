@@ -8,7 +8,7 @@ Portfolio of **Victor Chang**, senior full-stack engineer. A stop-motion clay se
 
 ## Stack
 
-- **Vite 8 + TypeScript 7**, no UI framework. All copy lives in `src/content.ts` and is prerendered into the HTML at build time, so the page reads fine without JavaScript or WebGL.
+- **Vite 8 + TypeScript 7**, no UI framework. Copy lives in `src/content.ts` and `src/works.ts` and is prerendered into the HTML at build time, so the page reads fine without JavaScript or WebGL.
 - **three.js 0.186** with pmndrs **postprocessing** and **N8AO**: contact shadows, a shallow miniature focus, lamp bloom, grain.
 - **Blender 5.2**, headless: every model is sculpted procedurally by script (`tools/clay`), then optimized with **gltf-transform + meshoptimizer**.
 
@@ -16,13 +16,16 @@ Portfolio of **Victor Chang**, senior full-stack engineer. A stop-motion clay se
 
 ```
 index.html            shell; the build fills in <!--head--> and <!--body-->
-src/content.ts        every word on the site, both languages
+src/content.ts        site copy, both languages; station order
+src/works.ts          seven works, their order and copy
 src/render.ts         content → HTML (used by the Vite plugin in vite.config.ts)
 src/main.ts           language toggle, scroll → stations, lightbox, boot
 src/scroll.ts         page scroll → station progress (dwell at a stop, then travel)
-src/styles.css        paper tags, beads, loader, flat fallback
+src/styles.css        ordered imports for src/styles/
+src/styles/           base, tags, chrome and responsive styles
 src/gl/world.ts       renderer, loading and warm-up, the frame loop
-src/gl/stations.ts    the twelve stop layouts and their stop-motion runtime
+src/gl/station-layouts.ts  layouts for the twelve stops
+src/gl/stations.ts    stop-motion runtime
 src/gl/rig.ts         camera: follow while walking, frame the set beside its tag on arrival
 src/gl/environment.ts sky, hills, terrain, road, lights; palette from dusk to dawn
 src/gl/screens.ts     work screens: shot wipes and texture streaming
